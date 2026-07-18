@@ -12,6 +12,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <script src="rules-content.js"></script>
     <style>
         :root {
             --bg-color: #08090e;
@@ -702,7 +703,7 @@
         }
 
         .dice-desc {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--text-secondary);
         }
 
@@ -764,12 +765,114 @@
 
 <body>
 
+    <!-- Templates for Interactive Widgets -->
+    <template id="builder-widget-template">
+        <div class="builder-section">
+            <div class="builder-top">
+                <span class="builder-title">Interactive Ship Designer</span>
+                <div id="points-status" class="badge-status valid">Points Allocated: 30 / 30</div>
+            </div>
+            <div class="builder-controls">
+                <div class="control-row">
+                    <span class="control-label">Attack (1-10)</span>
+                    <div class="control-input-container">
+                        <input type="range" id="input-attack" min="1" max="10" value="5">
+                    </div>
+                    <span class="control-val" id="val-attack">5</span>
+                </div>
+                <div class="control-row">
+                    <span class="control-label">Shield (1-10)</span>
+                    <div class="control-input-container">
+                        <input type="range" id="input-shield" min="1" max="10" value="5">
+                    </div>
+                    <span class="control-val" id="val-shield">5</span>
+                </div>
+                <div class="control-row">
+                    <span class="control-label">Distance (1-10)</span>
+                    <div class="control-input-container">
+                        <input type="range" id="input-distance" min="1" max="10" value="5">
+                    </div>
+                    <span class="control-val" id="val-distance">5</span>
+                </div>
+                <div class="control-row">
+                    <span class="control-label">Resistance (1-10)</span>
+                    <div class="control-input-container">
+                        <input type="range" id="input-resistance" min="1" max="10" value="5">
+                    </div>
+                    <span class="control-val" id="val-resistance">5</span>
+                </div>
+                <div class="control-row">
+                    <span class="control-label">Comms (1-10)</span>
+                    <div class="control-input-container">
+                        <input type="range" id="input-comms" min="1" max="10" value="5">
+                    </div>
+                    <span class="control-val" id="val-comms">5</span>
+                </div>
+                <div class="control-row">
+                    <span class="control-label">Maneuver</span>
+                    <div class="control-input-container">
+                        <input type="range" id="input-maneuver" min="0" max="10" value="3" step="1">
+                    </div>
+                    <span class="control-val" id="val-maneuver">3 <span id="maneuver-lvl" class="info-badge">Lvl 1</span></span>
+                </div>
+                <div class="control-row">
+                    <span class="control-label">Load</span>
+                    <div class="control-input-container">
+                        <input type="range" id="input-load" min="0" max="10" value="2" step="1">
+                    </div>
+                    <span class="control-val" id="val-load">2 <span id="load-lvl" class="info-badge">Lvl 1</span></span>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="combat-widget-template">
+        <div class="builder-section" style="border-color: rgba(239, 68, 68, 0.15);">
+            <span class="builder-title" style="display: block; margin-bottom: 1.25rem;">Interactive Combat Simulator</span>
+            <div class="calc-wrapper">
+                <div class="calc-panel">
+                    <div class="calc-row">
+                        <span class="calc-label">Allocated Attack</span>
+                        <input type="range" id="calc-attack" min="1" max="10" value="5">
+                        <span class="calc-val" id="calc-val-attack">5</span>
+                    </div>
+                    <div class="calc-row">
+                        <span class="calc-label">Distance to Target</span>
+                        <input type="range" id="calc-distance" min="1" max="10" value="3">
+                        <span class="calc-val" id="calc-val-distance">3</span>
+                    </div>
+                    <div class="calc-row" style="border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 0.75rem;">
+                        <span class="calc-label">Target Max Shield</span>
+                        <input type="range" id="calc-shield" min="0" max="10" value="4">
+                        <span class="calc-val" id="calc-val-shield">4</span>
+                    </div>
+                    <div class="calc-row">
+                        <span class="calc-label">Target Hull (Resist)</span>
+                        <input type="range" id="calc-resist" min="1" max="10" value="5">
+                        <span class="calc-val" id="calc-val-resist">5</span>
+                    </div>
+                </div>
+
+                <div class="calc-result-panel" id="combat-result-container">
+                    <div class="result-title">Damage Calculated</div>
+                    <div class="result-damage" id="dmg-display">3</div>
+                    <div class="result-bar-container">
+                        <div class="result-bar-shield" id="bar-shield"></div>
+                        <div class="result-bar-hull" id="bar-hull"></div>
+                    </div>
+                    <div class="result-breakdown" id="dmg-breakdown">
+                        <!-- Generated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
     <div class="container">
         <header>
             <div class="subtitle">MG</div>
             <h1>Space Trading & Combat Game</h1>
-            <p
-                style="margin-bottom: 0; margin-top: 0.5rem; font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 2px; color: var(--text-secondary); text-transform: uppercase;">
+            <p style="margin-bottom: 0; margin-top: 0.5rem; font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 2px; color: var(--text-secondary); text-transform: uppercase;">
                 Official Rulebook & Interactive Guides
             </p>
         </header>
@@ -790,388 +893,15 @@
         </aside>
 
         <main class="content">
-            <!-- Objective Section -->
-            <section id="objective">
-                <h2>Objective</h2>
-                <p>The ultimate goals of the space voyagers in Voidfarer.</p>
-                <div class="highlight-card">
-                    <strong>Current status:</strong> To be defined (e.g., Amass 100 credits through trading, or be the
-                    last ship standing).
-                </div>
-            </section>
-
-            <!-- Ship Specifications Section -->
-            <section id="specs">
-                <h2>Ship Specifications</h2>
-                <p>To set up a ship, players distribute exactly <strong>30 units</strong> among the following specs.
-                    Each spec defines the fundamental capabilities of your vessel:</p>
-
-                <div class="specs-grid">
-                    <div class="spec-item">
-                        <div class="spec-header">
-                            <span class="spec-name">Attack</span>
-                            <span class="spec-range">1 - 10</span>
-                        </div>
-                        <div class="spec-desc">Determines how far the ship can fire its main weapons.</div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-header">
-                            <span class="spec-name">Shield</span>
-                            <span class="spec-range">1 - 10</span>
-                        </div>
-                        <div class="spec-desc">The maximum energy value that shields can absorb before taking hull
-                            damage.</div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-header">
-                            <span class="spec-name">Distance</span>
-                            <span class="spec-range">1 - 10</span>
-                        </div>
-                        <div class="spec-desc">The maximum number of units (hexes) the ship can travel in a single turn.
-                        </div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-header">
-                            <span class="spec-name">Resistance</span>
-                            <span class="spec-range">1 - 10</span>
-                        </div>
-                        <div class="spec-desc">The hull integrity of the ship, which absorbs damage after shields fail.
-                        </div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-header">
-                            <span class="spec-name">Comms</span>
-                            <span class="spec-range">1 - 10</span>
-                        </div>
-                        <div class="spec-desc">The maximum range at which the ship can establish communications.</div>
-                    </div>
-                    <div class="spec-item">
-                        <div class="spec-header">
-                            <span class="spec-name">Maneuver</span>
-                            <span class="spec-range">3, 6, 10</span>
-                        </div>
-                        <div class="spec-desc">Allows in-place rotation movements on top of distance.
-                            <br><span class="info-badge">3 points = Lvl 1</span>
-                            <span class="info-badge">6 points = Lvl 2</span>
-                            <span class="info-badge">10 points = Lvl 3</span>
-                        </div>
-                    </div>
-                    <div class="spec-item" style="grid-column: 1 / -1;">
-                        <div class="spec-header">
-                            <span class="spec-name">Load</span>
-                            <span class="spec-range">2, 4, 7, 10</span>
-                        </div>
-                        <div class="spec-desc">Determines how many units of cargo the ship is certified to transport.
-                            <br><span class="info-badge">2 points = Lvl 1 (2 cargo)</span>
-                            <span class="info-badge">4 points = Lvl 2 (4 cargo)</span>
-                            <span class="info-badge">7 points = Lvl 3 (7 cargo)</span>
-                            <span class="info-badge">10 points = Lvl 4 (10 cargo)</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Interactive Spec Builder -->
-                <div class="builder-section">
-                    <div class="builder-top">
-                        <span class="builder-title">Interactive Ship Designer</span>
-                        <div id="points-status" class="badge-status valid">Points Allocated: 30 / 30</div>
-                    </div>
-                    <div class="builder-controls">
-                        <div class="control-row">
-                            <span class="control-label">Attack (1-10)</span>
-                            <div class="control-input-container">
-                                <input type="range" id="input-attack" min="1" max="10" value="5">
-                            </div>
-                            <span class="control-val" id="val-attack">5</span>
-                        </div>
-                        <div class="control-row">
-                            <span class="control-label">Shield (1-10)</span>
-                            <div class="control-input-container">
-                                <input type="range" id="input-shield" min="1" max="10" value="5">
-                            </div>
-                            <span class="control-val" id="val-shield">5</span>
-                        </div>
-                        <div class="control-row">
-                            <span class="control-label">Distance (1-10)</span>
-                            <div class="control-input-container">
-                                <input type="range" id="input-distance" min="1" max="10" value="5">
-                            </div>
-                            <span class="control-val" id="val-distance">5</span>
-                        </div>
-                        <div class="control-row">
-                            <span class="control-label">Resistance (1-10)</span>
-                            <div class="control-input-container">
-                                <input type="range" id="input-resistance" min="1" max="10" value="5">
-                            </div>
-                            <span class="control-val" id="val-resistance">5</span>
-                        </div>
-                        <div class="control-row">
-                            <span class="control-label">Comms (1-10)</span>
-                            <div class="control-input-container">
-                                <input type="range" id="input-comms" min="1" max="10" value="5">
-                            </div>
-                            <span class="control-val" id="val-comms">5</span>
-                        </div>
-                        <div class="control-row">
-                            <span class="control-label">Maneuver</span>
-                            <div class="control-input-container">
-                                <input type="range" id="input-maneuver" min="0" max="10" value="3" step="1">
-                            </div>
-                            <span class="control-val" id="val-maneuver">3 <span id="maneuver-lvl" class="info-badge">Lvl
-                                    1</span></span>
-                        </div>
-                        <div class="control-row">
-                            <span class="control-label">Load</span>
-                            <div class="control-input-container">
-                                <input type="range" id="input-load" min="0" max="10" value="2" step="1">
-                            </div>
-                            <span class="control-val" id="val-load">2 <span id="load-lvl" class="info-badge">Lvl
-                                    1</span></span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Turn Sequence Section -->
-            <section id="turn">
-                <h2>Turn Sequence</h2>
-                <p>Every turn, a player rolls <strong>two 6-sided dice (2d6)</strong>. The sum of the rolled numbers
-                    represents the points they can temporarily distribute among their active turn variables:</p>
-
-                <ul class="stages-list">
-                    <li class="stage-card">
-                        <span class="stage-title">Distance</span>
-                        <span class="stage-body">Adjust current speed. Each 1 point spent increases or decreases speed
-                            by 1, up to the ship's maximum spec.</span>
-                    </li>
-                    <li class="stage-card">
-                        <span class="stage-title">Attack</span>
-                        <span class="stage-body">Set the active attack range and damage potential for the current turn
-                            (cannot exceed local Attack spec).</span>
-                    </li>
-                    <li class="stage-card">
-                        <span class="stage-title">Shield</span>
-                        <span class="stage-body">Recover damaged shield points at a cost of 1 allocated point per 1
-                            shield point recovered (up to Shield spec).</span>
-                    </li>
-                    <li class="stage-card">
-                        <span class="stage-title">Maneuver</span>
-                        <span class="stage-body">Allocate rotation points for the turn (cannot exceed Maneuver spec
-                            level).</span>
-                    </li>
-                    <li class="stage-card">
-                        <span class="stage-title">Comms</span>
-                        <span class="stage-body">Set active communication range for the turn (cannot exceed Comms
-                            spec).</span>
-                    </li>
-                </ul>
-
-                <div class="rules-note">
-                    <strong>Constraint:</strong> None of the turn-allocated variables can surpass their maximum values
-                    defined by your Ship Specs.
-                </div>
-            </section>
-
-            <!-- Movements Section -->
-            <section id="movements">
-                <h2>Movements</h2>
-                <p>Navigating the cold void requires precise speed calculations:</p>
-                <div class="highlight-card">
-                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem;">
-                        <li>🚀 <strong>Fixed movement:</strong> Ships must move the exact Distance value currently set
-                            (no more, no less).</li>
-                        <li>🔄 <strong>Mid-travel rotation:</strong> At any point during movement, the player can spend
-                            Maneuver points allocated for the turn to rotate the ship in place (e.g., 60 degrees per
-                            point on a hex grid), and then continue moving if movement points remain.</li>
-                        <li>💾 <strong>Conservation:</strong> The speed/distance points set are preserved for the next
-                            turn unless actively adjusted.</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Combat Section -->
-            <section id="combat">
-                <h2>Combat Mechanics</h2>
-                <p>Engage target vessels using straight-line attacks from your forward-facing firing arc:</p>
-                <div class="highlight-card">
-                    <strong>Range Requirement:</strong> Attacks can only be made in a straight line from the ship's
-                    firing arc (forward-facing).
-                </div>
-
-                <p style="margin-top: 1.5rem;">If a target is within your active Attack range, it takes damage
-                    calculated as follows:</p>
-                <div class="highlight-card"
-                    style="text-align: center; font-family: var(--font-display); font-size: 1.2rem; border-color: rgba(239, 68, 68, 0.2); background: rgba(239, 68, 68, 0.02);">
-                    Damage = 1 + (Attack Points Allocated) - (Distance to Target)
-                </div>
-
-                <p style="margin-top: 1.5rem;">Damage points are first used to reduce the target's
-                    <strong>Shield</strong>. Any remaining damage is subtracted from the target's <strong>Resistance
-                        (hull)</strong>. A ship is destroyed when its Resistance reaches <strong>0</strong>.</p>
-
-                <!-- Interactive Combat Calculator -->
-                <div class="builder-section" style="border-color: rgba(239, 68, 68, 0.15);">
-                    <span class="builder-title" style="display: block; margin-bottom: 1.25rem;">Interactive Combat
-                        Simulator</span>
-                    <div class="calc-wrapper">
-                        <div class="calc-panel">
-                            <div class="calc-row">
-                                <span class="calc-label">Allocated Attack</span>
-                                <input type="range" id="calc-attack" min="1" max="10" value="5">
-                                <span class="calc-val" id="calc-val-attack">5</span>
-                            </div>
-                            <div class="calc-row">
-                                <span class="calc-label">Distance to Target</span>
-                                <input type="range" id="calc-distance" min="1" max="10" value="3">
-                                <span class="calc-val" id="calc-val-distance">3</span>
-                            </div>
-                            <div class="calc-row"
-                                style="border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 0.75rem;">
-                                <span class="calc-label">Target Max Shield</span>
-                                <input type="range" id="calc-shield" min="0" max="10" value="4">
-                                <span class="calc-val" id="calc-val-shield">4</span>
-                            </div>
-                            <div class="calc-row">
-                                <span class="calc-label">Target Hull (Resist)</span>
-                                <input type="range" id="calc-resist" min="1" max="10" value="5">
-                                <span class="calc-val" id="calc-val-resist">5</span>
-                            </div>
-                        </div>
-
-                        <div class="calc-result-panel" id="combat-result-container">
-                            <div class="result-title">Damage Calculated</div>
-                            <div class="result-damage" id="dmg-display">3</div>
-                            <div class="result-bar-container">
-                                <div class="result-bar-shield" id="bar-shield"></div>
-                                <div class="result-bar-hull" id="bar-hull"></div>
-                            </div>
-                            <div class="result-breakdown" id="dmg-breakdown">
-                                <!-- Generated by JS -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Special Rolls Section -->
-            <section id="special-rolls">
-                <h2>Double Dice Events</h2>
-                <p>Rolling matching pairs on your 2d6 turn roll triggers special galaxy-wide anomalies or events:</p>
-
-                <div class="dice-grid">
-                    <div class="dice-card double-six">
-                        <div class="dice-icon">⚅⚅</div>
-                        <div class="dice-title">Double Sixes (12)</div>
-                        <div class="dice-desc">The player can move the Space Station up to <strong>6 units</strong>.
-                        </div>
-                    </div>
-                    <div class="dice-card double-one">
-                        <div class="dice-icon">⚀⚀</div>
-                        <div class="dice-title">Double Ones (2)</div>
-                        <div class="dice-desc">One of the other players (the one who rolls the highest) can move the
-                            Space Storm up to <strong>3 hexes</strong> in any direction.</div>
-                    </div>
-                    <div class="dice-card double-any">
-                        <div class="dice-icon">⚂⚂</div>
-                        <div class="dice-title">Other Doubles</div>
-                        <div class="dice-desc">The active player can change resources on any <strong>one
-                                planet</strong>.</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Trading & Theft Section -->
-            <section id="trading">
-                <h2>Trading & Theft</h2>
-                <p>Accumulate wealth and transport commodities across space stations and planets:</p>
-
-                <h3
-                    style="font-family: var(--font-display); font-size: 1.1rem; color: #ffffff; margin-top: 1.5rem; text-transform: uppercase; letter-spacing: 0.5px;">
-                    Trading Protocols</h3>
-                <p>Trading can happen in three distinct ways:</p>
-                <ul class="trading-list">
-                    <li class="trading-item">
-                        <span class="trading-num">1</span>
-                        <span class="trading-text">When both ships land on the <strong>same Planet</strong>.</span>
-                    </li>
-                    <li class="trading-item">
-                        <span class="trading-num">2</span>
-                        <span class="trading-text">When both ships land in the <strong>same Space
-                                Station</strong>.</span>
-                    </li>
-                    <li class="trading-item">
-                        <span class="trading-num">3</span>
-                        <span class="trading-text">When both ships are within their active <strong>Comms
-                                Range</strong>.</span>
-                    </li>
-                </ul>
-
-                <h3
-                    style="font-family: var(--font-display); font-size: 1.1rem; color: #ffffff; margin-top: 2rem; text-transform: uppercase; letter-spacing: 0.5px;">
-                    Thievery</h3>
-                <div class="highlight-card"
-                    style="border-color: rgba(239, 68, 68, 0.2); background: rgba(239, 68, 68, 0.01);">
-                    👤 <strong>Planetary Theft:</strong> When a ship is at a planet, it can steal cargo from another
-                    ship docked at that same planet.
-                </div>
-            </section>
-
-            <!-- Planets & Stations Section -->
-            <section id="locations">
-                <h2>Planets & Space Stations</h2>
-                <p>The stellar bodies and installations scattered throughout the sector:</p>
-
-                <div class="locations-grid">
-                    <div class="loc-card planet">
-                        <div class="loc-header">
-                            <h3 class="loc-name">Planets</h3>
-                            <span class="loc-limit">Capacity: Unlimited ships</span>
-                        </div>
-                        <ul class="loc-actions">
-                            <li>Trade cargo between docked ships</li>
-                            <li>Sell cargo</li>
-                            <li>Buy cargo</li>
-                            <li>Repair ship hull integrity (Resistance)</li>
-                            <li>Accept pending missions</li>
-                        </ul>
-                    </div>
-
-                    <div class="loc-card station">
-                        <div class="loc-header">
-                            <h3 class="loc-name">Space Stations</h3>
-                            <span class="loc-limit">Capacity: Max 2 ships at a time</span>
-                        </div>
-                        <ul class="loc-actions">
-                            <li>Trade cargo between docked ships</li>
-                            <li>Sell specialized cargo</li>
-                            <li>Repair ship hull integrity (Resistance)</li>
-                            <li>Accept pending missions</li>
-                            <li>Refit or Change ship</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Missions Section -->
-            <section id="missions">
-                <h2>Missions</h2>
-                <p>Earn credits and reputational standing by assisting planetary governments and orbital corporations:
-                </p>
-
-                <div class="highlight-card">
-                    📋 <strong>Mission Lifecycle:</strong> Missions are offered by <strong>orbital stations</strong> and
-                    must be accepted while docked at <strong>planets</strong>.
-                </div>
-
-                <p style="margin-top: 1.5rem;">Standard missions consist of:</p>
-                <div class="loc-card station"
-                    style="border: 1px solid rgba(255, 255, 255, 0.03); background: rgba(255, 255, 255, 0.005);">
-                    <ul class="loc-actions">
-                        <li>Picking up specific cargo packages at one planet.</li>
-                        <li>Delivering the cargo securely to another designated planet.</li>
-                    </ul>
-                </div>
-            </section>
+            <section id="objective"></section>
+            <section id="specs"></section>
+            <section id="turn"></section>
+            <section id="movements"></section>
+            <section id="combat"></section>
+            <section id="special-rolls"></section>
+            <section id="trading"></section>
+            <section id="locations"></section>
+            <section id="missions"></section>
         </main>
 
         <footer>
@@ -1179,8 +909,196 @@
         </footer>
     </div>
 
-    <!-- Interactive script logic -->
+    <!-- Dynamic layout and interactivity script -->
     <script>
+        // --- Populate Rules Content from VOIDFARER_RULES ---
+        function renderRules() {
+            // 1. Objective
+            const objSec = document.getElementById('objective');
+            objSec.innerHTML = `
+                <h2>${VOIDFARER_RULES.objective.title}</h2>
+                <p>${VOIDFARER_RULES.objective.description}</p>
+                <div class="highlight-card">
+                    <strong>Current status:</strong> ${VOIDFARER_RULES.objective.status}
+                </div>
+            `;
+
+            // 2. Ship Specs
+            const specsSec = document.getElementById('specs');
+            const specsGridHtml = VOIDFARER_RULES.shipSpecs.specs.map(spec => {
+                let noteHtml = '';
+                if (spec.name === 'Maneuver') {
+                    noteHtml = `<br><span class="info-badge">3 points = Lvl 1</span> <span class="info-badge">6 points = Lvl 2</span> <span class="info-badge">10 points = Lvl 3</span>`;
+                } else if (spec.name === 'Load') {
+                    noteHtml = `<br><span class="info-badge">2 points = Lvl 1 (2 cargo)</span> <span class="info-badge">4 points = Lvl 2 (4 cargo)</span> <span class="info-badge">7 points = Lvl 3 (7 cargo)</span> <span class="info-badge">10 points = Lvl 4 (10 cargo)</span>`;
+                }
+                return `
+                    <div class="spec-item">
+                        <div class="spec-header">
+                            <span class="spec-name">${spec.name}</span>
+                            <span class="spec-range">${spec.range}</span>
+                        </div>
+                        <div class="spec-desc">${spec.desc}${noteHtml}</div>
+                    </div>
+                `;
+            }).join('');
+            
+            const specBuilderTemplate = document.getElementById('builder-widget-template');
+            const specBuilderClone = specBuilderTemplate.content.cloneNode(true);
+            
+            specsSec.innerHTML = `
+                <h2>${VOIDFARER_RULES.shipSpecs.title}</h2>
+                <p>${VOIDFARER_RULES.shipSpecs.description}</p>
+                <div class="specs-grid">
+                    ${specsGridHtml}
+                </div>
+            `;
+            specsSec.appendChild(specBuilderClone);
+
+            // 3. Turn Sequence
+            const turnSec = document.getElementById('turn');
+            const stagesHtml = VOIDFARER_RULES.turnSequence.stages.map(stage => `
+                <li class="stage-card">
+                    <span class="stage-title">${stage.title}</span>
+                    <span class="stage-body">${stage.body}</span>
+                </li>
+            `).join('');
+            turnSec.innerHTML = `
+                <h2>${VOIDFARER_RULES.turnSequence.title}</h2>
+                <p>${VOIDFARER_RULES.turnSequence.description}</p>
+                <ul class="stages-list">
+                    ${stagesHtml}
+                </ul>
+                <div class="rules-note">
+                    <strong>Constraint:</strong> ${VOIDFARER_RULES.turnSequence.constraint}
+                </div>
+            `;
+
+            // 4. Movements
+            const moveSec = document.getElementById('movements');
+            const moveRulesHtml = VOIDFARER_RULES.movements.rules.map(rule => `<li>${rule}</li>`).join('');
+            moveSec.innerHTML = `
+                <h2>${VOIDFARER_RULES.movements.title}</h2>
+                <p>${VOIDFARER_RULES.movements.description}</p>
+                <div class="highlight-card">
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem;">
+                        ${moveRulesHtml}
+                    </ul>
+                </div>
+            `;
+
+            // 5. Combat
+            const combatSec = document.getElementById('combat');
+            const combatTemplate = document.getElementById('combat-widget-template');
+            const combatClone = combatTemplate.content.cloneNode(true);
+
+            combatSec.innerHTML = `
+                <h2>${VOIDFARER_RULES.combat.title}</h2>
+                <p>${VOIDFARER_RULES.combat.description}</p>
+                <div class="highlight-card">
+                    <strong>Range Requirement:</strong> ${VOIDFARER_RULES.combat.rangeRequirement}
+                </div>
+                <p style="margin-top: 1.5rem;">If a target is within your active Attack range, it takes damage calculated as follows:</p>
+                <div class="highlight-card"
+                    style="text-align: center; font-family: var(--font-display); font-size: 1.2rem; border-color: rgba(239, 68, 68, 0.2); background: rgba(239, 68, 68, 0.02);">
+                    ${VOIDFARER_RULES.combat.formula}
+                </div>
+                <p style="margin-top: 1.5rem;">${VOIDFARER_RULES.combat.shieldHullRule}</p>
+            `;
+            combatSec.appendChild(combatClone);
+
+            // 6. Special Rolls
+            const rollsSec = document.getElementById('special-rolls');
+            const rollsHtml = VOIDFARER_RULES.doubleDiceEvents.events.map(event => `
+                <div class="dice-card ${event.colorClass}">
+                    <div class="dice-icon">${event.icon}</div>
+                    <div class="dice-title">${event.title}</div>
+                    <div class="dice-desc">${event.desc}</div>
+                </div>
+            `).join('');
+            rollsSec.innerHTML = `
+                <h2>${VOIDFARER_RULES.doubleDiceEvents.title}</h2>
+                <p>${VOIDFARER_RULES.doubleDiceEvents.description}</p>
+                <div class="dice-grid">
+                    ${rollsHtml}
+                </div>
+            `;
+
+            // 7. Trading & Theft
+            const tradingSec = document.getElementById('trading');
+            const tradingProtocolsHtml = VOIDFARER_RULES.tradingTheft.protocols.map((protocol, i) => `
+                <li class="trading-item">
+                    <span class="trading-num">${i + 1}</span>
+                    <span class="trading-text">${protocol}</span>
+                </li>
+            `).join('');
+            tradingSec.innerHTML = `
+                <h2>${VOIDFARER_RULES.tradingTheft.title}</h2>
+                <p>${VOIDFARER_RULES.tradingTheft.description}</p>
+                <h3 style="font-family: var(--font-display); font-size: 1.1rem; color: #ffffff; margin-top: 1.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Trading Protocols</h3>
+                <ul class="trading-list">
+                    ${tradingProtocolsHtml}
+                </ul>
+                <h3 style="font-family: var(--font-display); font-size: 1.1rem; color: #ffffff; margin-top: 2rem; text-transform: uppercase; letter-spacing: 0.5px;">Thievery</h3>
+                <div class="highlight-card"
+                    style="border-color: rgba(239, 68, 68, 0.2); background: rgba(239, 68, 68, 0.01);">
+                    👤 <strong>${VOIDFARER_RULES.tradingTheft.thievery}</strong>
+                </div>
+            `;
+
+            // 8. Locations (Planets & Stations)
+            const locSec = document.getElementById('locations');
+            const locationsHtml = VOIDFARER_RULES.locations.types.map(type => {
+                const actionsHtml = type.actions.map(action => `<li>${action}</li>`).join('');
+                return `
+                    <div class="loc-card ${type.cardClass}">
+                        <div class="loc-header">
+                            <h3 class="loc-name">${type.name}</h3>
+                            <span class="loc-limit">${type.limit}</span>
+                        </div>
+                        <ul class="loc-actions">
+                            ${actionsHtml}
+                        </ul>
+                    </div>
+                `;
+            }).join('');
+            locSec.innerHTML = `
+                <h2>${VOIDFARER_RULES.locations.title}</h2>
+                <p>${VOIDFARER_RULES.locations.description}</p>
+                <div class="locations-grid">
+                    ${locationsHtml}
+                </div>
+            `;
+
+            // 9. Missions
+            const missionsSec = document.getElementById('missions');
+            const missionsHtml = VOIDFARER_RULES.missions.types.map((type, index) => {
+                const actionsHtml = type.actions.map(action => `<li>${action}</li>`).join('');
+                const marginBottom = index < VOIDFARER_RULES.missions.types.length - 1 ? 'margin-bottom: 1.5rem;' : '';
+                return `
+                    <div class="loc-card ${type.cardClass}"
+                        style="border: 1px solid rgba(255, 255, 255, 0.03); background: rgba(255, 255, 255, 0.005); ${marginBottom}">
+                        <h3 style="font-family: var(--font-display); font-size: 1rem; color: ${index % 2 === 0 ? 'var(--accent-cyan)' : 'var(--accent-purple)'}; margin-bottom: 0.5rem; text-transform: uppercase;">${type.title}</h3>
+                        <ul class="loc-actions">
+                            ${actionsHtml}
+                        </ul>
+                    </div>
+                `;
+            }).join('');
+            missionsSec.innerHTML = `
+                <h2>${VOIDFARER_RULES.missions.title}</h2>
+                <p>${VOIDFARER_RULES.missions.description}</p>
+                <div class="highlight-card">
+                    📋 <strong>Mission Lifecycle:</strong> ${VOIDFARER_RULES.missions.lifecycle}
+                </div>
+                <p style="margin-top: 1.5rem;">Missions include the following objectives:</p>
+                ${missionsHtml}
+            `;
+        }
+
+        // Render everything first
+        renderRules();
+
         // --- Navigation active state tracking ---
         const links = document.querySelectorAll('.sidebar a');
         const sections = document.querySelectorAll('section');
@@ -1189,7 +1107,6 @@
             let current = '';
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
                 if (pageYOffset >= (sectionTop - 150)) {
                     current = section.getAttribute('id');
                 }
@@ -1346,8 +1263,6 @@
 
             // Bar visual styling
             const totalTargetHealth = (maxShield + maxHull) || 1;
-            const shieldPct = (maxShield / totalTargetHealth) * 100;
-            const hullPct = (maxHull / totalTargetHealth) * 100;
 
             // Damage impact bar widths
             const shieldDmgPct = (shieldAbsorbed / totalTargetHealth) * 100;
