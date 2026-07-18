@@ -1,92 +1,1404 @@
-Space trading and combat game.
+<!DOCTYPE html>
+<html lang="en">
 
-Objective
----------
-To be defined (e.g., Amass 100 credits through trading, or be the last ship standing).
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voidfarer | Space Trading and Combat Game Rules</title>
+    <meta name="description"
+        content="Official rulebook, interactive ship specification builder, and combat calculator for Voidfarer, the space trading and combat board game.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #08090e;
+            --panel-bg: rgba(15, 18, 32, 0.7);
+            --panel-border: rgba(0, 242, 254, 0.12);
+            --panel-border-hover: rgba(0, 242, 254, 0.35);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-cyan: #00f2fe;
+            --accent-purple: #a855f7;
+            --accent-green: #22c55e;
+            --accent-red: #ef4444;
+            --font-display: 'Orbitron', sans-serif;
+            --font-body: 'Space Grotesk', sans-serif;
+        }
 
-Rules
-========
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-Ship specs
-----------
-To setup a ship, distribute 30 units among following variables:
+        body {
+            background-color: var(--bg-color);
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(168, 85, 247, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 242, 254, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(15, 18, 32, 1) 0%, #08090e 100%);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-Attack : how far it can attack [1 - 10]
-Shield : max value the shields withstand [1 - 10]
-Distance : max units the ship can move [1 - 10]
-Resistance : how much the ship holds damage after shield go off [1 - 10]
-Comms : how far the ship can communicate [1 - 10]
-Maneuver : in place rotation movements on top of distance [3 (1), 6 (2), 10 (3)]
-Load : how much units of cargo the ship can carry [2 (1), 4 (2), 7 (3) , 10 (4)]
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2.5rem;
+        }
 
-Turn
----------
-Each player roll two 6-sided dice (2d6).
-Distributes the points into ship turn variables:
-Distance : adjust current speed (each 1 point spent increases or decreases speed by 1, up to ship's max spec)
-Attack : set attack range and damage potential for the turn (cannot exceed Attack spec)
-Shield : recover damaged shield points (1 point per shield point recovered, up to Shield spec)
-Maneuver : allocate rotation points for the turn (cannot exceed Maneuver spec level)
-Comms : set active communication range for the turn (cannot exceed Comms spec)
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
 
-None of the variables can surpass the max value according to ship specs
+            .sidebar {
+                display: none;
+            }
+        }
 
-Movements
----------
-Ships move the exact Distance value currently set (no less, no more).
-At any point during movement, the player can spend Maneuver points they have for the turn to rotate the ship in place
-(e.g., 60 degrees per point on a hex grid), and then continue moving if movement points remain.
-The distance points are preserved for the next turn.
+        header {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem 1.5rem 3rem;
+            background: linear-gradient(180deg, rgba(0, 242, 254, 0.04) 0%, transparent 100%);
+            border-bottom: 1px solid rgba(0, 242, 254, 0.08);
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
 
-Combat
----------
-Attacks can only be made in a straight line from the ship's firing arc (forward-facing).
-If a target is within the active Attack range, it takes damage equal to:
-Damage = 1 + (Attack points allocated) - (Distance to target)
-Damage points are first used to reduce the target's Shield. Remaining damage is subtracted from the target's Resistance
-(hull).
-A ship is destroyed when its Resistance reaches 0.
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 250px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+        }
 
-When a player rolls double six, it can move the station up to 6 units.
-When a player rolls double one, one of other players (higher roll) can move space storm up to three hex in any
-direction.
-On any other double player can change resources on any one planet
+        h1 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 35px rgba(0, 242, 254, 0.15);
+        }
 
-Trading
----------
-Can happen in three ways:
-1. when both ships land in the same planet
-2. when both ships land in the same space station
-3. when both ships are in range of communication
+        .subtitle {
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            color: var(--accent-purple);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
 
-Thiefs
----------
-When a ship is in a planet, it can steal cargo from another ship
+        /* Sidebar Nav */
+        .sidebar {
+            position: sticky;
+            top: 2rem;
+            height: fit-content;
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(16px);
+        }
 
-Planets
----------
-Planets accept any number of ships.
-At planets ships can:
-- Trade cargo among them.
-- Sell cargo.
-- Buy cargo.
-- Repair ship (resistance).
-- Accept missions.
+        .sidebar h2 {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.25rem;
+            color: var(--accent-cyan);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding-bottom: 0.5rem;
+        }
 
-Space stations
-------------
-Space stations accept up to two ships at a time.
-At space stations ships can:
-- Trade cargo among them.
-- Sell specialized cargo.
-- Repair ship (resistance).
-- Accept missions.
-- Change ship.
+        .sidebar ul {
+            list-style: none;
+        }
 
-Missions
---------
-Missions are given by stations and accepted at planets.
+        .sidebar li {
+            margin-bottom: 0.6rem;
+        }
 
-Missions consist of
-- Picking up cargo at one planet.
-- Delivering cargo to another planet.
+        .sidebar a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.25s ease;
+            display: block;
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            border-left: 2px solid transparent;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            color: var(--accent-cyan);
+            background: rgba(0, 242, 254, 0.04);
+            border-left-color: var(--accent-cyan);
+            padding-left: 1.1rem;
+        }
+
+        /* Main Content */
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        section {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            backdrop-filter: blur(16px);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        @media (max-width: 640px) {
+            section {
+                padding: 1.5rem;
+            }
+        }
+
+        section:hover {
+            border-color: var(--panel-border-hover);
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.02);
+        }
+
+        section h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #ffffff;
+        }
+
+        section h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-purple));
+            border-radius: 2px;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .highlight-card {
+            background: linear-gradient(135deg, rgba(0, 242, 254, 0.04) 0%, rgba(168, 85, 247, 0.04) 100%);
+            border: 1px solid rgba(0, 242, 254, 0.12);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            color: var(--text-primary);
+            font-size: 1.05rem;
+            box-shadow: inset 0 0 12px rgba(0, 242, 254, 0.02);
+        }
+
+        /* Ship Specs Grid */
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .spec-item {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .spec-item:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(0, 242, 254, 0.25);
+        }
+
+        .spec-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .spec-name {
+            font-family: var(--font-display);
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 1rem;
+        }
+
+        .spec-range {
+            font-size: 0.8rem;
+            font-family: var(--font-display);
+            color: var(--accent-cyan);
+            background: rgba(0, 242, 254, 0.08);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 242, 254, 0.15);
+        }
+
+        .spec-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Interactive Spec Builder */
+        .builder-section {
+            background: rgba(8, 9, 14, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.75rem;
+            margin-top: 2rem;
+        }
+
+        .builder-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .builder-title {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-status {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 0.4rem 1.25rem;
+            border-radius: 20px;
+            background: rgba(0, 242, 254, 0.08);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            box-shadow: 0 0 12px rgba(0, 242, 254, 0.05);
+            transition: all 0.25s ease;
+        }
+
+        .badge-status.invalid {
+            background: rgba(239, 68, 68, 0.08);
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+            box-shadow: 0 0 12px rgba(239, 68, 68, 0.05);
+        }
+
+        .badge-status.valid {
+            background: rgba(34, 197, 94, 0.08);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+            box-shadow: 0 0 12px rgba(34, 197, 94, 0.05);
+        }
+
+        .builder-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+        }
+
+        .control-row {
+            display: grid;
+            grid-template-columns: 150px 1fr 100px;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 640px) {
+            .control-row {
+                grid-template-columns: 1fr 60px;
+                gap: 0.5rem;
+                padding-bottom: 0.75rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            }
+
+            .control-row:last-child {
+                border-bottom: none;
+            }
+
+            .control-label {
+                grid-column: 1 / -1;
+            }
+        }
+
+        .control-label {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .control-input-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            width: 100%;
+        }
+
+        .control-input-container input[type="range"] {
+            flex-grow: 1;
+        }
+
+        .control-val {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-align: right;
+            min-width: 30px;
+        }
+
+        .info-badge {
+            font-size: 0.8rem;
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--accent-purple);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            margin-left: 0.5rem;
+            display: inline-block;
+        }
+
+        /* Lists and Turn Stages */
+        .stages-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stage-card {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        @media (max-width: 640px) {
+            .stage-card {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+        }
+
+        .stage-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            color: var(--accent-cyan);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding-top: 0.15rem;
+        }
+
+        .stage-body {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .rules-note {
+            margin-top: 1.5rem;
+            padding: 1rem 1.25rem;
+            border-left: 3px solid var(--accent-purple);
+            background: rgba(168, 85, 247, 0.03);
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Locations (Planets vs Stations) */
+        .locations-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .locations-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .loc-card {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            padding: 1.75rem;
+        }
+
+        .loc-card.planet {
+            border-top: 3px solid var(--accent-cyan);
+        }
+
+        .loc-card.station {
+            border-top: 3px solid var(--accent-purple);
+        }
+
+        .loc-header {
+            margin-bottom: 1.25rem;
+        }
+
+        .loc-name {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .loc-card.planet .loc-name {
+            color: var(--accent-cyan);
+        }
+
+        .loc-card.station .loc-name {
+            color: var(--accent-purple);
+        }
+
+        .loc-limit {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .loc-actions {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .loc-actions li {
+            position: relative;
+            padding-left: 1.25rem;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .loc-actions li::before {
+            content: '▫';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        .loc-card.station .loc-actions li::before {
+            color: var(--accent-purple);
+        }
+
+        /* Combat Damage Calculator */
+        .calc-wrapper {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .calc-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .calc-panel {
+            background: rgba(8, 9, 14, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .calc-row {
+            display: grid;
+            grid-template-columns: 120px 1fr 50px;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .calc-label {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .calc-val {
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-align: right;
+        }
+
+        .calc-result-panel {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.04) 0%, rgba(8, 9, 14, 0.8) 100%);
+            border: 1px solid rgba(239, 68, 68, 0.15);
+            border-radius: 12px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 200px;
+        }
+
+        .result-title {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .result-damage {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent-red);
+            line-height: 1;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
+        }
+
+        .result-bar-container {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            display: flex;
+        }
+
+        .result-bar-shield {
+            height: 100%;
+            background: var(--accent-cyan);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .result-bar-hull {
+            height: 100%;
+            background: var(--accent-red);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .result-breakdown {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            width: 100%;
+            line-height: 1.5;
+        }
+
+        .breakdown-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.25rem;
+        }
+
+        .breakdown-label {
+            color: var(--text-secondary);
+        }
+
+        .breakdown-val {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        /* Doubles Dice Rolls */
+        .dice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .dice-card {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+
+        .dice-card:hover {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .dice-icon {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .dice-card.double-six .dice-icon {
+            color: var(--accent-green);
+        }
+
+        .dice-card.double-one .dice-icon {
+            color: var(--accent-red);
+        }
+
+        .dice-card.double-any .dice-icon {
+            color: var(--accent-purple);
+        }
+
+        .dice-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .dice-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Trading & Thiefs cards */
+        .trading-list {
+            margin-top: 1rem;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .trading-item {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .trading-num {
+            font-family: var(--font-display);
+            font-weight: 700;
+            color: var(--accent-cyan);
+            background: rgba(0, 242, 254, 0.08);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 1px solid rgba(0, 242, 254, 0.15);
+            font-size: 0.85rem;
+        }
+
+        .trading-text {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        /* Footer styling */
+        footer {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem 0;
+            color: rgba(255, 255, 255, 0.25);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            margin-top: 3rem;
+            font-family: var(--font-display);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <div class="subtitle">MG</div>
+            <h1>Space Trading & Combat Game</h1>
+            <p
+                style="margin-bottom: 0; margin-top: 0.5rem; font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 2px; color: var(--text-secondary); text-transform: uppercase;">
+                Official Rulebook & Interactive Guides
+            </p>
+        </header>
+
+        <aside class="sidebar">
+            <h2>Rulebook Index</h2>
+            <ul>
+                <li><a href="#objective" class="active">Objective</a></li>
+                <li><a href="#specs">Ship Specifications</a></li>
+                <li><a href="#turn">Turn Sequence</a></li>
+                <li><a href="#movements">Movements</a></li>
+                <li><a href="#combat">Combat Mechanics</a></li>
+                <li><a href="#special-rolls">Double Dice Events</a></li>
+                <li><a href="#trading">Trading & Theft</a></li>
+                <li><a href="#locations">Planets & Stations</a></li>
+                <li><a href="#missions">Missions</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <!-- Objective Section -->
+            <section id="objective">
+                <h2>Objective</h2>
+                <p>The ultimate goals of the space voyagers in Voidfarer.</p>
+                <div class="highlight-card">
+                    <strong>Current status:</strong> To be defined (e.g., Amass 100 credits through trading, or be the
+                    last ship standing).
+                </div>
+            </section>
+
+            <!-- Ship Specifications Section -->
+            <section id="specs">
+                <h2>Ship Specifications</h2>
+                <p>To set up a ship, players distribute exactly <strong>30 units</strong> among the following specs.
+                    Each spec defines the fundamental capabilities of your vessel:</p>
+
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <div class="spec-header">
+                            <span class="spec-name">Attack</span>
+                            <span class="spec-range">1 - 10</span>
+                        </div>
+                        <div class="spec-desc">Determines how far the ship can fire its main weapons.</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-header">
+                            <span class="spec-name">Shield</span>
+                            <span class="spec-range">1 - 10</span>
+                        </div>
+                        <div class="spec-desc">The maximum energy value that shields can absorb before taking hull
+                            damage.</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-header">
+                            <span class="spec-name">Distance</span>
+                            <span class="spec-range">1 - 10</span>
+                        </div>
+                        <div class="spec-desc">The maximum number of units (hexes) the ship can travel in a single turn.
+                        </div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-header">
+                            <span class="spec-name">Resistance</span>
+                            <span class="spec-range">1 - 10</span>
+                        </div>
+                        <div class="spec-desc">The hull integrity of the ship, which absorbs damage after shields fail.
+                        </div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-header">
+                            <span class="spec-name">Comms</span>
+                            <span class="spec-range">1 - 10</span>
+                        </div>
+                        <div class="spec-desc">The maximum range at which the ship can establish communications.</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-header">
+                            <span class="spec-name">Maneuver</span>
+                            <span class="spec-range">3, 6, 10</span>
+                        </div>
+                        <div class="spec-desc">Allows in-place rotation movements on top of distance.
+                            <br><span class="info-badge">3 points = Lvl 1</span>
+                            <span class="info-badge">6 points = Lvl 2</span>
+                            <span class="info-badge">10 points = Lvl 3</span>
+                        </div>
+                    </div>
+                    <div class="spec-item" style="grid-column: 1 / -1;">
+                        <div class="spec-header">
+                            <span class="spec-name">Load</span>
+                            <span class="spec-range">2, 4, 7, 10</span>
+                        </div>
+                        <div class="spec-desc">Determines how many units of cargo the ship is certified to transport.
+                            <br><span class="info-badge">2 points = Lvl 1 (2 cargo)</span>
+                            <span class="info-badge">4 points = Lvl 2 (4 cargo)</span>
+                            <span class="info-badge">7 points = Lvl 3 (7 cargo)</span>
+                            <span class="info-badge">10 points = Lvl 4 (10 cargo)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Spec Builder -->
+                <div class="builder-section">
+                    <div class="builder-top">
+                        <span class="builder-title">Interactive Ship Designer</span>
+                        <div id="points-status" class="badge-status valid">Points Allocated: 30 / 30</div>
+                    </div>
+                    <div class="builder-controls">
+                        <div class="control-row">
+                            <span class="control-label">Attack (1-10)</span>
+                            <div class="control-input-container">
+                                <input type="range" id="input-attack" min="1" max="10" value="5">
+                            </div>
+                            <span class="control-val" id="val-attack">5</span>
+                        </div>
+                        <div class="control-row">
+                            <span class="control-label">Shield (1-10)</span>
+                            <div class="control-input-container">
+                                <input type="range" id="input-shield" min="1" max="10" value="5">
+                            </div>
+                            <span class="control-val" id="val-shield">5</span>
+                        </div>
+                        <div class="control-row">
+                            <span class="control-label">Distance (1-10)</span>
+                            <div class="control-input-container">
+                                <input type="range" id="input-distance" min="1" max="10" value="5">
+                            </div>
+                            <span class="control-val" id="val-distance">5</span>
+                        </div>
+                        <div class="control-row">
+                            <span class="control-label">Resistance (1-10)</span>
+                            <div class="control-input-container">
+                                <input type="range" id="input-resistance" min="1" max="10" value="5">
+                            </div>
+                            <span class="control-val" id="val-resistance">5</span>
+                        </div>
+                        <div class="control-row">
+                            <span class="control-label">Comms (1-10)</span>
+                            <div class="control-input-container">
+                                <input type="range" id="input-comms" min="1" max="10" value="5">
+                            </div>
+                            <span class="control-val" id="val-comms">5</span>
+                        </div>
+                        <div class="control-row">
+                            <span class="control-label">Maneuver</span>
+                            <div class="control-input-container">
+                                <input type="range" id="input-maneuver" min="0" max="10" value="3" step="1">
+                            </div>
+                            <span class="control-val" id="val-maneuver">3 <span id="maneuver-lvl" class="info-badge">Lvl
+                                    1</span></span>
+                        </div>
+                        <div class="control-row">
+                            <span class="control-label">Load</span>
+                            <div class="control-input-container">
+                                <input type="range" id="input-load" min="0" max="10" value="2" step="1">
+                            </div>
+                            <span class="control-val" id="val-load">2 <span id="load-lvl" class="info-badge">Lvl
+                                    1</span></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Turn Sequence Section -->
+            <section id="turn">
+                <h2>Turn Sequence</h2>
+                <p>Every turn, a player rolls <strong>two 6-sided dice (2d6)</strong>. The sum of the rolled numbers
+                    represents the points they can temporarily distribute among their active turn variables:</p>
+
+                <ul class="stages-list">
+                    <li class="stage-card">
+                        <span class="stage-title">Distance</span>
+                        <span class="stage-body">Adjust current speed. Each 1 point spent increases or decreases speed
+                            by 1, up to the ship's maximum spec.</span>
+                    </li>
+                    <li class="stage-card">
+                        <span class="stage-title">Attack</span>
+                        <span class="stage-body">Set the active attack range and damage potential for the current turn
+                            (cannot exceed local Attack spec).</span>
+                    </li>
+                    <li class="stage-card">
+                        <span class="stage-title">Shield</span>
+                        <span class="stage-body">Recover damaged shield points at a cost of 1 allocated point per 1
+                            shield point recovered (up to Shield spec).</span>
+                    </li>
+                    <li class="stage-card">
+                        <span class="stage-title">Maneuver</span>
+                        <span class="stage-body">Allocate rotation points for the turn (cannot exceed Maneuver spec
+                            level).</span>
+                    </li>
+                    <li class="stage-card">
+                        <span class="stage-title">Comms</span>
+                        <span class="stage-body">Set active communication range for the turn (cannot exceed Comms
+                            spec).</span>
+                    </li>
+                </ul>
+
+                <div class="rules-note">
+                    <strong>Constraint:</strong> None of the turn-allocated variables can surpass their maximum values
+                    defined by your Ship Specs.
+                </div>
+            </section>
+
+            <!-- Movements Section -->
+            <section id="movements">
+                <h2>Movements</h2>
+                <p>Navigating the cold void requires precise speed calculations:</p>
+                <div class="highlight-card">
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem;">
+                        <li>🚀 <strong>Fixed movement:</strong> Ships must move the exact Distance value currently set
+                            (no more, no less).</li>
+                        <li>🔄 <strong>Mid-travel rotation:</strong> At any point during movement, the player can spend
+                            Maneuver points allocated for the turn to rotate the ship in place (e.g., 60 degrees per
+                            point on a hex grid), and then continue moving if movement points remain.</li>
+                        <li>💾 <strong>Conservation:</strong> The speed/distance points set are preserved for the next
+                            turn unless actively adjusted.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Combat Section -->
+            <section id="combat">
+                <h2>Combat Mechanics</h2>
+                <p>Engage target vessels using straight-line attacks from your forward-facing firing arc:</p>
+                <div class="highlight-card">
+                    <strong>Range Requirement:</strong> Attacks can only be made in a straight line from the ship's
+                    firing arc (forward-facing).
+                </div>
+
+                <p style="margin-top: 1.5rem;">If a target is within your active Attack range, it takes damage
+                    calculated as follows:</p>
+                <div class="highlight-card"
+                    style="text-align: center; font-family: var(--font-display); font-size: 1.2rem; border-color: rgba(239, 68, 68, 0.2); background: rgba(239, 68, 68, 0.02);">
+                    Damage = 1 + (Attack Points Allocated) - (Distance to Target)
+                </div>
+
+                <p style="margin-top: 1.5rem;">Damage points are first used to reduce the target's
+                    <strong>Shield</strong>. Any remaining damage is subtracted from the target's <strong>Resistance
+                        (hull)</strong>. A ship is destroyed when its Resistance reaches <strong>0</strong>.</p>
+
+                <!-- Interactive Combat Calculator -->
+                <div class="builder-section" style="border-color: rgba(239, 68, 68, 0.15);">
+                    <span class="builder-title" style="display: block; margin-bottom: 1.25rem;">Interactive Combat
+                        Simulator</span>
+                    <div class="calc-wrapper">
+                        <div class="calc-panel">
+                            <div class="calc-row">
+                                <span class="calc-label">Allocated Attack</span>
+                                <input type="range" id="calc-attack" min="1" max="10" value="5">
+                                <span class="calc-val" id="calc-val-attack">5</span>
+                            </div>
+                            <div class="calc-row">
+                                <span class="calc-label">Distance to Target</span>
+                                <input type="range" id="calc-distance" min="1" max="10" value="3">
+                                <span class="calc-val" id="calc-val-distance">3</span>
+                            </div>
+                            <div class="calc-row"
+                                style="border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 0.75rem;">
+                                <span class="calc-label">Target Max Shield</span>
+                                <input type="range" id="calc-shield" min="0" max="10" value="4">
+                                <span class="calc-val" id="calc-val-shield">4</span>
+                            </div>
+                            <div class="calc-row">
+                                <span class="calc-label">Target Hull (Resist)</span>
+                                <input type="range" id="calc-resist" min="1" max="10" value="5">
+                                <span class="calc-val" id="calc-val-resist">5</span>
+                            </div>
+                        </div>
+
+                        <div class="calc-result-panel" id="combat-result-container">
+                            <div class="result-title">Damage Calculated</div>
+                            <div class="result-damage" id="dmg-display">3</div>
+                            <div class="result-bar-container">
+                                <div class="result-bar-shield" id="bar-shield"></div>
+                                <div class="result-bar-hull" id="bar-hull"></div>
+                            </div>
+                            <div class="result-breakdown" id="dmg-breakdown">
+                                <!-- Generated by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Special Rolls Section -->
+            <section id="special-rolls">
+                <h2>Double Dice Events</h2>
+                <p>Rolling matching pairs on your 2d6 turn roll triggers special galaxy-wide anomalies or events:</p>
+
+                <div class="dice-grid">
+                    <div class="dice-card double-six">
+                        <div class="dice-icon">⚅⚅</div>
+                        <div class="dice-title">Double Sixes (12)</div>
+                        <div class="dice-desc">The player can move the Space Station up to <strong>6 units</strong>.
+                        </div>
+                    </div>
+                    <div class="dice-card double-one">
+                        <div class="dice-icon">⚀⚀</div>
+                        <div class="dice-title">Double Ones (2)</div>
+                        <div class="dice-desc">One of the other players (the one who rolls the highest) can move the
+                            Space Storm up to <strong>3 hexes</strong> in any direction.</div>
+                    </div>
+                    <div class="dice-card double-any">
+                        <div class="dice-icon">⚂⚂</div>
+                        <div class="dice-title">Other Doubles</div>
+                        <div class="dice-desc">The active player can change resources on any <strong>one
+                                planet</strong>.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Trading & Theft Section -->
+            <section id="trading">
+                <h2>Trading & Theft</h2>
+                <p>Accumulate wealth and transport commodities across space stations and planets:</p>
+
+                <h3
+                    style="font-family: var(--font-display); font-size: 1.1rem; color: #ffffff; margin-top: 1.5rem; text-transform: uppercase; letter-spacing: 0.5px;">
+                    Trading Protocols</h3>
+                <p>Trading can happen in three distinct ways:</p>
+                <ul class="trading-list">
+                    <li class="trading-item">
+                        <span class="trading-num">1</span>
+                        <span class="trading-text">When both ships land on the <strong>same Planet</strong>.</span>
+                    </li>
+                    <li class="trading-item">
+                        <span class="trading-num">2</span>
+                        <span class="trading-text">When both ships land in the <strong>same Space
+                                Station</strong>.</span>
+                    </li>
+                    <li class="trading-item">
+                        <span class="trading-num">3</span>
+                        <span class="trading-text">When both ships are within their active <strong>Comms
+                                Range</strong>.</span>
+                    </li>
+                </ul>
+
+                <h3
+                    style="font-family: var(--font-display); font-size: 1.1rem; color: #ffffff; margin-top: 2rem; text-transform: uppercase; letter-spacing: 0.5px;">
+                    Thievery</h3>
+                <div class="highlight-card"
+                    style="border-color: rgba(239, 68, 68, 0.2); background: rgba(239, 68, 68, 0.01);">
+                    👤 <strong>Planetary Theft:</strong> When a ship is at a planet, it can steal cargo from another
+                    ship docked at that same planet.
+                </div>
+            </section>
+
+            <!-- Planets & Stations Section -->
+            <section id="locations">
+                <h2>Planets & Space Stations</h2>
+                <p>The stellar bodies and installations scattered throughout the sector:</p>
+
+                <div class="locations-grid">
+                    <div class="loc-card planet">
+                        <div class="loc-header">
+                            <h3 class="loc-name">Planets</h3>
+                            <span class="loc-limit">Capacity: Unlimited ships</span>
+                        </div>
+                        <ul class="loc-actions">
+                            <li>Trade cargo between docked ships</li>
+                            <li>Sell cargo</li>
+                            <li>Buy cargo</li>
+                            <li>Repair ship hull integrity (Resistance)</li>
+                            <li>Accept pending missions</li>
+                        </ul>
+                    </div>
+
+                    <div class="loc-card station">
+                        <div class="loc-header">
+                            <h3 class="loc-name">Space Stations</h3>
+                            <span class="loc-limit">Capacity: Max 2 ships at a time</span>
+                        </div>
+                        <ul class="loc-actions">
+                            <li>Trade cargo between docked ships</li>
+                            <li>Sell specialized cargo</li>
+                            <li>Repair ship hull integrity (Resistance)</li>
+                            <li>Accept pending missions</li>
+                            <li>Refit or Change ship</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Missions Section -->
+            <section id="missions">
+                <h2>Missions</h2>
+                <p>Earn credits and reputational standing by assisting planetary governments and orbital corporations:
+                </p>
+
+                <div class="highlight-card">
+                    📋 <strong>Mission Lifecycle:</strong> Missions are offered by <strong>orbital stations</strong> and
+                    must be accepted while docked at <strong>planets</strong>.
+                </div>
+
+                <p style="margin-top: 1.5rem;">Standard missions consist of:</p>
+                <div class="loc-card station"
+                    style="border: 1px solid rgba(255, 255, 255, 0.03); background: rgba(255, 255, 255, 0.005);">
+                    <ul class="loc-actions">
+                        <li>Picking up specific cargo packages at one planet.</li>
+                        <li>Delivering the cargo securely to another designated planet.</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            Voidfarer Rulebook © 2026. Made with styling for optimal game sessions.
+        </footer>
+    </div>
+
+    <!-- Interactive script logic -->
+    <script>
+        // --- Navigation active state tracking ---
+        const links = document.querySelectorAll('.sidebar a');
+        const sections = document.querySelectorAll('section');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            links.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // --- Ship Spec Builder Logic ---
+        const specInputs = {
+            attack: document.getElementById('input-attack'),
+            shield: document.getElementById('input-shield'),
+            distance: document.getElementById('input-distance'),
+            resistance: document.getElementById('input-resistance'),
+            comms: document.getElementById('input-comms'),
+            maneuver: document.getElementById('input-maneuver'),
+            load: document.getElementById('input-load')
+        };
+
+        const specValues = {
+            attack: document.getElementById('val-attack'),
+            shield: document.getElementById('val-shield'),
+            distance: document.getElementById('val-distance'),
+            resistance: document.getElementById('val-resistance'),
+            comms: document.getElementById('val-comms'),
+            maneuver: document.getElementById('val-maneuver'),
+            load: document.getElementById('val-load')
+        };
+
+        const pointsStatus = document.getElementById('points-status');
+
+        function updateSpecBuilder() {
+            let total = 0;
+            const values = {};
+
+            // Collect current values
+            for (const key in specInputs) {
+                values[key] = parseInt(specInputs[key].value, 10);
+                total += values[key];
+            }
+
+            // Update range levels for Maneuver
+            let maneuverLvl = 0;
+            if (values.maneuver >= 10) {
+                maneuverLvl = 3;
+            } else if (values.maneuver >= 6) {
+                maneuverLvl = 2;
+            } else if (values.maneuver >= 3) {
+                maneuverLvl = 1;
+            }
+            specValues.maneuver.innerHTML = `${values.maneuver} <span class="info-badge">Lvl ${maneuverLvl}</span>`;
+
+            // Update range levels for Load
+            let loadLvl = 0;
+            let loadCargo = 0;
+            if (values.load >= 10) {
+                loadLvl = 4; loadCargo = 10;
+            } else if (values.load >= 7) {
+                loadLvl = 3; loadCargo = 7;
+            } else if (values.load >= 4) {
+                loadLvl = 2; loadCargo = 4;
+            } else if (values.load >= 2) {
+                loadLvl = 1; loadCargo = 2;
+            }
+            specValues.load.innerHTML = `${values.load} <span class="info-badge">Lvl ${loadLvl} (${loadCargo} Cargo)</span>`;
+
+            // Update other values
+            specValues.attack.textContent = values.attack;
+            specValues.shield.textContent = values.shield;
+            specValues.distance.textContent = values.distance;
+            specValues.resistance.textContent = values.resistance;
+            specValues.comms.textContent = values.comms;
+
+            // Total status badge updates
+            pointsStatus.textContent = `Points Allocated: ${total} / 30`;
+            pointsStatus.className = 'badge-status';
+
+            if (total === 30) {
+                pointsStatus.classList.add('valid');
+            } else {
+                pointsStatus.classList.add('invalid');
+                if (total > 30) {
+                    pointsStatus.textContent += ' (Over Limit!)';
+                } else {
+                    pointsStatus.textContent += ' (Remaining: ' + (30 - total) + ')';
+                }
+            }
+        }
+
+        // Add event listeners for spec builder inputs
+        for (const key in specInputs) {
+            specInputs[key].addEventListener('input', updateSpecBuilder);
+        }
+        updateSpecBuilder();
+
+
+        // --- Combat Simulator Logic ---
+        const calcInputs = {
+            attack: document.getElementById('calc-attack'),
+            distance: document.getElementById('calc-distance'),
+            shield: document.getElementById('calc-shield'),
+            resist: document.getElementById('calc-resist')
+        };
+
+        const calcValues = {
+            attack: document.getElementById('calc-val-attack'),
+            distance: document.getElementById('calc-val-distance'),
+            shield: document.getElementById('calc-val-shield'),
+            resist: document.getElementById('calc-val-resist')
+        };
+
+        const dmgDisplay = document.getElementById('dmg-display');
+        const barShield = document.getElementById('bar-shield');
+        const barHull = document.getElementById('bar-hull');
+        const dmgBreakdown = document.getElementById('dmg-breakdown');
+        const combatResultContainer = document.getElementById('combat-result-container');
+
+        function updateCombatCalc() {
+            // Update labels
+            for (const key in calcInputs) {
+                calcValues[key].textContent = calcInputs[key].value;
+            }
+
+            const attack = parseInt(calcInputs.attack.value, 10);
+            const distance = parseInt(calcInputs.distance.value, 10);
+            const maxShield = parseInt(calcInputs.shield.value, 10);
+            const maxHull = parseInt(calcInputs.resist.value, 10);
+
+            // Compute damage formula: 1 + Attack - Distance
+            let damage = 1 + attack - distance;
+            if (damage < 0) damage = 0;
+
+            // Display overall damage
+            dmgDisplay.textContent = damage;
+
+            // Calculate impact
+            let remainingDmg = damage;
+            let shieldAbsorbed = 0;
+            let hullDamage = 0;
+
+            if (maxShield > 0) {
+                shieldAbsorbed = Math.min(remainingDmg, maxShield);
+                remainingDmg -= shieldAbsorbed;
+            }
+
+            hullDamage = Math.min(remainingDmg, maxHull);
+            const remainingHull = maxHull - hullDamage;
+            const isDestroyed = (remainingHull <= 0);
+
+            // Bar visual styling
+            const totalTargetHealth = (maxShield + maxHull) || 1;
+            const shieldPct = (maxShield / totalTargetHealth) * 100;
+            const hullPct = (maxHull / totalTargetHealth) * 100;
+
+            // Damage impact bar widths
+            const shieldDmgPct = (shieldAbsorbed / totalTargetHealth) * 100;
+            const hullDmgPct = (hullDamage / totalTargetHealth) * 100;
+
+            // Total health bar representation
+            barShield.style.width = `${shieldDmgPct}%`;
+            barHull.style.width = `${hullDmgPct}%`;
+
+            // Text breakdown rendering
+            let breakdownHtml = `
+                <div class="breakdown-line">
+                    <span class="breakdown-label">Calculated raw damage:</span>
+                    <span class="breakdown-val">${damage}</span>
+                </div>
+                <div class="breakdown-line">
+                    <span class="breakdown-label">Absorbed by shields:</span>
+                    <span class="breakdown-val">${shieldAbsorbed} / ${maxShield}</span>
+                </div>
+                <div class="breakdown-line">
+                    <span class="breakdown-label">Applied to Hull:</span>
+                    <span class="breakdown-val" style="color: var(--accent-red);">${hullDamage}</span>
+                </div>
+                <div class="breakdown-line" style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px dashed rgba(255,255,255,0.06);">
+                    <span class="breakdown-label">Target Hull Status:</span>
+                    <span class="breakdown-val" style="font-weight: bold; color: ${isDestroyed ? 'var(--accent-red)' : 'var(--accent-green)'}">
+                        ${isDestroyed ? '🛑 DESTROYED' : `🛡️ ACTIVE (${remainingHull} HP)`}
+                    </span>
+                </div>
+            `;
+            dmgBreakdown.innerHTML = breakdownHtml;
+
+            // Highlight color changes based on lethality
+            if (isDestroyed) {
+                combatResultContainer.style.borderColor = 'var(--accent-red)';
+                combatResultContainer.style.background = 'linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(8, 9, 14, 0.8) 100%)';
+            } else if (damage > 0) {
+                combatResultContainer.style.borderColor = 'rgba(239, 68, 68, 0.15)';
+                combatResultContainer.style.background = 'linear-gradient(135deg, rgba(239, 68, 68, 0.04) 0%, rgba(8, 9, 14, 0.8) 100%)';
+            } else {
+                combatResultContainer.style.borderColor = 'rgba(255, 255, 255, 0.05)';
+                combatResultContainer.style.background = 'rgba(10, 11, 20, 0.6)';
+            }
+        }
+
+        // Add event listeners for combat inputs
+        for (const key in calcInputs) {
+            calcInputs[key].addEventListener('input', updateCombatCalc);
+        }
+        updateCombatCalc();
+    </script>
+</body>
+
+</html>
