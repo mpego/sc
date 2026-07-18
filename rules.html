@@ -1,0 +1,71 @@
+Space trading and combat game.
+
+Objective
+---------
+To be defined (e.g., Amass 100 credits through trading, or be the last ship standing).
+
+Rules
+========
+
+Ship specs
+----------
+To setup a ship, distribute 30 units among following variables:
+
+Attack : how far it can attack [1 - 10]
+Shield : max value the shields withstand [1 - 10]
+Distance : max units the ship can move [1 - 10]
+Resistance : how much the ship holds damage after shield go off [1 - 10]
+Comms : how far the ship can communicate [1 - 10]
+Maneuver : in place rotation movements on top of distance [3 (1), 6 (2), 10 (3)]
+Load : how much units of cargo the ship can carry [2 (1), 4 (2), 7 (3) , 10 (4)]
+
+Turn
+---------
+Each player roll two 6-sided dice (2d6).
+Distributes the points into ship turn variables:
+Distance : adjust current speed (each 1 point spent increases or decreases speed by 1, up to ship's max spec)
+Attack : set attack range and damage potential for the turn (cannot exceed Attack spec)
+Shield : recover damaged shield points (1 point per shield point recovered, up to Shield spec)
+Maneuver : allocate rotation points for the turn (cannot exceed Maneuver spec level)
+Comms : set active communication range for the turn (cannot exceed Comms spec)
+
+None of the variables can surpass the max value according to ship specs
+
+Movements
+---------
+Ships move the exact Distance value currently set (no less, no more).
+At any point during movement, the player can spend Maneuver points they have for the turn to rotate the ship in place
+(e.g., 60 degrees per point on a hex grid), and then continue moving if movement points remain.
+The distance points are preserved for the next turn.
+
+Combat
+---------
+Attacks can only be made in a straight line from the ship's firing arc (forward-facing).
+If a target is within the active Attack range, it takes damage equal to:
+Damage = 1 + (Attack points allocated) - (Distance to target)
+Damage points are first used to reduce the target's Shield. Remaining damage is subtracted from the target's Resistance
+(hull).
+A ship is destroyed when its Resistance reaches 0.
+
+Trading
+---------
+Can happen in three ways:
+1. when both ships land in the same planet
+2. when both ships land in the same space station
+3. when both ships are in range of communication
+
+Thiefs
+---------
+When a ship is in a planet, it can thieve cargo from another ship
+
+Planets
+---------
+Planets accept any number of ships.
+At planets ships can:
+- Trade cargo among them.
+- Sell cargo.
+- Buy cargo.
+- Accept missions.
+
+Missions
+To be defined
