@@ -2,7 +2,7 @@ const VOIDFARER_RULES = {
     objective: {
         title: "Objective",
         description: "The ultimate goals of the space voyagers in Voidfarer.",
-        status: "To be defined (e.g., Amass 100 credits through trading, or be the last ship standing)."
+        status: "Amass 100 credits through trading, piracy, missions, or bounty hunting.<br>And fear not, players will always be back in play even after losing their ships."
     },
     earningCredits: {
         title: "Earning Credits",
