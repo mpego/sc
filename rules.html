@@ -813,7 +813,8 @@
                     <div class="control-input-container">
                         <input type="range" id="input-maneuver" min="0" max="10" value="3" step="1">
                     </div>
-                    <span class="control-val" id="val-maneuver">3 <span id="maneuver-lvl" class="info-badge">Lvl 1</span></span>
+                    <span class="control-val" id="val-maneuver">3 <span id="maneuver-lvl" class="info-badge">Lvl
+                            1</span></span>
                 </div>
                 <div class="control-row">
                     <span class="control-label">Load</span>
@@ -828,7 +829,8 @@
 
     <template id="combat-widget-template">
         <div class="builder-section" style="border-color: rgba(239, 68, 68, 0.15);">
-            <span class="builder-title" style="display: block; margin-bottom: 1.25rem;">Interactive Combat Simulator</span>
+            <span class="builder-title" style="display: block; margin-bottom: 1.25rem;">Interactive Combat
+                Simulator</span>
             <div class="calc-wrapper">
                 <div class="calc-panel">
                     <div class="calc-row">
@@ -841,7 +843,8 @@
                         <input type="range" id="calc-distance" min="1" max="10" value="3">
                         <span class="calc-val" id="calc-val-distance">3</span>
                     </div>
-                    <div class="calc-row" style="border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 0.75rem;">
+                    <div class="calc-row"
+                        style="border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 0.75rem;">
                         <span class="calc-label">Target Max Shield</span>
                         <input type="range" id="calc-shield" min="0" max="10" value="4">
                         <span class="calc-val" id="calc-val-shield">4</span>
@@ -872,7 +875,8 @@
         <header>
             <div class="subtitle">MG</div>
             <h1>Space Trading & Combat Game</h1>
-            <p style="margin-bottom: 0; margin-top: 0.5rem; font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 2px; color: var(--text-secondary); text-transform: uppercase;">
+            <p
+                style="margin-bottom: 0; margin-top: 0.5rem; font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 2px; color: var(--text-secondary); text-transform: uppercase;">
                 Official Rulebook & Interactive Guides
             </p>
         </header>
@@ -942,10 +946,10 @@
                     </div>
                 `;
             }).join('');
-            
+
             const specBuilderTemplate = document.getElementById('builder-widget-template');
             const specBuilderClone = specBuilderTemplate.content.cloneNode(true);
-            
+
             specsSec.innerHTML = `
                 <h2>${VOIDFARER_RULES.shipSpecs.title}</h2>
                 <p>${VOIDFARER_RULES.shipSpecs.description}</p>
@@ -1176,7 +1180,7 @@
             } else if (values.load >= 2) {
                 loadLvl = 1; loadCargo = 2;
             }
-            specValues.load.innerHTML = `${values.load} <span class="info-badge">Lvl ${loadLvl} (${loadCargo} Cargo)</span>`;
+            specValues.load.innerHTML = `${values.load} <span class="info-badge">Lvl ${loadLvl}</span>`;
 
             // Update other values
             specValues.attack.textContent = values.attack;

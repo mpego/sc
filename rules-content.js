@@ -13,13 +13,13 @@ const VOIDFARER_RULES = {
             { name: "Distance", range: "1 - 10", desc: "The maximum number of units (hexes) the ship can travel in a single turn." },
             { name: "Resistance", range: "1 - 10", desc: "The hull integrity of the ship, which absorbs damage after shields fail." },
             { name: "Comms", range: "1 - 10", desc: "The maximum range at which the ship can establish communications." },
-            { name: "Maneuver", range: "3, 6, 10", desc: "Allows in-place rotation movements on top of distance." },
-            { name: "Load", range: "2, 4, 7, 10", desc: "Determines how many units of cargo the ship is certified to transport." }
+            { name: "Maneuver", range: "1 (3), 2 (6), 3 (10)", desc: "Allows in-place rotation movements on top of distance." },
+            { name: "Load", range: "1 (2), 2 (4), 3 (7), 4 (10)", desc: "Determines how many units of cargo the ship is certified to transport." }
         ]
     },
     turnSequence: {
         title: "Turn Sequence",
-        description: "Every turn, a player rolls two 6-sided dice (2d6). The sum of the rolled numbers represents the points they can temporarily distribute among their active turn variables:",
+        description: "Every turn, each player rolls two 6-sided dice (2d6). The sum of the rolled numbers represents the engineering points they can distribute among their turn variables:",
         stages: [
             { title: "Distance", body: "Adjust current speed. Each 1 point spent increases or decreases speed by 1, up to the ship's maximum spec." },
             { title: "Attack", body: "Set the active attack range and damage potential for the current turn (cannot exceed local Attack spec)." },
@@ -47,11 +47,11 @@ const VOIDFARER_RULES = {
     },
     doubleDiceEvents: {
         title: "Double Dice Events",
-        description: "Rolling matching pairs on your 2d6 turn roll triggers special galaxy-wide anomalies or events:",
+        description: "Rolling matching pairs on your 2d6 turn roll also triggers special galaxy-wide anomalies or events:",
         events: [
             { icon: "⚅⚅", colorClass: "double-six", title: "Double Sixes (12)", desc: "The player can move the Space Station up to 6 units." },
             { icon: "⚀⚀", colorClass: "double-one", title: "Double Ones (2)", desc: "One of the other players (the one who rolls the highest) can move the Space Storm up to 3 hexes in any direction." },
-            { icon: "⚂⚂", colorClass: "double-any", title: "Other Doubles", desc: "The active player can change resources on any one planet." }
+            { icon: "⚂⚂", colorClass: "double-any", title: "Other Doubles", desc: "The active player can change resources on any one planet or the value cargo is bought at stations." }
         ]
     },
     tradingTheft: {
@@ -62,7 +62,7 @@ const VOIDFARER_RULES = {
             "When both ships land in the same Space Station.",
             "When both ships are within their active Comms Range."
         ],
-        thievery: "Planetary Theft: When a ship is at a planet, it can steal cargo from another ship docked at that same planet."
+        thievery: "Planetary Theft: When a ship is at a planet, it can steal cargo or missions from another ship docked at that same planet."
     },
     locations: {
         title: "Planets & Space Stations",
@@ -96,8 +96,8 @@ const VOIDFARER_RULES = {
     },
     missions: {
         title: "Missions",
-        description: "Earn credits and reputational standing by assisting planetary governments and orbital corporations:",
-        lifecycle: "Missions are offered by <strong>orbital stations</strong> and must be accepted while docked at <strong>planets</strong>.",
+        description: "Earn credits by assisting planetary governments and orbital corporations:",
+        lifecycle: "Missions are offered at <strong>orbital stations</strong> and at <strong>planets</strong>.",
         types: [
             {
                 title: "📦 Cargo Delivery",
