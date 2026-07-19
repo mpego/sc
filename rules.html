@@ -760,6 +760,74 @@
             letter-spacing: 1px;
             text-transform: uppercase;
         }
+
+        /* Hazards Section */
+        .hazards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .hazards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hazard-card {
+            background: rgba(255, 255, 255, 0.015);
+            border-radius: 14px;
+            padding: 1.75rem;
+            border-width: 1px;
+            border-style: solid;
+        }
+
+        .hazard-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .hazard-icon {
+            font-size: 1.75rem;
+            line-height: 1;
+        }
+
+        .hazard-name {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .hazard-rules {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .hazard-rules li {
+            position: relative;
+            padding-left: 1.25rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
+        }
+
+        .hazard-rules li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            font-size: 0.75rem;
+            top: 0.2rem;
+        }
+
+        .hazard-card.asteroid .hazard-rules li::before { color: #94a3b8; }
+        .hazard-card.storm    .hazard-rules li::before { color: var(--accent-red); }
     </style>
 </head>
 
@@ -885,11 +953,13 @@
             <h2>Rulebook Index</h2>
             <ul>
                 <li><a href="#objective" class="active">Objective</a></li>
+                <li><a href="#earning-credits">Earning Credits</a></li>
                 <li><a href="#specs">Ship Specifications</a></li>
                 <li><a href="#turn">Turn Sequence</a></li>
                 <li><a href="#movements">Movements</a></li>
                 <li><a href="#combat">Combat Mechanics</a></li>
                 <li><a href="#special-rolls">Double Dice Events</a></li>
+                <li><a href="#hazards">Asteroids & Storms</a></li>
                 <li><a href="#trading">Trading & Theft</a></li>
                 <li><a href="#locations">Planets & Stations</a></li>
                 <li><a href="#missions">Missions</a></li>
@@ -898,11 +968,13 @@
 
         <main class="content">
             <section id="objective"></section>
+            <section id="earning-credits"></section>
             <section id="specs"></section>
             <section id="turn"></section>
             <section id="movements"></section>
             <section id="combat"></section>
             <section id="special-rolls"></section>
+            <section id="hazards"></section>
             <section id="trading"></section>
             <section id="locations"></section>
             <section id="missions"></section>
@@ -925,6 +997,25 @@
                 <div class="highlight-card">
                     <strong>Current status:</strong> ${VOIDFARER_RULES.objective.status}
                 </div>
+            `;
+
+            // 1.5 Earning Credits
+            const creditsSec = document.getElementById('earning-credits');
+            const creditsHtml = VOIDFARER_RULES.earningCredits.methods.map(method => `
+                <li class="stage-card">
+                    <span class="stage-title" style="color: var(--accent-cyan);">${method.activity}</span>
+                    <span class="stage-body">
+                        <strong>How to:</strong> ${method.howTo}<br>
+                        <strong>Points to Earn:</strong> <span style="color: var(--accent-green); font-weight: bold;">${method.profit}</span>
+                    </span>
+                </li>
+            `).join('');
+            creditsSec.innerHTML = `
+                <h2>${VOIDFARER_RULES.earningCredits.title}</h2>
+                <p>${VOIDFARER_RULES.earningCredits.description}</p>
+                <ul class="stages-list">
+                    ${creditsHtml}
+                </ul>
             `;
 
             // 2. Ship Specs
@@ -1028,6 +1119,30 @@
                 </div>
             `;
 
+            // 6.5 Hazards — Asteroids & Spatial Storms
+            const hazardsSec = document.getElementById('hazards');
+            const hazardsHtml = VOIDFARER_RULES.hazards.types.map(type => {
+                const rulesHtml = type.rules.map(rule => `<li>${rule}</li>`).join('');
+                return `
+                    <div class="hazard-card ${type.colorClass}" style="border-color: ${type.borderColor};">
+                        <div class="hazard-header">
+                            <span class="hazard-icon">${type.icon}</span>
+                            <span class="hazard-name" style="color: ${type.titleColor};">${type.name}</span>
+                        </div>
+                        <ul class="hazard-rules">
+                            ${rulesHtml}
+                        </ul>
+                    </div>
+                `;
+            }).join('');
+            hazardsSec.innerHTML = `
+                <h2>${VOIDFARER_RULES.hazards.title}</h2>
+                <p>${VOIDFARER_RULES.hazards.description}</p>
+                <div class="hazards-grid">
+                    ${hazardsHtml}
+                </div>
+            `;
+
             // 7. Trading & Theft
             const tradingSec = document.getElementById('trading');
             const tradingProtocolsHtml = VOIDFARER_RULES.tradingTheft.protocols.map((protocol, i) => `
@@ -1044,10 +1159,12 @@
                     ${tradingProtocolsHtml}
                 </ul>
                 <h3 style="font-family: var(--font-display); font-size: 1.1rem; color: #ffffff; margin-top: 2rem; text-transform: uppercase; letter-spacing: 0.5px;">Thievery</h3>
-                <div class="highlight-card"
-                    style="border-color: rgba(239, 68, 68, 0.2); background: rgba(239, 68, 68, 0.01);">
-                    👤 <strong>${VOIDFARER_RULES.tradingTheft.thievery}</strong>
-                </div>
+                ${VOIDFARER_RULES.tradingTheft.thievery.map(rule => `
+                    <div class="highlight-card"
+                        style="border-color: rgba(239, 68, 68, 0.2); background: rgba(239, 68, 68, 0.01); margin-top: 0.75rem;">
+                        👤 ${rule}
+                    </div>
+                `).join('')}
             `;
 
             // 8. Locations (Planets & Stations)

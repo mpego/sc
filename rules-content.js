@@ -4,6 +4,17 @@ const VOIDFARER_RULES = {
         description: "The ultimate goals of the space voyagers in Voidfarer.",
         status: "To be defined (e.g., Amass 100 credits through trading, or be the last ship standing)."
     },
+    earningCredits: {
+        title: "Earning Credits",
+        description: "To achieve victory in Voidfarer, ships must accumulate credits/points through various sector operations. Here are the primary ways to earn credits:",
+        methods: [
+            { activity: "Trading Cargo", howTo: "Buy low-cost cargo from planets or space stations, and sell it at other locations for a premium.", profit: "10 - 30 credits per run" },
+            { activity: "Cargo Missions", howTo: "Accept cargo transport contracts at planets/stations and safely deliver cargo to the destination planet.", profit: "40 credits upon delivery" },
+            { activity: "Bounty Hunting", howTo: "Locate, capture, and tow designated target ships back to the issuing Space Station.", profit: "80 credits upon completion" },
+            { activity: "Thievery", howTo: "Steal cargo or missions from other ships via Planetary Theft or by sharing the same tile and winning a dice contest.", profit: "Value of stolen assets (20 - 50 credits)" },
+            { activity: "Combat Salvage", howTo: "Defeat rival ships in direct combat to salvage remaining scrap metal and ship debris.", profit: "15 credits per salvaged ship" }
+        ]
+    },
     shipSpecs: {
         title: "Ship Specifications",
         description: "To set up a ship, players distribute exactly 30 units among the following specs. Each spec defines the fundamental capabilities of your vessel:",
@@ -35,6 +46,7 @@ const VOIDFARER_RULES = {
         rules: [
             "🚀 <strong>Fixed movement:</strong> Ships must move the exact Distance value currently set (no more, no less).",
             "🔄 <strong>Mid-travel rotation:</strong> At any point during movement, the player can spend Maneuver points allocated for the turn to rotate the ship in place (e.g., 60 degrees per point on a hex grid), and then continue moving if movement points remain.",
+            "⚔️ <strong>Attack interrupt:</strong> Movement can be paused at any hex along the path to fire an attack (provided Attack points are allocated and a valid target is in arc). After resolving the attack, the ship continues moving with its remaining distance.",
             "💾 <strong>Conservation:</strong> The speed/distance points set are preserved for the next turn unless actively adjusted."
         ]
     },
@@ -54,6 +66,36 @@ const VOIDFARER_RULES = {
             { icon: "⚂⚂", colorClass: "double-any", title: "Other Doubles", desc: "The active player can change resources on any one planet or the value cargo is bought at stations." }
         ]
     },
+    hazards: {
+        title: "Asteroids & Spatial Storms",
+        description: "The sector is filled with hazardous anomalies that challenge even the most experienced voidfarers:",
+        types: [
+            {
+                name: "Asteroid Fields",
+                icon: "🪨",
+                colorClass: "asteroid",
+                borderColor: "#94a3b8",
+                titleColor: "#f1f5f9",
+                rules: [
+                    "<strong>Navigation Hazard:</strong> Moving through or ending a turn in an asteroid field is dangerous. For each hex of an asteroid field entered, the player must roll a 1d6. On a roll of 1 or 2, the ship takes 1 Hull damage (directly to Resistance, bypassing Shield).",
+                    "<strong>Line of Sight Obstruction:</strong> Asteroid fields block all laser fire. Attacks cannot pass through asteroid hexes.",
+                    "<strong>Mining Opportunity:</strong> Ships equipped with cargo space can spend an action to mine resource-rich asteroid fields, gaining 1 random cargo on a 1d6 roll of 5 or 6."
+                ]
+            },
+            {
+                name: "Spatial Storm",
+                icon: "⚡",
+                colorClass: "storm",
+                borderColor: "var(--accent-red)",
+                titleColor: "var(--accent-red)",
+                rules: [
+                    "<strong>Comms Blackout:</strong> While inside the Spatial Storm, a ship's active Comms range is reduced to 0, preventing any trading, comms, or thievery actions.",
+                    "<strong>Shield Depletion:</strong> Any ship that ends its turn inside the Spatial Storm loses 2 Shield points immediately due to extreme electromagnetic interference.",
+                    "<strong>Attack Interference:</strong> Ships outside the storm cannot attack ships inside the storm. Inside attack is normal."
+                ]
+            }
+        ]
+    },
     tradingTheft: {
         title: "Trading & Theft",
         description: "Accumulate wealth and transport commodities across space stations and planets:",
@@ -62,7 +104,10 @@ const VOIDFARER_RULES = {
             "When both ships land in the same Space Station.",
             "When both ships are within their active Comms Range."
         ],
-        thievery: "Planetary Theft: When a ship is at a planet, it can steal cargo or missions from another ship docked at that same planet."
+        thievery: [
+            "<strong>Planetary Theft:</strong> When a ship is at a planet, it can steal cargo or missions from another ship docked at that same planet.",
+            "<strong>Tile-Share Theft:</strong> Thievery can also be executed by occupying the exact same tile as another ship, subject to a dice condition to be defined."
+        ]
     },
     locations: {
         title: "Planets & Space Stations",
