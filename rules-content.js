@@ -38,7 +38,20 @@ const VOIDFARER_RULES = {
             { title: "Maneuver", body: "Allocate rotation points for the turn (cannot exceed Maneuver spec level)." },
             { title: "Comms", body: "Set active communication range for the turn (cannot exceed Comms spec)." }
         ],
-        constraint: "None of the turn-allocated variables can surpass their maximum values defined by your Ship Specs."
+        constraint: "None of the turn-allocated variables can surpass their maximum values defined by your Ship Specs.",
+        actionPhase: {
+            description: "After <strong>all players</strong> have assigned their engineering points, each player takes their turn performing any actions they see fit, in any order:",
+            actions: [
+                { icon: "🚀", label: "Move", detail: "Fly the ship across the board using the distance set this turn." },
+                { icon: "⚔️", label: "Attack", detail: "Fire weapons at a valid target within arc and attack range." },
+                { icon: "📡", label: "Establish Communications", detail: "Open a comms channel with another ship within active Comms range to enable trading or coordination." },
+                { icon: "🔧", label: "Repair Shield", detail: "Recover Shield points using allocated engineering points." },
+                { icon: "🛠️", label: "Repair Ship", detail: "Restore Hull (Resistance) while docked at a planet or space station." },
+                { icon: "📋", label: "Pick Missions", detail: "Accept a pending mission contract at a planet or space station." },
+                { icon: "📦", label: "Trade Cargo", detail: "Exchange or sell cargo with another ship or at a location." },
+                { icon: "🏆", label: "Claim Mission Success", detail: "Deliver cargo or a captured ship to the designated destination to collect the mission reward." }
+            ]
+        }
     },
     movements: {
         title: "Movements",

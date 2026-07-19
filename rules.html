@@ -1058,6 +1058,12 @@
                     <span class="stage-body">${stage.body}</span>
                 </li>
             `).join('');
+            const actionPhaseHtml = VOIDFARER_RULES.turnSequence.actionPhase.actions.map(a => `
+                <li class="stage-card" style="border-color: rgba(168, 85, 247, 0.08);">
+                    <span class="stage-title" style="color: var(--accent-purple);">${a.icon} ${a.label}</span>
+                    <span class="stage-body">${a.detail}</span>
+                </li>
+            `).join('');
             turnSec.innerHTML = `
                 <h2>${VOIDFARER_RULES.turnSequence.title}</h2>
                 <p>${VOIDFARER_RULES.turnSequence.description}</p>
@@ -1067,6 +1073,11 @@
                 <div class="rules-note">
                     <strong>Constraint:</strong> ${VOIDFARER_RULES.turnSequence.constraint}
                 </div>
+                <h3 style="font-family: var(--font-display); font-size: 1.1rem; color: #ffffff; margin-top: 2rem; text-transform: uppercase; letter-spacing: 0.5px;">⚡ Action Phase</h3>
+                <p style="margin-top: 0.5rem;">${VOIDFARER_RULES.turnSequence.actionPhase.description}</p>
+                <ul class="stages-list" style="margin-top: 1rem;">
+                    ${actionPhaseHtml}
+                </ul>
             `;
 
             // 4. Movements
