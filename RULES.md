@@ -100,9 +100,9 @@ Engage target vessels using straight-line attacks from your forward-facing firin
 
 ## 🎲 Special Dice Events
 
-Rolling matching pairs on your 2d6 turn roll triggers special galaxy-wide anomalies or events.
+Rolling some special dice combination on your 3d4 turn roll triggers special galaxy-wide anomalies or events.
 
-| Roll                 | Event                                                                                                             |
+| Dice Combination     | Event                                                                                                             |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | ⚅⚅ Triple Fours (12) | The player can move the Space Station up to 4 hexes.                                                              |
 | ⚀⚀ Triple Ones (3)   | One of the other players (the one who rolls the highest) can move the Space Storm up to 3 hexes in any direction. |
