@@ -104,6 +104,7 @@ In this case player can do one of the following:
 | 📋 Pick Missions         | Accept a pending mission contract at a planet or space station.                               |
 | 📦 Trade Cargo           | Exchange or sell cargo with another ship or at a location.                                    |
 | 🏆 Claim Mission Success | Deliver cargo or a captured ship to the designated destination to collect the mission reward. |
+| ⏹️ Pass                  | Pass the turn without doing any other action.                                                 |
 
 ---
 
@@ -121,6 +122,8 @@ Navigating the cold void requires precise speed calculations.
 ## ⚔️ Combat Mechanics
 
 Engage target vessels using straight-line attacks from your forward-facing firing arc.
+
+Attacking cannot overpass a occupied hex tile.
 
 - **Range requirement:** Attacks can only be made in a straight line from the ship's firing arc (forward-facing).
 - **Damage formula:**
@@ -166,7 +169,7 @@ The sector is filled with hazardous anomalies that challenge even the most exper
 
 Accumulate wealth and transport commodities across space stations and planets.
 
-### Trading Protocols
+### Trading
 
 Trading between ships is possible when:
 - Both ships land on the same **Planet**.
@@ -187,23 +190,19 @@ If the thief succeeds in a planet or station, a bounty mission is automatically 
 
 ## 🌍 Planets & Space Stations
 
-The stellar bodies and installations scattered throughout the sector.
+Ships can land on planets or dock at a space station.
+Docking ends movement and attacking is no longer possible.
 
 ### Planets
-
-Ships can land on planets or dock at a space station.
-In either case the turn ends immediately.
-
-Trading, repairing and picking up missions take the whole turn of the player.
-
 **Capacity:** Unlimited ships
 
 Available actions:
 - Trade cargo between docked ships
 - Sell cargo
-- Buy cargo
-- Repair ship hull integrity (Resistance)
-- Accept pending missions
+- Buy cargo available in the planet
+- Repair ship hull integrity
+- Accept missions offered by the planet
+- Pass the turn without doing any other action at a cost
 
 ### Space Stations
 **Capacity:** Max 2 ships at a time
@@ -211,9 +210,11 @@ Available actions:
 Available actions:
 - Trade cargo between docked ships
 - Sell specialized cargo
-- Repair ship hull integrity (Resistance)
-- Accept pending missions
-- Refit or Change ship
+- Repair ship hull integrity at a cost
+- Claim mission success
+- Accept missions offered by the station
+- Refit or Change ship at a cost
+- Pass the turn without doing any other action at a cost
 
 ---
 
