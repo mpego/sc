@@ -72,10 +72,6 @@ Player assigns his engineering points:
 | ⚔️ Attack                   | Fire weapons at a valid target within arc and attack range.                                         |
 | 📡 Establish Communications | Open a comms channel with another ship within active Comms range to enable trading or coordination. |
 | 🔧 Repair Shield            | Recover Shield points allocating engineering points.                                                |
-| 🛠️ Repair Ship              | Restore Hull (Resistance) while docked at a planet or space station.                                |
-| 📋 Pick Missions            | Accept a pending mission contract at a planet or space station.                                     |
-| 📦 Trade Cargo              | Exchange or sell cargo with another ship or at a location.                                          |
-| 🏆 Claim Mission Success    | Deliver cargo or a captured ship to the designated destination to collect the mission reward.       |
 
 ### Action Phase
 
@@ -102,10 +98,12 @@ If docking to the same planet or station as another ship, the player can run a t
 
 In this case player can do one of the following:
 
-* Trade
-* Repair hull
-* Pick missions
-* Claim missions
+| Action                  | Detail                                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------------- |
+| 🛠️ Repair Ship           | Restore Hull (Resistance) while docked at a planet or space station.                          |
+| 📋 Pick Missions         | Accept a pending mission contract at a planet or space station.                               |
+| 📦 Trade Cargo           | Exchange or sell cargo with another ship or at a location.                                    |
+| 🏆 Claim Mission Success | Deliver cargo or a captured ship to the designated destination to collect the mission reward. |
 
 ---
 
