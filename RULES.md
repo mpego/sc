@@ -43,6 +43,11 @@ Players distribute exactly **30 units** among the following specs. Each spec def
 
 ## 🎲 Turn Sequence
 
+When in space player can run a turn in space.
+When docked to a planet or space station, player can choose run a normal turn in space to leave planet or station or can choose to stay docked and perform station related actions.
+
+### 🎲 Turn Sequence in space
+
 Each turn, players roll **3d4**. The sum represents **engineering points** distributed among turn variables.
 
 > **Constraint:** None of the turn-allocated variables can surpass their maximum values defined by Ship Specs.
@@ -57,9 +62,9 @@ Each turn, players roll **3d4**. The sum represents **engineering points** distr
 | Maneuver | Allocate rotation points for the turn (cannot exceed Maneuver spec level).                                     |
 | Comms    | Set active communication range for the turn (cannot exceed Comms spec).                                        |
 
-### Action Phase
+### Engineering Phase
 
-After **all players** have assigned their engineering points, each player takes their turn performing any actions in any order:
+Player assigns his engineering points:
 
 | Action                     | Detail                                                                                              |
 | -------------------------- | --------------------------------------------------------------------------------------------------- |
@@ -71,6 +76,36 @@ After **all players** have assigned their engineering points, each player takes 
 | 📋 Pick Missions            | Accept a pending mission contract at a planet or space station.                                     |
 | 📦 Trade Cargo              | Exchange or sell cargo with another ship or at a location.                                          |
 | 🏆 Claim Mission Success    | Deliver cargo or a captured ship to the designated destination to collect the mission reward.       |
+
+### Action Phase
+
+Player executes actions in any order in any combination.
+Move must be fully utilized by the end of the phase.
+Attack and repair shield can be utilized only once per turn.
+
+#### Docking into a space station
+
+Docking to a station requires an exact distance match.
+The ship must share any tile not fully covered by the station.
+
+#### Docking into a planet
+
+Docking to a planet allow to discard any remaining move points.
+
+#### Thievery mission while docking
+
+If docking to the same planet or station as another ship, the player can run a thievery mission against that ship. If successful, the player can steal cargo or mission from that ship and the other player lose the next turn.
+
+---
+
+### 🎲 Turn Sequence in planet or station
+
+In this case player can do one of the following:
+
+* Trade
+* Repair hull
+* Pick missions
+* Claim missions
 
 ---
 
@@ -148,7 +183,7 @@ Trading between ships is possible when:
 Thieves and victims roll **3d4s**. 
 If the thief’s total roll is equal or higher than the victim’s, the thief succeeds.
 
-If the thief succeeds, the planet or station automatically issues a bounty mission for the thief.
+If the thief succeeds in a planet or station, a bounty mission is automatically issued for the thief.
 
 ---
 
