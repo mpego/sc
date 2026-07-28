@@ -43,7 +43,7 @@ Players distribute exactly **30 units** among the following specs. Each spec def
 
 ## 🎲 Turn Sequence
 
-Each turn, players roll **three 4-sided dice (3d4)**. The sum represents **engineering points** distributed among turn variables.
+Each turn, players roll **3d4**. The sum represents **engineering points** distributed among turn variables.
 
 > **Constraint:** None of the turn-allocated variables can surpass their maximum values defined by Ship Specs.
 
@@ -100,14 +100,14 @@ Engage target vessels using straight-line attacks from your forward-facing firin
 
 ## 🎲 Special Dice Events
 
-Rolling some special dice combination on your 3d4 turn roll triggers special galaxy-wide anomalies or events.
+Rolling some special dice combination on your **3d4** turn roll triggers special galaxy-wide anomalies or events.
 
-| Dice Combination     | Event                                                                                                             |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| ⚅⚅ Triple Fours (12) | The player can move the Space Station up to 4 hexes.                                                              |
-| ⚀⚀ Triple Ones (3)   | One of the other players (the one who rolls the highest) can move the Space Storm up to 3 hexes in any direction. |
-| Even Doubles         | The player can change resources on any one planet or the value cargo is bought at stations.                       |
-| Odd Doubles          | The player can move up to 4 units of asteroid fields or spatial storms in any combination.                        |
+| Dice Combination | Event                                                                                                             |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------- |
+| ⚅⚅ Triple Fours  | The player can move the Space Station up to 4 hexes.                                                              |
+| ⚀⚀ Triple Ones   | One of the other players (the one who rolls the highest) can move the Space Storm up to 3 hexes in any direction. |
+| Even Doubles     | The player can change resources on any one planet or the value cargo is bought at stations.                       |
+| Odd Doubles      | The player can move up to 4 units of asteroid fields or spatial storms in any combination.                        |
 
 ---
 
@@ -117,9 +117,9 @@ The sector is filled with hazardous anomalies that challenge even the most exper
 
 ### 🪨 Asteroid Fields
 
-- **Navigation Hazard:** Moving through or ending a turn in an asteroid field is dangerous. For each hex of an asteroid field entered, the player must roll a 1d4. On a roll of **1**, the ship takes **1 Hull damage** (directly to Resistance, bypassing Shield).
+- **Navigation Hazard:** Moving through or ending a turn in an asteroid field is dangerous. For each hex of an asteroid field entered, the player must roll a **1d4**. On a roll of **1**, the ship takes **1 Hull damage** (directly to Resistance, bypassing Shield).
 - **Line of Sight Obstruction:** Asteroid fields block all weapon fire. Attacks cannot pass through asteroid hexes.
-- **Mining Opportunity:** Ships equipped with cargo space can spend an action to mine resource-rich asteroid fields, gaining **1 random cargo** on a 1d4 roll of **4**.
+- **Mining Opportunity:** Ships can attempt to mine asteroids, gaining **a  cargo of minerals** on a **1d4** roll of **4**.
 
 ### ⚡ Spatial Storm
 
