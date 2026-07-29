@@ -4,10 +4,9 @@
 
 ## 🎯 Objective
 
-The ultimate goals of the space voyagers in Voidfarer.
-
 Amass **100 credits** through trading, piracy, missions, or bounty hunting.
-Players will always be back in play even after losing their ships.
+
+Fear not exploring, players will always be back in play even after losing their ships.
 
 ---
 
