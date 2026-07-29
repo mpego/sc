@@ -89,7 +89,7 @@ Docking to a planet allow to discard any remaining move points.
 
 #### Thievery mission while docking
 
-If docking to the same planet or station as another ship, the player can run a thievery mission against that ship. If successful, the player can steal cargo or mission from that ship and the other player lose the next turn.
+If ships share the same tile, the player can run a thievery mission against that ship.
 
 ---
 
@@ -104,6 +104,10 @@ In this case player can do one of the following:
 | 📦 Trade Cargo           | Exchange or sell cargo with another ship or at a location.                                    |
 | 🏆 Claim Mission Success | Deliver cargo or a captured ship to the designated destination to collect the mission reward. |
 | ⏹️ Pass                  | Pass the turn without doing any other action.                                                 |
+
+#### Thievery mission while at a planet or station
+
+If docked to the same planet or station as another ship, the player can run a thievery mission against that player.
 
 ---
 
@@ -129,7 +133,7 @@ Attacking cannot overpass a occupied hex tile.
   ```
   Damage = 1 + (Attack Points Allocated) - (Distance to Target)
   ```
-- **Shield & Hull rule:** Damage points are first used to reduce the target's **Shield**. Any remaining damage is subtracted from the target's **Resistance** (hull). A ship is destroyed when its Resistance reaches **0**.
+- **Shield & Hull rule:** Damage points are first used to reduce the target's **Shield**. Any remaining damage is directed to the target's **Resistance** (hull). A ship is destroyed when its Resistance reaches **0**.
 
 ---
 
@@ -137,12 +141,12 @@ Attacking cannot overpass a occupied hex tile.
 
 Rolling some special dice combination on your **3d4** turn roll triggers special galaxy-wide anomalies or events.
 
-| Dice Combination | Event                                                                                                             |
-| ---------------- | ----------------------------------------------------------------------------------------------------------------- |
-| ⚅⚅ Triple Fours  | The player can move the Space Station up to 4 hexes.                                                              |
-| ⚀⚀ Triple Ones   | One of the other players (the one who rolls the highest) can move the Space Storm up to 3 hexes in any direction. |
-| Even Doubles     | The player can change resources on any one planet or the value cargo is bought at stations.                       |
-| Odd Doubles      | The player can move up to 4 units of asteroid fields or spatial storms in any combination.                        |
+| Dice Combination | Event                                                                                                                                                |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ⚅⚅ Triple Fours  | The player can move the Space Station up to 4 hexes. Or choose to play as even doubles.                                                              |
+| ⚀⚀ Triple Ones   | One of the other players (the one whºo rolls the highest) can move the Space Storm up to 3 hexes in any direction. Or choose to play as odd doubles. |
+| Even Doubles     | The player can change resources on any one planet.                                                                                                   |
+| Odd Doubles      | The player can move up to 4 units of asteroid fields or spatial storms in any combination.                                                           |
 
 ---
 
@@ -167,6 +171,7 @@ The sector is filled with hazardous anomalies that challenge even the most exper
 ## 🤝 Trading & Theft
 
 Accumulate wealth and transport commodities across space stations and planets.
+Trading and theft include both cargo and mission cards.
 
 ### Trading
 
@@ -175,15 +180,34 @@ Trading between ships is possible when:
 - Both ships land in the same **Space Station**.
 - Both ships are within their active **Comms Range**.
 
+### Bribery
+
+Any player can bribe another player at any time.
+For bribe to happen ships must be in each other comm range. Also it is a non commit action, so it can be refused by the other player without any consequences or advice.
+But if it succeds bribber can not attack the other player until his next full turn passes or bribber is attacked by that other player.
+
 ### Thievery
 
 - **Planetary Theft:** When a ship is at a planet, it can steal cargo or missions from another ship docked at that same planet.
+
 - **Tile-Share Theft:** Thievery can also be executed by occupying the exact same tile as another ship.
 
 Thieves and victims roll **3d4s**. 
 If the thief’s total roll is equal or higher than the victim’s, the thief succeeds.
 
-If the thief succeeds in a planet or station, a bounty mission is automatically issued for the thief.
+If the theft succeeds in a planet or station, a bounty mission is automatically issued for the thief.
+
+Thivery is the only way to have more than one mission card at a time.
+
+### Capturing a thief
+
+Capturing is resolve the same way as **Tile Share Theft**, then the ship must be delivered to a space station to claim the reward.
+Cargo on the thief can be moved to the capturing ship if space is available, and card mission if any is owned by capturer.
+In the mean time cargo and mission of the thief can be sell or claimed.
+Every turn the thief does a **3d4** roll on any triplet he has the chance to scape.
+To actually sacpe he must defeat the capturer by rolling more than him in a **3d4** roll.
+
+If wins the thief escape from capture with cargo that was left on his ship.
 
 ---
 
@@ -196,40 +220,62 @@ Docking ends movement and attacking is no longer possible.
 **Capacity:** Unlimited ships
 
 Available actions:
-- Trade cargo between docked ships
-- Sell cargo
-- Buy cargo available in the planet
-- Repair ship hull integrity
-- Accept missions offered by the planet
-- Pass the turn without doing any other action at a cost
+| Action                                       | Credits |
+| -------------------------------------------- | ------- |
+| Trade cargo between ships                    | -       |
+| Accept missions offered by the planet        | -       |
+| Pass the turn without doing any other action | -5      |
+| Sell cargo                                   | 5       |
+| Sell highlited cargo                         | 10      |
+| Buy cargo available in the planet            | -5      |
+| Repair ship hull integrity                   | -5      |
+| Refit 5 point of ship                        | -10     |
+| Trade ship for a new one                     | -20     |
 
 ### Space Stations
 **Capacity:** Max 2 ships at a time
 
 Available actions:
-- Trade cargo between docked ships
-- Sell specialized cargo
-- Repair ship hull integrity at a cost
-- Claim mission success
-- Accept missions offered by the station
-- Refit or Change ship at a cost
-- Pass the turn without doing any other action at a cost
+| Action                                       | Credits |
+| -------------------------------------------- | ------- |
+| Trade cargo between ships                    | -       |
+| Accept missions offered by the station       | -       |
+| Pass the turn without doing any other action | -5      |
+| Sell tech cargo                              | 10      |
+| Sell highlited cargo                         | 15      |
+| Repair ship hull integrity                   | -10     |
+| Refit 5 point of ship                        | -10     |
+| Turn in thief                                | 20      |
+
+**Destroying a ship:** earns 15 credits.
 
 ---
 
-## 📋 Missions
+### Missions
 
-Earn credits by assisting planetary governments and orbital corporations.
+Cargo missions
 
-Missions are offered at **orbital stations** and at **planets**.
+**Planets**
+Deliver 2 units of goods
+Deliver 2 units of minerals
+Deliver 2 units of tech
 
-### 📦 Cargo Delivery
+Deliver 1 units of good and 1 unit of mineral
+Deliver 1 units of good and 1 unit of tech
+Deliver 1 units of mineral and 1 unit of tech
 
-1. Picking up specific cargo packages at one planet.
-2. Delivering the cargo securely to another designated planet.
+Deliver 2 units of goods and 1 unit of mineral
+Deliver 2 units of goods and 1 unit of tech
+Deliver 2 units of minerals and 1 unit of good
+Deliver 2 units of minerals and 1 unit of tech
 
-### ⚔️ Capture Ship
+**Space Stations**
+Deliver 2 units of tech
+Deliver 2 units of tech and 1 unit of good
+Deliver 2 units of tech and 1 unit of mineral
 
-1. Locating a designated target ship in the sector.
-2. **How to capture the ship:** To be defined.
-3. Escorting or towing the captured vessel back to the issuing Space Station.
+
+Deliver 3 units of goods
+Deliver Cargo 3 units of minerals
+Deliver Cargo 3 units of tech
+
