@@ -85,11 +85,11 @@ The ship must share any tile not fully covered by the station.
 
 #### Docking into a planet
 
-Docking to a planet allow to discard any remaining move points.
+Docking to a planet not need exact distance match. player can discard any remaining move points.
 
-#### Thievery mission while docking
+#### Thievery
 
-If ships share the same tile, the player can run a thievery mission against that ship.
+If ships share the same tile or the other ship is within the comms range, the player can run a thievery mission against that ship.
 
 ---
 
@@ -183,15 +183,16 @@ Trading between ships is possible when:
 ### Bribery
 
 Any player can bribe another player at any time.
-For bribe to happen ships must be in each other comm range. Also it is a non commit action, so it can be refused by the other player without any consequences or advice.
+For bribe to happen ships must be in each other comm range (if not the player receives one hit in the hull for each exceding hex). Accept bribe is a non commit action, so it can be refused by the other player without any consequences or advice.
 But if it succeds bribber can not attack the other player until his next full turn passes or bribber is attacked by that other player.
 
 ### Thievery
 
 - **Planetary Theft:** When a ship is at a planet, it can steal cargo or missions from another ship docked at that same planet.
 
-- **Tile-Share Theft:** Thievery can also be executed by occupying the exact same tile as another ship.
+- **Tile-Share Theft:** Thievery can also be executed by occupying the exact same tile as another ship or within the comms range to the other ship.
 
+**Resolution:**
 Thieves and victims roll **3d4s**. 
 If the thief’s total roll is equal or higher than the victim’s, the thief succeeds.
 
@@ -201,13 +202,14 @@ Thivery is the only way to have more than one mission card at a time.
 
 ### Capturing a thief
 
-Capturing is resolve the same way as **Tile Share Theft**, then the ship must be delivered to a space station to claim the reward.
-Cargo on the thief can be moved to the capturing ship if space is available, and card mission if any is owned by capturer.
-In the mean time cargo and mission of the thief can be sell or claimed.
-Every turn the thief does a **3d4** roll on any triplet he has the chance to scape.
-To actually sacpe he must defeat the capturer by rolling more than him in a **3d4** roll.
+Capturing is resolve the same way as thievery **Resolution**, then the ship must be delivered to a space station to claim the reward.
 
-If wins the thief escape from capture with cargo that was left on his ship.
+Cargo on the thief can be moved to the capturing ship if space is available, and card mission if any is owned by capturer.
+While captured, cargo and mission of the thief can be sell or claimed.
+On each of his turns the thief does a **3d4** roll, on any triplet he has the chance to scape.
+To actually sacpe he must defeat the capturer by rolling like thievery **Resolution**.
+
+If wins the thief escape from capture with cargo that was left on his ship, he plays a normal turn.
 
 ---
 
