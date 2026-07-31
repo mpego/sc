@@ -60,77 +60,6 @@ Players distribute exactly **30 units** among the following specs. Each spec def
 
 ---
 
-## 🎲 Turn Sequence
-
-When in space player can run a turn in space.
-When docked to a planet or space station, player can choose run a normal turn in space to leave planet or station or can choose to stay docked and perform station related actions.
-
-### 🎲 Turn Sequence in space
-
-Each turn, players roll **3d4**. The sum represents **engineering points** distributed among turn variables.
-
-> **Constraint:** None of the turn-allocated variables can surpass their maximum values defined by Ship Specs.
-
-### Engineering Phase
-
-| Variable | Rule                                                                                                           |
-| -------- | -------------------------------------------------------------------------------------------------------------- |
-| Distance | Adjust current speed. Each 1 point spent increases or decreases speed by 1, up to the ship's maximum spec.     |
-| Attack   | Set the active attack range and damage potential for the current turn (cannot exceed local Attack spec).       |
-| Shield   | Recover damaged shield points at a cost of 1 allocated point per 1 shield point recovered (up to Shield spec). |
-| Maneuver | Allocate rotation points for the turn (cannot exceed Maneuver spec level).                                     |
-| Comms    | Set active communication range for the turn (cannot exceed Comms spec).                                        |
-
-### Engineering Phase
-
-Player assigns his engineering points:
-
-| Action                     | Detail                                                                                              |
-| -------------------------- | --------------------------------------------------------------------------------------------------- |
-| 🚀 Move                     | Fly the ship across the board using the distance set for this turn.                                 |
-| ⚔️ Attack                   | Fire weapons at a valid target within arc and attack range.                                         |
-| 📡 Establish Communications | Open a comms channel with another ship within active Comms range to enable trading or coordination. |
-| 🔧 Repair Shield            | Recover Shield points allocating engineering points.                                                |
-
-### Action Phase
-
-Player executes actions in any order in any combination.
-Move must be fully utilized by the end of the phase.
-Attack and repair shield can be utilized only once per turn.
-
-#### Docking into a space station
-
-Docking to a station requires an exact distance match.
-The ship must share any tile not fully covered by the station.
-
-#### Docking into a planet
-
-Docking to a planet not need exact distance match. player can discard any remaining move points.
-
-#### Thievery
-
-If ships share the same tile or the other ship is within the comms range, the player can run a thievery mission against that ship.
-
----
-
-### 🎲 Turn Sequence in planet or station
-
-In this case player can do one of the following:
-
-| Action                  | Detail                                                                                        |
-| ----------------------- | --------------------------------------------------------------------------------------------- |
-| 🛠️ Repair Ship           | Restore Hull while docked at a planet or space station.                                       |
-| 📋 Pick Missions         | Accept a pending mission contract at a planet or space station.                               |
-| 📦 Trade Cargo           | Exchange or sell cargo with another ship or at a location.                                    |
-| 🏆 Claim Mission Success | Deliver cargo or a captured ship to the designated destination to collect the mission reward. |
-| ⏹️ Pass                  | Pass the turn without doing any other action.                                                 |
-
-#### Thievery mission while at a planet or station
-
-If docked to the same planet or station as another ship, the player can run a thievery mission against that player.
-
----
-
 ## 🧭 Movements
 
 **Variables** Distance and Maneuver.
@@ -160,6 +89,7 @@ Attacking cannot overpass a occupied hex tile.
 - **Shield & Hull rule:** Damage points are first used to reduce the target's **Shield**. Any remaining damage is directed to the target's **Hull**. A ship is destroyed when its hull resistance reaches **0**.
 
 ---
+
 ## 🤝 Trading & Theft
 
 **Variables** Comms and Load.
@@ -306,3 +236,73 @@ Deliver 3 units of goods
 Deliver Cargo 3 units of minerals
 Deliver Cargo 3 units of tech
 
+## 🎲 Turn Sequence
+
+When in space player can run a turn in space.
+When docked to a planet or space station, player can choose run a normal turn in space to leave planet or station or can choose to stay docked and perform station related actions.
+
+### 🎲 Turn Sequence in space
+
+Each turn, players roll **3d4**. The sum represents **engineering points** distributed among turn variables.
+
+> **Constraint:** None of the turn-allocated variables can surpass their maximum values defined by Ship Specs.
+
+### Engineering Phase
+
+| Variable | Rule                                                                                                           |
+| -------- | -------------------------------------------------------------------------------------------------------------- |
+| Distance | Adjust current speed. Each 1 point spent increases or decreases speed by 1, up to the ship's maximum spec.     |
+| Attack   | Set the active attack range and damage potential for the current turn (cannot exceed local Attack spec).       |
+| Shield   | Recover damaged shield points at a cost of 1 allocated point per 1 shield point recovered (up to Shield spec). |
+| Maneuver | Allocate rotation points for the turn (cannot exceed Maneuver spec level).                                     |
+| Comms    | Set active communication range for the turn (cannot exceed Comms spec).                                        |
+
+### Engineering Phase
+
+Player assigns his engineering points:
+
+| Action                     | Detail                                                                                              |
+| -------------------------- | --------------------------------------------------------------------------------------------------- |
+| 🚀 Move                     | Fly the ship across the board using the distance set for this turn.                                 |
+| ⚔️ Attack                   | Fire weapons at a valid target within arc and attack range.                                         |
+| 📡 Establish Communications | Open a comms channel with another ship within active Comms range to enable trading or coordination. |
+| 🔧 Repair Shield            | Recover Shield points allocating engineering points.                                                |
+
+### Action Phase
+
+Player executes actions in any order in any combination.
+Move must be fully utilized by the end of the phase.
+Attack and repair shield can be utilized only once per turn.
+
+#### Docking into a space station
+
+Docking to a station requires an exact distance match.
+The ship must share any tile not fully covered by the station.
+
+#### Docking into a planet
+
+Docking to a planet not need exact distance match. player can discard any remaining move points.
+
+#### Thievery
+
+If ships share the same tile or the other ship is within the comms range, the player can run a thievery mission against that ship.
+
+---
+
+### 🎲 Turn Sequence in planet or station
+
+In this case player can do one of the following:
+
+| Action                  | Detail                                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------------- |
+| 🛠️ Repair Ship           | Restore Hull while docked at a planet or space station.                                       |
+| 📋 Pick Missions         | Accept a pending mission contract at a planet or space station.                               |
+| 📦 Trade Cargo           | Exchange or sell cargo with another ship or at a location.                                    |
+| 🏆 Claim Mission Success | Deliver cargo or a captured ship to the designated destination to collect the mission reward. |
+| ⏹️ Pass                  | Pass the turn without doing any other action.                                                 |
+
+#### Thievery mission while at a planet or station
+
+If docked to the same planet or station as another ship, the player can run a thievery mission against that player.
+
+---
