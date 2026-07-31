@@ -20,6 +20,7 @@
             font-size: 1rem;
             line-height: 1.75;
         }
+
         .md-prose h1 {
             font-family: var(--font-display);
             font-size: 1.8rem;
@@ -31,6 +32,7 @@
             -webkit-text-fill-color: transparent;
             margin-bottom: 1.5rem;
         }
+
         .md-prose h2 {
             font-family: var(--font-display);
             font-size: 1.15rem;
@@ -46,6 +48,7 @@
             align-items: center;
             gap: 0.6rem;
         }
+
         .md-prose h3 {
             font-family: var(--font-display);
             font-size: 0.95rem;
@@ -56,23 +59,34 @@
             margin-top: 1.75rem;
             margin-bottom: 0.6rem;
         }
+
         .md-prose p {
             margin-bottom: 0.75rem;
         }
-        .md-prose strong { color: var(--text-primary); }
-        .md-prose ul, .md-prose ol {
+
+        .md-prose strong {
+            color: var(--text-primary);
+        }
+
+        .md-prose ul,
+        .md-prose ol {
             padding-left: 1.4rem;
             margin-bottom: 0.75rem;
             display: flex;
             flex-direction: column;
             gap: 0.35rem;
         }
-        .md-prose li { color: var(--text-secondary); }
+
+        .md-prose li {
+            color: var(--text-secondary);
+        }
+
         .md-prose hr {
             border: none;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
             margin: 2rem 0;
         }
+
         .md-prose blockquote {
             border-left: 3px solid var(--accent-purple);
             padding: 0.6rem 1rem;
@@ -81,7 +95,11 @@
             margin-bottom: 0.75rem;
             font-style: italic;
         }
-        .md-prose blockquote p { margin-bottom: 0; }
+
+        .md-prose blockquote p {
+            margin-bottom: 0;
+        }
+
         .md-prose code {
             font-family: monospace;
             font-size: 0.9rem;
@@ -90,6 +108,7 @@
             padding: 0.1rem 0.4rem;
             border-radius: 4px;
         }
+
         .md-prose pre {
             background: rgba(8, 9, 14, 0.8);
             border: 1px solid rgba(0, 242, 254, 0.1);
@@ -98,18 +117,21 @@
             overflow-x: auto;
             margin-bottom: 1rem;
         }
+
         .md-prose pre code {
             background: none;
             padding: 0;
             color: var(--accent-cyan);
             font-size: 0.95rem;
         }
+
         .md-prose table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 1rem;
             font-size: 0.9rem;
         }
+
         .md-prose th {
             font-family: var(--font-display);
             font-size: 0.75rem;
@@ -120,13 +142,17 @@
             border-bottom: 1px solid rgba(0, 242, 254, 0.2);
             text-align: left;
         }
+
         .md-prose td {
             padding: 0.6rem 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             color: var(--text-secondary);
             vertical-align: top;
         }
-        .md-prose tr:hover td { background: rgba(255,255,255,0.015); }
+
+        .md-prose tr:hover td {
+            background: rgba(255, 255, 255, 0.015);
+        }
 
         :root {
             --bg-color: #08090e;
@@ -228,7 +254,9 @@
         }
 
         @media (max-width: 640px) {
-            .sim-card { padding: 1.5rem; }
+            .sim-card {
+                padding: 1.5rem;
+            }
         }
 
         .sim-card:hover {
@@ -314,8 +342,14 @@
                 padding-bottom: 0.75rem;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             }
-            .control-row:last-child { border-bottom: none; }
-            .control-label { grid-column: 1 / -1; }
+
+            .control-row:last-child {
+                border-bottom: none;
+            }
+
+            .control-label {
+                grid-column: 1 / -1;
+            }
         }
 
         .control-label {
@@ -332,7 +366,9 @@
             width: 100%;
         }
 
-        .control-input-container input[type="range"] { flex-grow: 1; }
+        .control-input-container input[type="range"] {
+            flex-grow: 1;
+        }
 
         .control-val {
             font-family: var(--font-display);
@@ -378,7 +414,9 @@
             transition: transform 0.15s ease;
         }
 
-        input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
 
         /* ── Turn Points (Combat) Simulator ── */
         .calc-wrapper {
@@ -388,7 +426,11 @@
             margin-top: 1.5rem;
         }
 
-        @media (max-width: 768px) { .calc-wrapper { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) {
+            .calc-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
 
         .calc-panel {
             background: rgba(8, 9, 14, 0.6);
@@ -492,8 +534,14 @@
             margin-bottom: 0.25rem;
         }
 
-        .breakdown-label { color: var(--text-secondary); }
-        .breakdown-val { color: #ffffff; font-weight: 500; }
+        .breakdown-label {
+            color: var(--text-secondary);
+        }
+
+        .breakdown-val {
+            color: #ffffff;
+            font-weight: 500;
+        }
 
         /* Turn simulator range thumb — red accent */
         #turn-sim input[type="range"]::-webkit-slider-thumb {
@@ -519,7 +567,8 @@
         <header>
             <div class="subtitle">MG</div>
             <h1>Voidfarer</h1>
-            <p style="margin-bottom: 0; margin-top: 0.5rem; font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 2px; color: var(--text-secondary); text-transform: uppercase;">
+            <p
+                style="margin-bottom: 0; margin-top: 0.5rem; font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 2px; color: var(--text-secondary); text-transform: uppercase;">
                 Rulebook &amp; Interactive Simulators
             </p>
         </header>
@@ -532,10 +581,12 @@
         <!-- ── Ship Spec Builder ── -->
         <section class="sim-card" id="ship-builder">
             <h2>Ship Spec Builder</h2>
-            <p>Distribute exactly <strong style="color: var(--text-primary);">30 points</strong> among your ship specs. Each spec defines a core capability of your vessel.</p>
+            <p>Distribute exactly <strong style="color: var(--text-primary);">30 points</strong> among your ship specs.
+                Each spec defines a core capability of your vessel.</p>
 
             <div class="builder-top">
-                <span style="font-family: var(--font-display); font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Points</span>
+                <span
+                    style="font-family: var(--font-display); font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Points</span>
                 <div id="points-status" class="badge-status valid">Allocated: 30 / 30</div>
             </div>
 
@@ -562,11 +613,11 @@
                     <span class="control-val" id="val-distance">5</span>
                 </div>
                 <div class="control-row">
-                    <span class="control-label">Resistance (1–10)</span>
+                    <span class="control-label">Hull (1–10)</span>
                     <div class="control-input-container">
-                        <input type="range" id="input-resistance" min="1" max="10" value="5">
+                        <input type="range" id="input-hull" min="1" max="10" value="5">
                     </div>
-                    <span class="control-val" id="val-resistance">5</span>
+                    <span class="control-val" id="val-hull">5</span>
                 </div>
                 <div class="control-row">
                     <span class="control-label">Comms (1–10)</span>
@@ -580,7 +631,8 @@
                     <div class="control-input-container">
                         <input type="range" id="input-maneuver" min="0" max="10" value="3" step="1">
                     </div>
-                    <span class="control-val" id="val-maneuver">3 <span id="maneuver-lvl" class="info-badge">Lvl 1</span></span>
+                    <span class="control-val" id="val-maneuver">3 <span id="maneuver-lvl" class="info-badge">Lvl
+                            1</span></span>
                 </div>
                 <div class="control-row">
                     <span class="control-label">Load</span>
@@ -639,23 +691,23 @@
     <script>
         // ── Ship Spec Builder Logic ──
         const specInputs = {
-            attack:     document.getElementById('input-attack'),
-            shield:     document.getElementById('input-shield'),
-            distance:   document.getElementById('input-distance'),
-            resistance: document.getElementById('input-resistance'),
-            comms:      document.getElementById('input-comms'),
-            maneuver:   document.getElementById('input-maneuver'),
-            load:       document.getElementById('input-load')
+            attack: document.getElementById('input-attack'),
+            shield: document.getElementById('input-shield'),
+            distance: document.getElementById('input-distance'),
+            hull: document.getElementById('input-hull'),
+            comms: document.getElementById('input-comms'),
+            maneuver: document.getElementById('input-maneuver'),
+            load: document.getElementById('input-load')
         };
 
         const specValues = {
-            attack:     document.getElementById('val-attack'),
-            shield:     document.getElementById('val-shield'),
-            distance:   document.getElementById('val-distance'),
-            resistance: document.getElementById('val-resistance'),
-            comms:      document.getElementById('val-comms'),
-            maneuver:   document.getElementById('val-maneuver'),
-            load:       document.getElementById('val-load')
+            attack: document.getElementById('val-attack'),
+            shield: document.getElementById('val-shield'),
+            distance: document.getElementById('val-distance'),
+            hull: document.getElementById('val-hull'),
+            comms: document.getElementById('val-comms'),
+            maneuver: document.getElementById('val-maneuver'),
+            load: document.getElementById('val-load')
         };
 
         const pointsStatus = document.getElementById('points-status');
@@ -671,25 +723,25 @@
 
             // Maneuver level
             let maneuverLvl = 0;
-            if (values.maneuver >= 10)      maneuverLvl = 3;
-            else if (values.maneuver >= 6)  maneuverLvl = 2;
-            else if (values.maneuver >= 3)  maneuverLvl = 1;
+            if (values.maneuver >= 10) maneuverLvl = 3;
+            else if (values.maneuver >= 6) maneuverLvl = 2;
+            else if (values.maneuver >= 3) maneuverLvl = 1;
             specValues.maneuver.innerHTML = `${values.maneuver} <span class="info-badge">Lvl ${maneuverLvl}</span>`;
 
             // Load level
             let loadLvl = 0;
-            if (values.load >= 10)      loadLvl = 4;
-            else if (values.load >= 7)  loadLvl = 3;
-            else if (values.load >= 4)  loadLvl = 2;
-            else if (values.load >= 2)  loadLvl = 1;
+            if (values.load >= 10) loadLvl = 4;
+            else if (values.load >= 7) loadLvl = 3;
+            else if (values.load >= 4) loadLvl = 2;
+            else if (values.load >= 2) loadLvl = 1;
             specValues.load.innerHTML = `${values.load} <span class="info-badge">Lvl ${loadLvl}</span>`;
 
             // Simple values
-            specValues.attack.textContent     = values.attack;
-            specValues.shield.textContent     = values.shield;
-            specValues.distance.textContent   = values.distance;
-            specValues.resistance.textContent = values.resistance;
-            specValues.comms.textContent      = values.comms;
+            specValues.attack.textContent = values.attack;
+            specValues.shield.textContent = values.shield;
+            specValues.distance.textContent = values.distance;
+            specValues.hull.textContent = values.hull;
+            specValues.comms.textContent = values.comms;
 
             // Points badge
             pointsStatus.textContent = `Allocated: ${total} / 30`;
@@ -713,23 +765,23 @@
 
         // ── Combat / Turn Points Simulator Logic ──
         const calcInputs = {
-            attack:   document.getElementById('calc-attack'),
+            attack: document.getElementById('calc-attack'),
             distance: document.getElementById('calc-distance'),
-            shield:   document.getElementById('calc-shield'),
-            resist:   document.getElementById('calc-resist')
+            shield: document.getElementById('calc-shield'),
+            resist: document.getElementById('calc-resist')
         };
 
         const calcValues = {
-            attack:   document.getElementById('calc-val-attack'),
+            attack: document.getElementById('calc-val-attack'),
             distance: document.getElementById('calc-val-distance'),
-            shield:   document.getElementById('calc-val-shield'),
-            resist:   document.getElementById('calc-val-resist')
+            shield: document.getElementById('calc-val-shield'),
+            resist: document.getElementById('calc-val-resist')
         };
 
-        const dmgDisplay           = document.getElementById('dmg-display');
-        const barShield            = document.getElementById('bar-shield');
-        const barHull              = document.getElementById('bar-hull');
-        const dmgBreakdown         = document.getElementById('dmg-breakdown');
+        const dmgDisplay = document.getElementById('dmg-display');
+        const barShield = document.getElementById('bar-shield');
+        const barHull = document.getElementById('bar-hull');
+        const dmgBreakdown = document.getElementById('dmg-breakdown');
         const combatResultContainer = document.getElementById('combat-result-container');
 
         function updateCombatCalc() {
@@ -737,24 +789,24 @@
                 calcValues[key].textContent = calcInputs[key].value;
             }
 
-            const attack    = parseInt(calcInputs.attack.value,   10);
-            const distance  = parseInt(calcInputs.distance.value, 10);
-            const maxShield = parseInt(calcInputs.shield.value,   10);
-            const maxHull   = parseInt(calcInputs.resist.value,   10);
+            const attack = parseInt(calcInputs.attack.value, 10);
+            const distance = parseInt(calcInputs.distance.value, 10);
+            const maxShield = parseInt(calcInputs.shield.value, 10);
+            const maxHull = parseInt(calcInputs.resist.value, 10);
 
             let damage = Math.max(0, 1 + attack - distance);
             dmgDisplay.textContent = damage;
 
-            let remainingDmg   = damage;
+            let remainingDmg = damage;
             const shieldAbsorbed = Math.min(remainingDmg, maxShield);
             remainingDmg -= shieldAbsorbed;
-            const hullDamage   = Math.min(remainingDmg, maxHull);
+            const hullDamage = Math.min(remainingDmg, maxHull);
             const remainingHull = maxHull - hullDamage;
-            const isDestroyed  = remainingHull <= 0;
+            const isDestroyed = remainingHull <= 0;
 
             const totalHealth = (maxShield + maxHull) || 1;
             barShield.style.width = `${(shieldAbsorbed / totalHealth) * 100}%`;
-            barHull.style.width   = `${(hullDamage    / totalHealth) * 100}%`;
+            barHull.style.width = `${(hullDamage / totalHealth) * 100}%`;
 
             dmgBreakdown.innerHTML = `
                 <div class="breakdown-line">
@@ -779,13 +831,13 @@
 
             if (isDestroyed) {
                 combatResultContainer.style.borderColor = 'var(--accent-red)';
-                combatResultContainer.style.background  = 'linear-gradient(135deg, rgba(239,68,68,0.1) 0%, rgba(8,9,14,0.8) 100%)';
+                combatResultContainer.style.background = 'linear-gradient(135deg, rgba(239,68,68,0.1) 0%, rgba(8,9,14,0.8) 100%)';
             } else if (damage > 0) {
                 combatResultContainer.style.borderColor = 'rgba(239,68,68,0.15)';
-                combatResultContainer.style.background  = 'linear-gradient(135deg, rgba(239,68,68,0.04) 0%, rgba(8,9,14,0.8) 100%)';
+                combatResultContainer.style.background = 'linear-gradient(135deg, rgba(239,68,68,0.04) 0%, rgba(8,9,14,0.8) 100%)';
             } else {
                 combatResultContainer.style.borderColor = 'rgba(255,255,255,0.05)';
-                combatResultContainer.style.background  = 'rgba(10,11,20,0.6)';
+                combatResultContainer.style.background = 'rgba(10,11,20,0.6)';
             }
         }
 

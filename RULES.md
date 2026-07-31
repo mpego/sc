@@ -1,4 +1,4 @@
-# Voidfarer — Game Rules
+# Game Rules
 
 ---
 
@@ -7,6 +7,26 @@
 Amass **100 credits** through trading, piracy, missions, or bounty hunting.
 
 Fear not exploring, players will always be back in play even after losing their ships.
+
+---
+
+## 💰 Game setup
+
+Each player gets a common ship with specs:
+
+**Hull** 5 
+**Shield** 5 
+**Speed** 5 
+**Attack** 5 
+**Defense** 5 
+**Maneuver** 1 
+**Load** 1
+
+No cargo, no missions and 10 credits
+
+Each player starts at a different space station or planet.
+
+Plants and space statios have no resources to trade or other resources to offer and no missions to offer.
 
 ---
 
@@ -28,15 +48,15 @@ To achieve victory in Voidfarer, ships must accumulate credits/points through va
 
 Players distribute exactly **30 units** among the following specs. Each spec defines the fundamental capabilities of your vessel.
 
-| Spec       | Range                       | Description                                                                 |
-| ---------- | --------------------------- | --------------------------------------------------------------------------- |
-| Attack     | 1 – 10                      | Determines how far the ship can fire its main weapons.                      |
-| Shield     | 1 – 10                      | The maximum energy value that shields can absorb before taking hull damage. |
-| Distance   | 1 – 10                      | The maximum number of units (hexes) the ship can travel in a single turn.   |
-| Resistance | 1 – 10                      | The hull integrity of the ship, which absorbs damage after shields fail.    |
-| Comms      | 1 – 10                      | The maximum range at which the ship can establish communications.           |
-| Maneuver   | 1 (3), 2 (6), 3 (10)        | Allows in-place rotation movements on top of distance.                      |
-| Load       | 1 (2), 2 (4), 3 (7), 4 (10) | Determines how many units of cargo the ship is certified to transport.      |
+| Spec     | Range                       | Description                                                                             |
+| -------- | --------------------------- | --------------------------------------------------------------------------------------- |
+| Attack   | 1 – 10                      | Determines how far the ship can fire its main weapons.                                  |
+| Shield   | 1 – 10                      | The maximum energy value that shields can absorb before taking hull damage.             |
+| Distance | 1 – 10                      | The maximum number of units the ship can travel in a single turn.                       |
+| Hull     | 1 – 10                      | The hull integrity of the ship, which absorbs damage after shields fail.                |
+| Comms    | 1 – 10                      | The maximum range at which the ship can establish communications.                       |
+| Maneuver | 1 (3), 2 (6), 3 (10)        | Allows in-place rotation movements on top of distance [level (points)].                 |
+| Load     | 1 (2), 2 (4), 3 (7), 4 (10) | Determines how many units of cargo the ship is certified to transport [level (points)]. |
 
 ---
 
@@ -99,7 +119,7 @@ In this case player can do one of the following:
 
 | Action                  | Detail                                                                                        |
 | ----------------------- | --------------------------------------------------------------------------------------------- |
-| 🛠️ Repair Ship           | Restore Hull (Resistance) while docked at a planet or space station.                          |
+| 🛠️ Repair Ship           | Restore Hull while docked at a planet or space station.                                       |
 | 📋 Pick Missions         | Accept a pending mission contract at a planet or space station.                               |
 | 📦 Trade Cargo           | Exchange or sell cargo with another ship or at a location.                                    |
 | 🏆 Claim Mission Success | Deliver cargo or a captured ship to the designated destination to collect the mission reward. |
@@ -113,6 +133,8 @@ If docked to the same planet or station as another ship, the player can run a th
 
 ## 🧭 Movements
 
+**Variables** Distance and Maneuver.
+
 Navigating the cold void requires precise speed calculations.
 
 - 🚀 **Fixed movement:** Ships must move the exact Distance value currently set (no more, no less).
@@ -124,6 +146,8 @@ Navigating the cold void requires precise speed calculations.
 
 ## ⚔️ Combat Mechanics
 
+**Variables** Attack, Shield and Hull.
+
 Engage target vessels using straight-line attacks from your forward-facing firing arc.
 
 Attacking cannot overpass a occupied hex tile.
@@ -133,42 +157,12 @@ Attacking cannot overpass a occupied hex tile.
   ```
   Damage = 1 + (Attack Points Allocated) - (Distance to Target)
   ```
-- **Shield & Hull rule:** Damage points are first used to reduce the target's **Shield**. Any remaining damage is directed to the target's **Resistance** (hull). A ship is destroyed when its Resistance reaches **0**.
+- **Shield & Hull rule:** Damage points are first used to reduce the target's **Shield**. Any remaining damage is directed to the target's **Hull**. A ship is destroyed when its hull resistance reaches **0**.
 
 ---
-
-## 🎲 Special Dice Events
-
-Rolling some special dice combination on your **3d4** turn roll triggers special galaxy-wide anomalies or events.
-
-| Dice Combination | Event                                                                                                                                                |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ⚅⚅ Triple Fours  | The player can move the Space Station up to 4 hexes. Or choose to play as even doubles.                                                              |
-| ⚀⚀ Triple Ones   | One of the other players (the one whºo rolls the highest) can move the Space Storm up to 3 hexes in any direction. Or choose to play as odd doubles. |
-| Even Doubles     | The player can change resources on any one planet.                                                                                                   |
-| Odd Doubles      | The player can move up to 4 units of asteroid fields or spatial storms in any combination.                                                           |
-
----
-
-## ☄️ Asteroids & Spatial Storms
-
-The sector is filled with hazardous anomalies that challenge even the most experienced voidfarers.
-
-### 🪨 Asteroid Fields
-
-- **Navigation Hazard:** Moving through or ending a turn in an asteroid field is dangerous. For each hex of an asteroid field entered, the player must roll a **1d4**. On a roll of **1**, the ship takes **1 Hull damage** (directly to Resistance, bypassing Shield).
-- **Line of Sight Obstruction:** Asteroid fields block all weapon fire. Attacks cannot pass through asteroid hexes.
-- **Mining Opportunity:** Ships can attempt to mine asteroids, gaining **a  cargo of minerals** on a **1d4** roll of **4**.
-
-### ⚡ Spatial Storm
-
-- **Comms Blackout:** While inside the Spatial Storm, a ship's active Comms range is reduced to **0**, preventing any trading, comms, or thievery actions.
-- **Shield Depletion:** Any ship that ends its turn inside the Spatial Storm loses **2 Shield points** immediately due to extreme electromagnetic interference.
-- **Attack Interference:** Ships outside the storm cannot attack ships inside the storm. Inside attack is normal.
-
----
-
 ## 🤝 Trading & Theft
+
+**Variables** Comms and Load.
 
 Accumulate wealth and transport commodities across space stations and planets.
 Trading and theft include both cargo and mission cards.
@@ -210,6 +204,37 @@ On each of his turns the thief does a **3d4** roll, on any triplet he has the ch
 To actually sacpe he must defeat the capturer by rolling like thievery **Resolution**.
 
 If wins the thief escape from capture with cargo that was left on his ship, he plays a normal turn.
+
+---
+
+## 🎲 Special Dice Events
+
+Rolling some special dice combination on your **3d4** turn roll triggers special galaxy-wide anomalies or events.
+
+| Dice Combination | Event                                                                                                                                                |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ⚅⚅ Triple Fours  | The player can move the Space Station up to 4 hexes. Or choose to play as even doubles.                                                              |
+| ⚀⚀ Triple Ones   | One of the other players (the one whºo rolls the highest) can move the Space Storm up to 3 hexes in any direction. Or choose to play as odd doubles. |
+| Even Doubles     | The player can change resources on any one planet.                                                                                                   |
+| Odd Doubles      | The player can move up to 4 units of asteroid fields or spatial storms in any combination.                                                           |
+
+---
+
+## ☄️ Asteroids & Spatial Storms
+
+The sector is filled with hazardous anomalies that challenge even the most experienced voidfarers.
+
+### 🪨 Asteroid Fields
+
+- **Navigation Hazard:** Moving through or ending a turn in an asteroid field is dangerous. For each hex of an asteroid field entered, the player must roll a **1d4**. On a roll of **1**, the ship takes **1 Hull damage**.
+- **Line of Sight Obstruction:** Asteroid fields block all weapon fire. Attacks cannot pass through asteroid hexes.
+- **Mining Opportunity:** Ships can attempt to mine asteroids, gaining **a  cargo of minerals** on a **1d4** roll of **4**.
+
+### ⚡ Spatial Storm
+
+- **Comms Blackout:** While inside the Spatial Storm, a ship's active Comms range is reduced to **0**, preventing any trading, comms, or thievery actions.
+- **Shield Depletion:** Any ship that ends its turn inside the Spatial Storm loses **2 Shield points** immediately due to extreme electromagnetic interference.
+- **Attack Interference:** Ships outside the storm cannot attack ships inside the storm. Inside attack is normal.
 
 ---
 
