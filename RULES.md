@@ -243,45 +243,52 @@ When docked to a planet or space station, player can choose run a normal turn in
 
 ### 🎲 Turn Sequence in space
 
-Each turn, players roll **3d4**. The sum represents **engineering points** distributed among turn variables.
+
+### Engineering Phase
+
+The player chooses to roll up to **3d4**.
+The accumulated valued must be completly used to increase or decrease ship variables.
+
+>
+> 
+| Variable | Rule                                                                                       |
+| -------- | ------------------------------------------------------------------------------------------ |
+| Distance | Adjust current speed. Each 1 point spent increases or decreases speed by 1.                |
+| Attack   | Set the active attack range and damage potential for the current turn.                     |
+| Shield   | Recover damaged shield points at a cost of 1 allocated point per 1 shield point recovered. |
+| Maneuver | Allocate rotation points for the turn.                                                     |
+| Comms    | Set active communication range for the turn.                                               |
 
 > **Constraint:** None of the turn-allocated variables can surpass their maximum values defined by Ship Specs.
-
-### Engineering Phase
-
-| Variable | Rule                                                                                                           |
-| -------- | -------------------------------------------------------------------------------------------------------------- |
-| Distance | Adjust current speed. Each 1 point spent increases or decreases speed by 1, up to the ship's maximum spec.     |
-| Attack   | Set the active attack range and damage potential for the current turn (cannot exceed local Attack spec).       |
-| Shield   | Recover damaged shield points at a cost of 1 allocated point per 1 shield point recovered (up to Shield spec). |
-| Maneuver | Allocate rotation points for the turn (cannot exceed Maneuver spec level).                                     |
-| Comms    | Set active communication range for the turn (cannot exceed Comms spec).                                        |
-
-### Engineering Phase
-
-Player assigns his engineering points:
-
-| Action                     | Detail                                                                                              |
-| -------------------------- | --------------------------------------------------------------------------------------------------- |
-| 🚀 Move                     | Fly the ship across the board using the distance set for this turn.                                 |
-| ⚔️ Attack                   | Fire weapons at a valid target within arc and attack range.                                         |
-| 📡 Establish Communications | Open a comms channel with another ship within active Comms range to enable trading or coordination. |
-| 🔧 Repair Shield            | Recover Shield points allocating engineering points.                                                |
+> 
 
 ### Action Phase
 
 Player executes actions in any order in any combination.
-Move must be fully utilized by the end of the phase.
-Attack and repair shield can be utilized only once per turn.
+
+
+| Action           | Detail                                                                   |
+| ---------------- | ------------------------------------------------------------------------ |
+| 🚀 Move           | Fly the ship across the board using the distance set for this turn.      |
+| ⚔️ Attack         | Fire weapons at a valid target within arc and attack range.              |
+| 📡 Communications | Open a comms channel with another ship for trading, bribing or thievery. |
+| 🔧 Repair Shield  | Recover Shield points allocating engineering points.                     |
+
+
+The ship must move the exact value of distance points set. 
+Attack and comms variable point are fully consumed if used, all other are preserved for next turn.
+
 
 #### Docking into a space station
 
 Docking to a station requires an exact distance match.
 The ship must share any tile not fully covered by the station.
+Docking sets all turn variables to 0.
 
 #### Docking into a planet
 
 Docking to a planet not need exact distance match. player can discard any remaining move points.
+Docking sets all turn variables to 0.
 
 #### Thievery
 
