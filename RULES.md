@@ -67,7 +67,7 @@ Players distribute exactly **30 units** among the following specs. Each spec def
 Navigating the cold void requires precise speed calculations.
 
 - 🚀 **Fixed movement:** Ships must move the exact Distance value currently set (no more, no less).
-- 🔄 **Mid-travel rotation:** At any point during movement, the player can spend Maneuver points allocated for the turn to rotate the ship in place (e.g., 60 degrees per point on a hex grid), and then continue moving if movement points remain.
+- 🔄 **Mid-travel rotation:** At any point during movement, the player can spend Maneuver points allocated for the turn to rotate the ship in place, and then continue moving if movement points remain. Each point of Maneuver allow any number of rotations in a single hex.
 - ⚔️ **Attack interrupt:** Movement can be paused at any hex along the path to fire an attack (provided Attack points are allocated and a valid target is in arc). After resolving the attack, the ship continues moving with its remaining distance.
 - 💾 **Conservation:** The speed/distance points set are preserved for the next turn unless actively adjusted.
 
