@@ -6,7 +6,7 @@
 
 Amass **100 credits** through trading, piracy, missions, or bounty hunting.
 
-Fear not exploring, players will always be back in play even after losing their ships.
+Fear not exploring, players will always have the chance to get back in play even after losing their ships.
 
 ---
 
@@ -16,9 +16,9 @@ Each player gets a common ship with specs:
 
 **Hull** 5 
 **Shield** 5 
-**Speed** 5 
+**Distance** 5 
 **Attack** 5 
-**Defense** 5 
+**Communication** 5 
 **Maneuver** 1 
 **Load** 1
 
@@ -26,7 +26,7 @@ No cargo, no missions and 10 credits
 
 Each player starts at a different space station or planet.
 
-Plants and space statios have no resources to trade or other resources to offer and no missions to offer.
+Planets and space statios have no resources to trade or other resources to offer and no missions to offer.
 
 ---
 
@@ -34,19 +34,20 @@ Plants and space statios have no resources to trade or other resources to offer 
 
 To achieve victory in Voidfarer, ships must accumulate credits/points through various sector operations.
 
-| Activity       | How To                                                                                                   |
-| -------------- | -------------------------------------------------------------------------------------------------------- |
-| Trading Cargo  | Buy low-cost cargo from planets or space stations, and sell it at other locations for a premium.         |
-| Cargo Missions | Accept cargo transport contracts at planets/stations and safely deliver cargo to the destination planet. |
-| Bounty Hunting | Locate, capture, and tow designated target ships back to the issuing Space Station.                      |
-| Thievery       | Steal cargo or missions from other ships via Planetary Theft or in space.                                |
-| Combat Salvage | Defeat rival ships in direct combat to salvage remaining scrap metal and ship debris.                    |
+| Activity             | How To                                                                                                   |
+| -------------------- | -------------------------------------------------------------------------------------------------------- |
+| Trading Cargo        | Buy low-cost cargo from planets or space stations, and sell it at other locations for a premium.         |
+| Cargo Missions       | Accept cargo transport contracts at planets/stations and safely deliver cargo to the destination planet. |
+| Exploration Missions | Complete exploration tasks at planets.                                                                   |
+| Bounty Hunting       | Locate, capture, and tow designated target ships back to the issuing Space Station.                      |
+| Thievery             | Steal cargo or missions from other ships via Planetary Theft or in space.                                |
+| Combat Salvage       | Defeat rival ships in direct combat to salvage remaining scrap metal and ship debris.                    |
 
 ---
 
 ## 🚀 Ship Specifications
 
-Players distribute exactly **30 units** among the following specs. Each spec defines the fundamental capabilities of your vessel.
+When changing ships, players distribute exactly **30 units** among the following specs. Each spec defines the fundamental capabilities of your vessel.
 
 | Spec     | Range                       | Description                                                                             |
 | -------- | --------------------------- | --------------------------------------------------------------------------------------- |
@@ -64,12 +65,12 @@ Players distribute exactly **30 units** among the following specs. Each spec def
 
 **Variables** Distance and Maneuver.
 
-Navigating the cold void requires precise speed calculations.
+Navigating the cold void requires precise distance calculations.
 
 - 🚀 **Fixed movement:** Ships must move the exact Distance value currently set (no more, no less).
 - 🔄 **Mid-travel rotation:** At any point during movement, the player can spend Maneuver points allocated for the turn to rotate the ship in place, and then continue moving if movement points remain. Each point of Maneuver allow any number of rotations in a single hex.
 - ⚔️ **Attack interrupt:** Movement can be paused at any hex along the path to fire an attack (provided Attack points are allocated and a valid target is in arc). After resolving the attack, the ship continues moving with its remaining distance.
-- 💾 **Conservation:** The speed/distance points set are preserved for the next turn unless actively adjusted.
+- 💾 **Conservation:** The distance points set are preserved for the next turn unless actively adjusted.
 
 ---
 
@@ -107,7 +108,7 @@ Trading between ships is possible when:
 ### Bribery
 
 Any player can bribe another player at any time.
-For bribe to happen ships must be in each other comm range (if not the player receives one hit in the hull for each exceding hex). Accept bribe is a non commit action, so it can be refused by the other player without any consequences or advice.
+For bribe to happen ships must be in each other comm range (if not the bribber receives one hit in the hull for each exceeding hex). Accept bribe is a non commit action, so it can be refused by the other player without any consequences or advice.
 But if it succeds bribber can not attack the other player until his next full turn passes or bribber is attacked by that other player.
 
 ### Thievery
@@ -120,7 +121,7 @@ But if it succeds bribber can not attack the other player until his next full tu
 Thieves and victims roll **3d4s**. 
 If the thief’s total roll is equal or higher than the victim’s, the thief succeeds.
 
-If the theft succeeds in a planet or station, a bounty mission is automatically issued for the thief.
+If the theft succeeds in a planet or station, a bounty mission is automatically issued against the thief.
 
 Thivery is the only way to have more than one mission card at a time.
 
@@ -130,7 +131,7 @@ Capturing is resolve the same way as thievery **Resolution**, then the ship must
 
 Cargo on the thief can be moved to the capturing ship if space is available, and card mission if any is owned by capturer.
 While captured, cargo and mission of the thief can be sell or claimed.
-On each of his turns the thief does a **3d4** roll, on any triplet he has the chance to scape.
+On each of his turns the thief does a **3d4** roll, on any triplet he has the chance to escape.
 To actually sacpe he must defeat the capturer by rolling like thievery **Resolution**.
 
 If wins the thief escape from capture with cargo that was left on his ship, he plays a normal turn.
@@ -141,12 +142,12 @@ If wins the thief escape from capture with cargo that was left on his ship, he p
 
 Rolling some special dice combination on your **3d4** turn roll triggers special galaxy-wide anomalies or events.
 
-| Dice Combination | Event                                                                                                                                                |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ⚅⚅ Triple Fours  | The player can move the Space Station up to 4 hexes. Or choose to play as even doubles.                                                              |
-| ⚀⚀ Triple Ones   | One of the other players (the one whºo rolls the highest) can move the Space Storm up to 3 hexes in any direction. Or choose to play as odd doubles. |
-| Even Doubles     | The player can change resources on any one planet.                                                                                                   |
-| Odd Doubles      | The player can move up to 4 units of asteroid fields or spatial storms in any combination.                                                           |
+| Dice Combination | Event                                                                                                                                               |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ⚅⚅ Triple Fours  | The player can move the Space Station up to 4 hexes. Or choose to play as even doubles.                                                             |
+| ⚀⚀ Triple Ones   | One of the other players (the one who rolls the highest) can move the Space Storm up to 3 hexes in any direction. Or choose to play as odd doubles. |
+| Even Doubles     | The player can change resources on any one planet.                                                                                                  |
+| Odd Doubles      | The player can move up to 4 units of asteroid fields or spatial storms in any combination.                                                          |
 
 ---
 
@@ -204,37 +205,83 @@ Available actions:
 | Refit 5 point of ship                        | -10     |
 | Turn in thief                                | 20      |
 
+
+If player cannot pay the passing fee, he must make a space movement turn.
+
+
 **Destroying a ship:** earns 15 credits.
 
 ---
 
-### Missions
+## Missions
 
-Cargo missions
+When looking for a mission the player can chose to take mission card or if the planet allow can instead chose to do an exploration mission.
+
+### Exploration missions ###
+
+#### Free hostages ####
+
+At the start of the mission, place NPC in the cage door.
+NPC makes the first move. Then the player chooses the starting entry.
+
+Other players can also enter the mission competing for the reward.
+
+To move in the planet roll **3d4**, chose the two highest dice to determine the max distance the player can move on the planet. 
+
+If there are other NPCs on the planet that also move, the player roll **3d4**. Put the dice in descending order, each dice will move an NPC, if more dice than NPCs just loop the NPC list. NPCs must always move forward and must always move.
+
+Example with two NPCs:
+Dice roll **4 3 2**
+NPC 1 moves 4 + 2 = 6 plces.
+NPC 2 moves 3 places.
+
+If the player is captured, he loses the mission, the next turn and 10 credits.
+
+He can exit the mission without any penalty. 
+
+***Reward*** 20 credits plus a ship that allow a second turn as long as it is not destroyed. The player choses the ship specs.
+---
+
+#### Maze ####
+
+At the start of the mission, each other player can do up to two actions in the maze to so set up the maze for the active player. Then the player choses the starting corner.
+
+Other players can also enter the mission competing for the reward.
+
+On the players turn, push one tile into the maze and move the players as much as wanted through the maze.
+Player must get the treasure in the center and escape throuth the opposite corner he entered. Reaching the treasure stops movement.
+Tile moved in one turn must not be the opposite of the previous turn.
+
+***Reward*** After escaping roll **3d4** twice. The sum is the earnings.
+
+---
+
+### Cargo missions ###
+
+Each planet and station will also have one mission available.
+If a player takes one replace immediately with a new one.
 
 **Planets**
-Deliver 2 units of goods
-Deliver 2 units of minerals
-Deliver 2 units of tech
-
-Deliver 1 units of good and 1 unit of mineral
-Deliver 1 units of good and 1 unit of tech
-Deliver 1 units of mineral and 1 unit of tech
-
-Deliver 2 units of goods and 1 unit of mineral
-Deliver 2 units of goods and 1 unit of tech
-Deliver 2 units of minerals and 1 unit of good
-Deliver 2 units of minerals and 1 unit of tech
+* 3 x "Deliver 2 units of goods"
+* 3 x "Deliver 2 units of minerals"
+* 3 x "Deliver 2 units of tech"
+* 3 x "Deliver 1 units of good and 1 unit of mineral"
+* 3 x "Deliver 1 units of good and 1 unit of tech"
+* 3 x "Deliver 1 units of mineral and 1 unit of tech"
+* 2 x "Deliver 2 units of goods and 1 unit of mineral"
+* 2 x "Deliver 2 units of goods and 1 unit of tech"
+* 2 x "Deliver 2 units of minerals and 1 unit of good"
+* 2 x "Deliver 2 units of minerals and 1 unit of tech"
 
 **Space Stations**
-Deliver 2 units of tech
-Deliver 2 units of tech and 1 unit of good
-Deliver 2 units of tech and 1 unit of mineral
+* 3 x "Deliver 2 units of tech"
+* 3 x "Deliver 2 units of tech and 1 unit of good"
+* 3 x "Deliver 2 units of tech and 1 unit of mineral"
+* 2 x "Deliver 3 units of goods"
+* 2 x "Deliver 3 units of minerals"
+* 2 x "Deliver 3 units of tech"
 
-
-Deliver 3 units of goods
-Deliver Cargo 3 units of minerals
-Deliver Cargo 3 units of tech
+---
 
 ## 🎲 Turn Sequence
 
@@ -249,11 +296,10 @@ When docked to a planet or space station, player can choose run a normal turn in
 The player chooses to roll up to **3d4**.
 The accumulated valued must be completly used to increase or decrease ship variables.
 
->
-> 
+ 
 | Variable | Rule                                                                                       |
 | -------- | ------------------------------------------------------------------------------------------ |
-| Distance | Adjust current speed. Each 1 point spent increases or decreases speed by 1.                |
+| Distance | Adjust current distance. Each 1 point spent increases or decreases distance by 1.          |
 | Attack   | Set the active attack range and damage potential for the current turn.                     |
 | Shield   | Recover damaged shield points at a cost of 1 allocated point per 1 shield point recovered. |
 | Maneuver | Allocate rotation points for the turn.                                                     |
