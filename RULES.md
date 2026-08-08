@@ -38,10 +38,10 @@ To achieve victory in Voidfarer, ships must accumulate credits/points through va
 | -------------------- | -------------------------------------------------------------------------------------------------------- |
 | Trading Cargo        | Buy low-cost cargo from planets or space stations, and sell it at other locations for a premium.         |
 | Cargo Missions       | Accept cargo transport contracts at planets/stations and safely deliver cargo to the destination planet. |
-| Exploration Missions | Complete exploration tasks at planets.                                                                   |
+| Exploration Missions | Complete exploration tasks.                                                                              |
 | Bounty Hunting       | Locate, capture, and tow designated target ships back to the issuing Space Station.                      |
 | Thievery             | Steal cargo or missions from other ships via Planetary Theft or in space.                                |
-| Combat Salvage       | Defeat rival ships in direct combat to salvage remaining scrap metal and ship debris.                    |
+| Combat Salvage       | Defeat rival ships in direct combat.                                                                     |
 
 ---
 
@@ -142,12 +142,12 @@ If wins the thief escape from capture with cargo that was left on his ship, he p
 
 Rolling some special dice combination on your **3d4** turn roll triggers special galaxy-wide anomalies or events.
 
-| Dice Combination | Event                                                                                                                                               |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ⚅⚅ Triple Fours  | The player can move the Space Station up to 4 hexes. Or choose to play as even doubles.                                                             |
-| ⚀⚀ Triple Ones   | One of the other players (the one who rolls the highest) can move the Space Storm up to 3 hexes in any direction. Or choose to play as odd doubles. |
-| Even Doubles     | The player can change resources on any one planet.                                                                                                  |
-| Odd Doubles      | The player can move up to 4 units of asteroid fields or spatial storms in any combination.                                                          |
+| Dice Combination | Event                                                                                                                                                 |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ⚅⚅ Triple Fours  | The player can move the Space Station up to 4 hexes. Or choose to play as even doubles.                                                               |
+| ⚀⚀ Triple Ones   | One of the other players (the one who rolls the highest) can move the Space Station up to 3 hexes in any direction. Or choose to play as odd doubles. |
+| Even Doubles     | The player can change resources on any one planet.                                                                                                    |
+| Odd Doubles      | The player can move up to 4 units of asteroid fields or spatial storms in any combination.                                                            |
 
 ---
 
@@ -240,6 +240,7 @@ If the player is captured, he loses the mission, the next turn and 10 credits.
 He can exit the mission without any penalty. 
 
 ***Reward*** 20 credits plus a ship that allow a second turn as long as it is not destroyed. The player choses the ship specs.
+
 ---
 
 #### Maze ####
@@ -293,7 +294,7 @@ When docked to a planet or space station, player can choose run a normal turn in
 
 ### Engineering Phase
 
-The player chooses to roll up to **3d4**.
+The player rolls up to **3d4**, from those choose up to three dice.
 The accumulated valued must be completly used to increase or decrease ship variables.
 
  
