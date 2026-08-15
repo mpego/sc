@@ -174,42 +174,29 @@ The sector is filled with hazardous anomalies that challenge even the most exper
 Ships can land on planets or dock at a space station.
 Docking ends movement and attacking is no longer possible.
 
-### Planets
-**Capacity:** Unlimited ships
+#### Possible actions ####
 
-Available actions:
-| Action                                       | Credits |
-| -------------------------------------------- | ------- |
-| Trade cargo between ships                    | -       |
-| Accept missions offered by the planet        | -       |
-| Pass the turn without doing any other action | -5      |
-| Sell cargo                                   | 5       |
-| Sell highlited cargo                         | 10      |
-| Buy cargo available in the planet            | -5      |
-| Repair ship hull integrity                   | -5      |
-| Refit 5 point of ship                        | -10     |
-| Trade ship for a new one                     | -20     |
+| Action         | Planet    | Station     |
+| -------------- | --------- | ----------- |
+| Docked ships   | Unlimited | Max 2 ships |
+| Buy cargo      | Yes       | No          |
+| Accepted cargo | Anything  | Only tech   |
+| Bounty office  | No        | Yes         |
 
-### Space Stations
-**Capacity:** Max 2 ships at a time
-
-Available actions:
-| Action                                       | Credits |
-| -------------------------------------------- | ------- |
-| Trade cargo between ships                    | -       |
-| Accept missions offered by the station       | -       |
-| Pass the turn without doing any other action | -5      |
-| Sell tech cargo                              | 10      |
-| Sell highlited cargo                         | 15      |
-| Repair ship hull integrity                   | -10     |
-| Refit 5 point of ship                        | -10     |
-| Turn in thief                                | 20      |
+#### Costs of actions ####
+| Action                     | Planet | Station |
+| -------------------------- | ------ | ------- |
+| Accept mission             | 0      | 0       |
+| Pass the turn              | 0      | -5      |
+| Buy cargo                  | -5     | -       |
+| Repair two points of hull  | -5     | -10     |
+| Refit three points of ship | -5     | -10     |
+| Sell cargo                 | 5      | 10      |
+| Sell highlited cargo       | 10     | 15      |
+| Turn in thief              | -      | 25      |
 
 
 If player cannot pay the passing fee, he must make a space movement turn.
-
-
-**Destroying a ship:** earns 15 credits.
 
 ---
 
@@ -221,25 +208,23 @@ When looking for a mission the player can chose to take mission card or if the p
 
 #### Free hostages ####
 
-At the start of the mission, place NPC in the cage door.
-NPC makes the first move. Then the player chooses the starting entry.
+At the start of the mission, place NPCs in the cage at the center and door and two guards outside the door.
+
+NPCs make the first move. Then the player chooses the starting entry.
 
 Other players can also enter the mission competing for the reward.
 
-To move in the planet roll **3d4**, chose the two highest dice to determine the max distance the player can move on the planet. 
+To move in the planet roll **3d4**, move the sum on the dice. Movement can be back and forth as wanted. 
 
-If there are other NPCs on the planet that also move, the player roll **3d4**. Put the dice in descending order, each dice will move an NPC, if more dice than NPCs just loop the NPC list. NPCs must always move forward and must always move.
+For NPCs on the planet, any player must roll **3d4** for every two NPCs. Distribute dice among NPCs with the only restriction that each NPC must have at least one die.
 
-Example with two NPCs:
-Dice roll **4 3 2**
-NPC 1 moves 4 + 2 = 6 plces.
-NPC 2 moves 3 places.
+If an NPC collide with another, turn it 180 degrees and continue movement as normal.
 
-If the player is captured, he loses the mission, the next turn and 10 credits.
+If the player is captured, he loses the mission.
 
-He can exit the mission without any penalty. 
+Player can abandon the mission without any penalty, exiting through any corner before releasing hostages. 
 
-***Reward*** 20 credits plus a ship that allow a second turn as long as it is not destroyed. The player choses the ship specs.
+***Reward*** 30 credits plus a ship that allow a second turn as long as it is not destroyed. The player choses the ship specs.
 
 ---
 
@@ -253,44 +238,53 @@ On the players turn, push one tile into the maze and move the players as much as
 Player must get the treasure in the center and escape throuth the opposite corner he entered. Reaching the treasure stops movement.
 Tile moved in one turn must not be the opposite of the previous turn.
 
-***Reward*** After escaping roll **3d4** twice. The sum is the earnings.
+He can abandon the mission without any penalty, exiting through any corner without the treassure. 
+
+***Reward*** 15 credits.
 
 ---
 
 ### Cargo missions ###
 
-Each planet and station will also have one mission available.
-If a player takes one replace immediately with a new one.
-
 **Planets**
-* 3 x "Deliver 2 units of goods"
-* 3 x "Deliver 2 units of minerals"
-* 3 x "Deliver 2 units of tech"
-* 3 x "Deliver 1 units of good and 1 unit of mineral"
-* 3 x "Deliver 1 units of good and 1 unit of tech"
-* 3 x "Deliver 1 units of mineral and 1 unit of tech"
-* 2 x "Deliver 2 units of goods and 1 unit of mineral"
-* 2 x "Deliver 2 units of goods and 1 unit of tech"
-* 2 x "Deliver 2 units of minerals and 1 unit of good"
-* 2 x "Deliver 2 units of minerals and 1 unit of tech"
+* "Deliver 2 units of goods"
+* "Deliver 2 units of minerals"
+* "Deliver 1 units of good and 1 unit of mineral"
+* "Deliver 1 units of good and 1 unit of tech"
+* "Deliver 1 units of mineral and 1 unit of tech"
+* "Deliver 2 units of goods and 1 unit of mineral"
+* "Deliver 2 units of goods and 1 unit of tech"
+* "Deliver 2 units of minerals and 1 unit of good"
+* "Deliver 2 units of minerals and 1 unit of tech"
+* "Deliver 3 units of goods"
+* "Deliver 3 units of minerals"
+
+One of each mission per planet
 
 **Space Stations**
-* 3 x "Deliver 2 units of tech"
-* 3 x "Deliver 2 units of tech and 1 unit of good"
-* 3 x "Deliver 2 units of tech and 1 unit of mineral"
-* 2 x "Deliver 3 units of goods"
-* 2 x "Deliver 3 units of minerals"
-* 2 x "Deliver 3 units of tech"
+* "Deliver 2 units of tech"
+* "Deliver 2 units of tech and 1 unit of good"
+* "Deliver 2 units of tech and 1 unit of mineral"
+* "Deliver 1 unit of tech and 2 units of goods"
+* "Deliver 1 unit of tech and 2 units of minerals"
+* "Deliver 3 units of tech"
+  
+One of each mission per space station
+
+### At any time ###
+
+Any player can destroy any other ship in a space combat.
+
+***Reward*** 20 credits.
 
 ---
 
 ## 🎲 Turn Sequence
 
-When in space player can run a turn in space.
-When docked to a planet or space station, player can choose run a normal turn in space to leave planet or station or can choose to stay docked and perform station related actions.
+When in space player runs a turn in space.
+When docked to a planet or space station, player can choose to run a normal turn in space to leave planet or station or can choose to stay docked and perform docked actions.
 
 ### 🎲 Turn Sequence in space
-
 
 ### Engineering Phase
 
@@ -349,8 +343,9 @@ In this case player can do one of the following:
 
 | Action                  | Detail                                                                                        |
 | ----------------------- | --------------------------------------------------------------------------------------------- |
-| 🛠️ Repair Ship           | Restore Hull while docked at a planet or space station.                                       |
-| 📋 Pick Missions         | Accept a pending mission contract at a planet or space station.                               |
+| 🛠️ Repair Ship           | Restore Hull.                                                                                 |
+| 📋 Accept Mission        | Accept an offered mission contract.                                                           |
+| ❌ Resign Mission        | Resign from a mission contract.                                                               |
 | 📦 Trade Cargo           | Exchange or sell cargo with another ship or at a location.                                    |
 | 🏆 Claim Mission Success | Deliver cargo or a captured ship to the designated destination to collect the mission reward. |
 | ⏹️ Pass                  | Pass the turn without doing any other action.                                                 |
