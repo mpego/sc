@@ -87,7 +87,9 @@ Attacking cannot overpass a occupied hex tile.
   ```
   Damage = 1 + (Attack Points Allocated) - (Distance to Target)
   ```
-- **Shield & Hull rule:** Damage points are first used to reduce the target's **Shield**. Any remaining damage is directed to the target's **Hull**. A ship is destroyed when its hull resistance reaches **0**.
+- **Receiving damage:** Damage points are first used to reduce the target's **Shield**. Any remaining damage is directed to the target's **Hull**. A ship is destroyed when its hull resistance reaches **0**.
+
+Once the ship shield is depleted, player receiving damage can direct the damage to any variable with points instead of the hull, in that case the variable receives all the damage and its value go to 0, in case of load bays, any cargo is lost.
 
 ---
 
@@ -113,7 +115,7 @@ But if it succeds bribber can not attack the other player until his next full tu
 
 ### Thievery
 
-- **Planetary Theft:** When a ship is at a planet, it can steal cargo or missions from another ship docked at that same planet.
+- **Docked Theft:** When a ship is at a planet, it can steal cargo or missions from another ship docked at that same planet.
 
 - **Tile-Share Theft:** Thievery can also be executed by occupying the exact same tile as another ship or within the comms range to the other ship.
 
@@ -124,17 +126,6 @@ If the thief’s total roll is equal or higher than the victim’s, the thief su
 If the theft succeeds in a planet or station, a bounty mission is automatically issued against the thief.
 
 Thivery is the only way to have more than one mission card at a time.
-
-### Capturing a thief
-
-Capturing is resolve the same way as thievery **Resolution**, then the ship must be delivered to a space station to claim the reward.
-
-Cargo on the thief can be moved to the capturing ship if space is available, and card mission if any is owned by capturer.
-While captured, cargo and mission of the thief can be sell or claimed.
-On each of his turns the thief does a **3d4** roll, on any triplet he has the chance to escape.
-To actually sacpe he must defeat the capturer by rolling like thievery **Resolution**.
-
-If wins the thief escape from capture with cargo that was left on his ship, he plays a normal turn.
 
 ---
 
@@ -180,6 +171,7 @@ Docking ends movement and attacking is no longer possible.
 | -------------- | --------- | ----------- |
 | Docked ships   | Unlimited | Max 2 ships |
 | Buy cargo      | Yes       | No          |
+| Sell cargo     | Yes       | No          |
 | Accepted cargo | Anything  | Only tech   |
 | Bounty office  | No        | Yes         |
 
@@ -191,9 +183,8 @@ Docking ends movement and attacking is no longer possible.
 | Buy cargo                  | -5     | -       |
 | Repair two points of hull  | -5     | -10     |
 | Refit three points of ship | -5     | -10     |
-| Sell cargo                 | 5      | 10      |
-| Sell highlited cargo       | 10     | 15      |
-| Turn in thief              | -      | 25      |
+| Sell cargo                 | 5      | 5       |
+| Sell highlited cargo       | 10     | 10      |
 
 
 If player cannot pay the passing fee, he must make a space movement turn.
@@ -274,6 +265,20 @@ One of each mission per space station
 ### At any time ###
 
 Any player can destroy any other ship in a space combat.
+
+***Reward*** 15 credits.
+
+### Bounty mission
+
+A bounty mission occurs when a player successfuly thief while docked on a station or planet.
+
+Capturing is resolved the same way as thievery **Resolution**, then the ship must be delivered to a space station to claim the reward.
+
+Cargo on the thief can be moved to the capturing ship if space is available, and card mission if any is owned by capturer.
+While captured, thief cargo can be sold and missions claimed.
+On each of his turns the thief does a **3d4** roll, on any triplet he has the chance to escape.
+To actually escape he must defeat the capturer by rolling like thievery **Resolution**.
+If wins the thief escape from capture with cargo that was left on his ship, he plays a normal turn.
 
 ***Reward*** 20 credits.
 
