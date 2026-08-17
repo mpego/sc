@@ -59,6 +59,8 @@ When changing ships, players distribute exactly **30 units** among the following
 | Maneuver | 1 (3), 2 (6), 3 (10)        | Allows in-place rotation movements on top of distance [level (points)].                 |
 | Load     | 1 (2), 2 (4), 3 (7), 4 (10) | Determines how many units of cargo the ship is certified to transport [level (points)]. |
 
+Distance cannot be higher than hull.
+
 ---
 
 ## 🧭 Movements

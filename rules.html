@@ -582,7 +582,9 @@
         <section class="sim-card" id="ship-builder">
             <h2>Ship Spec Builder</h2>
             <p>Distribute exactly <strong style="color: var(--text-primary);">30 points</strong> among your ship specs.
-                Each spec defines a core capability of your vessel.</p>
+                Each spec defines a core capability of your vessel. <span
+                    style="font-size: 0.85rem; color: var(--accent-cyan); display: block; margin-top: 0.25rem;">⚠️ Note:
+                    Distance cannot be higher than Hull.</span></p>
 
             <div class="builder-top">
                 <span
@@ -592,11 +594,11 @@
 
             <div class="builder-controls">
                 <div class="control-row">
-                    <span class="control-label">Attack (1–10)</span>
+                    <span class="control-label">Hull (1–10)</span>
                     <div class="control-input-container">
-                        <input type="range" id="input-attack" min="1" max="10" value="5">
+                        <input type="range" id="input-hull" min="1" max="10" value="5">
                     </div>
-                    <span class="control-val" id="val-attack">5</span>
+                    <span class="control-val" id="val-hull">5</span>
                 </div>
                 <div class="control-row">
                     <span class="control-label">Shield (1–10)</span>
@@ -606,25 +608,18 @@
                     <span class="control-val" id="val-shield">5</span>
                 </div>
                 <div class="control-row">
-                    <span class="control-label">Distance (1–10)</span>
+                    <span class="control-label">Attack (1–10)</span>
+                    <div class="control-input-container">
+                        <input type="range" id="input-attack" min="1" max="10" value="5">
+                    </div>
+                    <span class="control-val" id="val-attack">5</span>
+                </div>
+                <div class="control-row">
+                    <span class="control-label" id="label-distance">Distance (1–10)</span>
                     <div class="control-input-container">
                         <input type="range" id="input-distance" min="1" max="10" value="5">
                     </div>
                     <span class="control-val" id="val-distance">5</span>
-                </div>
-                <div class="control-row">
-                    <span class="control-label">Hull (1–10)</span>
-                    <div class="control-input-container">
-                        <input type="range" id="input-hull" min="1" max="10" value="5">
-                    </div>
-                    <span class="control-val" id="val-hull">5</span>
-                </div>
-                <div class="control-row">
-                    <span class="control-label">Comms (1–10)</span>
-                    <div class="control-input-container">
-                        <input type="range" id="input-comms" min="1" max="10" value="5">
-                    </div>
-                    <span class="control-val" id="val-comms">5</span>
                 </div>
                 <div class="control-row">
                     <span class="control-label">Maneuver</span>
@@ -633,6 +628,13 @@
                     </div>
                     <span class="control-val" id="val-maneuver">3 <span id="maneuver-lvl" class="info-badge">Lvl
                             1</span></span>
+                </div>
+                <div class="control-row">
+                    <span class="control-label">Comms (1–10)</span>
+                    <div class="control-input-container">
+                        <input type="range" id="input-comms" min="1" max="10" value="5">
+                    </div>
+                    <span class="control-val" id="val-comms">5</span>
                 </div>
                 <div class="control-row">
                     <span class="control-label">Load</span>
@@ -739,21 +741,34 @@
             // Simple values
             specValues.attack.textContent = values.attack;
             specValues.shield.textContent = values.shield;
-            specValues.distance.textContent = values.distance;
             specValues.hull.textContent = values.hull;
             specValues.comms.textContent = values.comms;
 
-            // Points badge
-            pointsStatus.textContent = `Allocated: ${total} / 30`;
+            // Distance value display & constraint check
+            const isDistanceValid = values.distance <= values.hull;
+            if (isDistanceValid) {
+                specValues.distance.textContent = values.distance;
+            } else {
+                specValues.distance.innerHTML = `${values.distance} <span class="info-badge" style="background: rgba(239, 68, 68, 0.15); color: var(--accent-red); border-color: var(--accent-red); font-size: 0.75rem;">&gt; Hull (${values.hull})</span>`;
+            }
+
+            // Points status badge
             pointsStatus.className = 'badge-status';
 
-            if (total === 30) {
+            if (total === 30 && isDistanceValid) {
                 pointsStatus.classList.add('valid');
+                pointsStatus.textContent = `Allocated: ${total} / 30`;
             } else {
                 pointsStatus.classList.add('invalid');
-                pointsStatus.textContent += total > 30
-                    ? ' (Over Limit!)'
-                    : ` (Remaining: ${30 - total})`;
+                let statusMsg = `Allocated: ${total} / 30`;
+                if (!isDistanceValid) {
+                    statusMsg += ' (Distance > Hull!)';
+                } else if (total > 30) {
+                    statusMsg += ' (Over Limit!)';
+                } else {
+                    statusMsg += ` (Remaining: ${30 - total})`;
+                }
+                pointsStatus.textContent = statusMsg;
             }
         }
 
