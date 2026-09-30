@@ -72,7 +72,7 @@ Navigating the cold void requires precise distance calculations.
 - 🚀 **Fixed movement:** Ships must move the exact Distance value currently set (no more, no less).
 - 🔄 **Mid-travel rotation:** At any point during movement, the player can spend Maneuver points allocated for the turn to rotate the ship in place, and then continue moving if movement points remain. Each point of Maneuver allow any number of rotations in a single hex.
 - ⚔️ **Attack interrupt:** Movement can be paused at any hex along the path to fire an attack (provided Attack points are allocated and a valid target is in arc). After resolving the attack, the ship continues moving with its remaining distance.
-- 💾 **Conservation:** The distance points set are preserved for the next turn unless actively adjusted.
+- 💾 **Conservation:** Space has no friction, so, distance points are reset for the next turn.
 
 ---
 
@@ -80,11 +80,11 @@ Navigating the cold void requires precise distance calculations.
 
 **Variables** Attack, Shield and Hull.
 
-Engage target vessels using straight-line attacks from your forward-facing firing arc.
+Engage target vessels using straight-line attacks from your forward-facing ship.
 
 Attacking cannot overpass a occupied hex tile.
 
-- **Range requirement:** Attacks can only be made in a straight line from the ship's firing arc (forward-facing).
+- **Range requirement:** Attacks can only be made in a straight line from the ship's forward-facing side.
 - **Damage formula:**
   ```
   Damage = 1 + (Attack Points Allocated) - (Distance to Target)
@@ -112,14 +112,13 @@ Trading between ships is possible when:
 ### Bribery
 
 Any player can bribe another player at any time.
-For bribe to happen ships must be in each other comm range (if not the bribber receives one hit in the hull for each exceeding hex). Accept bribe is a non commit action, so it can be refused by the other player without any consequences or advice.
-But if it succeds bribber can not attack the other player until his next full turn passes or bribber is attacked by that other player.
+For bribe to happen ships must be in each other comm range (if not the bribber receives one hit in the hull for each exceeding hex). If accepted, the bribber can not attack or thieve the other player until a bribber full turn passes or bribber is attacked or thieved by that other player.
 
 ### Thievery
 
 - **Docked Theft:** When a ship is at a planet, it can steal cargo or missions from another ship docked at that same planet.
 
-- **Tile-Share Theft:** Thievery can also be executed by occupying the exact same tile as another ship or within the comms range to the other ship.
+- **Tile-Share Theft:** Thievery can also be executed by occupying the exact same tile than another ship or within the comms range to the other ship.
 
 **Resolution:**
 Thieves and victims roll **3d4s**. 
@@ -133,14 +132,14 @@ Thivery is the only way to have more than one mission card at a time.
 
 ## 🎲 Special Dice Events
 
-Rolling some special dice combination on your **3d4** turn roll triggers special galaxy-wide anomalies or events.
+Some dice combination on your **3d4** turn roll triggers special galaxy-wide anomalies or events.
 
 | Dice Combination | Event                                                                                                                                                 |
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ⚅⚅ Triple Fours  | The player can move the Space Station up to 4 hexes. Or choose to play as even doubles.                                                               |
 | ⚀⚀ Triple Ones   | One of the other players (the one who rolls the highest) can move the Space Station up to 3 hexes in any direction. Or choose to play as odd doubles. |
 | Even Doubles     | The player can change resources on any one planet.                                                                                                    |
-| Odd Doubles      | The player can move up to 4 units of asteroid fields or spatial storms in any combination.                                                            |
+| Odd Doubles      | The player can move up to 6 units of asteroid fields or spatial storms in any combination.                                                            |
 
 ---
 
@@ -201,21 +200,29 @@ When looking for a mission the player can chose to take mission card or if the p
 
 #### Free hostages ####
 
-At the start of the mission, place NPCs in the cage at the center and door and two guards outside the door.
+**<<<<< Mission can run for too long, needs revision >>>>>**
 
-NPCs make the first move. Then the player chooses the starting entry.
+At the start of the mission, place the NPC in the cage at the center and two guards outside the door.
+
+Guards are moved by players not running the mission, if all are, alternate players.
+
+Guards make the first move. Then the player chooses the starting entry.
 
 Other players can also enter the mission competing for the reward.
 
 To move in the planet roll **3d4**, move the sum on the dice. Movement can be back and forth as wanted. 
 
-For NPCs on the planet, any player must roll **3d4** for every two NPCs. Distribute dice among NPCs with the only restriction that each NPC must have at least one die.
+For Guards on the planet, any player must roll **3d4** for every two guards. Distribute dice among guards with the only restriction that each guard must have at least one die.
 
-If an NPC collide with another, turn it 180 degrees and continue movement as normal.
+If a guard collide with another, turn it 180 degrees and continue movement as normal.
 
 If the player is captured, he loses the mission.
 
+If multiple players are running the mission, colliding players can run a **Thiervey roll** for the hostage.
+
 Player can abandon the mission without any penalty, exiting through any corner before releasing hostages. 
+
+To open the cell, player must roll **3d4** with a sum of 8 or more.
 
 ***Reward*** 30 credits plus a ship that allow a second turn as long as it is not destroyed. The player choses the ship specs.
 
@@ -223,13 +230,15 @@ Player can abandon the mission without any penalty, exiting through any corner b
 
 #### Maze ####
 
-At the start of the mission, each other player can do up to two actions in the maze to so set up the maze for the active player. Then the player choses the starting corner.
+At the start of the mission, reshuffle the maze, then each other player can do up to two actions in the maze to set up the maze for the active player. Then the player choses the starting corner.
 
 Other players can also enter the mission competing for the reward.
 
-On the players turn, push one tile into the maze and move the players as much as wanted through the maze.
+On the players turn, push one tile into the maze and move the players as much as a roll of **1d4** through the maze.
 Player must get the treasure in the center and escape throuth the opposite corner he entered. Reaching the treasure stops movement.
 Tile moved in one turn must not be the opposite of the previous turn.
+
+If multiple players are running the mission, colliding players can run a **Thiervey roll** for the treassure.
 
 He can abandon the mission without any penalty, exiting through any corner without the treassure. 
 
@@ -274,7 +283,7 @@ Any player can destroy any other ship in a space combat.
 
 A bounty mission occurs when a player successfuly thief while docked on a station or planet.
 
-Capturing is resolved the same way as thievery **Resolution**, then the ship must be delivered to a space station to claim the reward.
+Capturing is resolved the same way as thievery **Resolution**, then the ship must be delivered to a space station to claim the reward, at wich point the the bounty mission is cleared.
 
 Cargo on the thief can be moved to the capturing ship if space is available, and card mission if any is owned by capturer.
 While captured, thief cargo can be sold and missions claimed.
@@ -293,9 +302,17 @@ When docked to a planet or space station, player can choose to run a normal turn
 
 ### 🎲 Turn Sequence in space
 
+### Preparation Phase
+
+The player rolls up to **3d4**
+
+### Execute special events
+
+If dice combinations are correct, execute special events.
+
 ### Engineering Phase
 
-The player rolls up to **3d4**, from those choose up to three dice.
+From the dice rolled choose up to three dice.
 The accumulated valued must be completly used to increase or decrease ship variables.
 
  
@@ -307,13 +324,12 @@ The accumulated valued must be completly used to increase or decrease ship varia
 | Maneuver | Allocate rotation points for the turn.                                                     |
 | Comms    | Set active communication range for the turn.                                               |
 
-> **Constraint:** None of the turn-allocated variables can surpass their maximum values defined by Ship Specs.
+> **Constraint:** None of these variables can surpass their maximum values defined by Ship Specs.
 > 
 
 ### Action Phase
 
 Player executes actions in any order in any combination.
-
 
 | Action           | Detail                                                                   |
 | ---------------- | ------------------------------------------------------------------------ |
