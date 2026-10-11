@@ -124,6 +124,8 @@ There can only be one active agreement per player at a time.
 
 If agreement is not fulfilled a bounty mission is immediately issued against the player who broke the agreement.
 
+Any dispute is resolved by the ***Resolution*** rule.
+
 ### Bribery
 
 Any player can bribe another player at any time.
