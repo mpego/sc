@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voidfarer - 4x3 A4 Hex Board Game Map</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Space+Grotesk:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #030712;
+            --accent-cyan: #00f2fe;
+            --accent-magenta: #f43f5e;
+            --accent-purple: #a855f7;
+            --accent-gold: #fbbf24;
+            --text-main: #f8fafc;
+            --font-display: 'Orbitron', sans-serif;
+            --font-body: 'Space Grotesk', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+        }
+
+        /* ── Screen Header & Control Bar ── */
+        .controls-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 242, 254, 0.2);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .brand-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-title span {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            border: 1px solid #334155;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: var(--font-body);
+            -webkit-text-fill-color: initial;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn {
+            background: #1e293b;
+            color: #f8fafc;
+            border: 1px solid #334155;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background: #334155;
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0284c7, #0d9488);
+            border: none;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #0369a1, #0f766e);
+            box-shadow: 0 0 15px rgba(2, 132, 199, 0.5);
+            color: #ffffff;
+        }
+
+        .toggle-btn {
+            background: rgba(30, 41, 59, 0.7);
+        }
+
+        .toggle-btn.active {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            background: rgba(0, 242, 254, 0.15);
+        }
+
+        /* ── Screen Container ── */
+        .app-view {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .tab-bar {
+            display: flex;
+            gap: 10px;
+            background: #0f172a;
+            padding: 4px;
+            border-radius: 8px;
+            border: 1px solid #1e293b;
+        }
+
+        .tab-btn {
+            padding: 8px 20px;
+            border-radius: 6px;
+            border: none;
+            background: transparent;
+            color: #94a3b8;
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background: #1e293b;
+            color: var(--accent-cyan);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ── Full Map Preview ── */
+        #full-map-container {
+            width: 100%;
+            max-width: 1300px;
+            background: #0a0f1d;
+            border: 2px solid #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            overflow: auto;
+        }
+
+        #full-map-svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #030712;
+            border-radius: 8px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
+        }
+
+        /* ── Print Grid Pages ── */
+        #print-pages-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            align-items: center;
+        }
+
+        /* Standard A4 Landscape Page */
+        .page {
+            width: 297mm;
+            height: 210mm;
+            background: #030712;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+            overflow: hidden;
+            page-break-after: always;
+            break-after: page;
+            box-sizing: border-box;
+            border: 1px solid #1e293b;
+        }
+
+        .page-svg-wrapper {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Page Overlays & Alignment Marks */
+        .page-meta-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            box-sizing: border-box;
+            padding: 6mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .page-header-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-display);
+            font-size: 8pt;
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            background: rgba(3, 7, 18, 0.7);
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .page-footer-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-display);
+            font-size: 8pt;
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 1px;
+            background: rgba(3, 7, 18, 0.7);
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Crop lines on corners */
+        .crop-mark {
+            position: absolute;
+            width: 10mm;
+            height: 10mm;
+            border-color: rgba(0, 242, 254, 0.5);
+            border-style: solid;
+            pointer-events: none;
+        }
+
+        .crop-tl {
+            top: 4mm;
+            left: 4mm;
+            border-width: 1px 0 0 1px;
+        }
+
+        .crop-tr {
+            top: 4mm;
+            right: 4mm;
+            border-width: 1px 1px 0 0;
+        }
+
+        .crop-bl {
+            bottom: 4mm;
+            left: 4mm;
+            border-width: 0 0 1px 1px;
+        }
+
+        .crop-br {
+            bottom: 4mm;
+            right: 4mm;
+            border-width: 0 1px 1px 0;
+        }
+
+        /* ── CSS @media print ── */
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 0mm;
+            }
+
+            html,
+            body {
+                background: #030712 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .controls-header,
+            .tab-bar,
+            #full-map-container,
+            .screen-only {
+                display: none !important;
+            }
+
+            .app-view {
+                padding: 0 !important;
+                gap: 0 !important;
+            }
+
+            #print-pages-container {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 0 !important;
+            }
+
+            .page {
+                display: block !important;
+                box-shadow: none !important;
+                border: none !important;
+                margin: 0 !important;
+                width: 297mm !important;
+                height: 210mm !important;
+                min-height: 210mm !important;
+                max-height: 210mm !important;
+                page-break-after: always !important;
+                break-after: page !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                overflow: hidden !important;
+            }
+
+            .page-header-line,
+            .page-footer-line {
+                background: transparent !important;
+                color: rgba(255, 255, 255, 0.8) !important;
+                border-color: rgba(255, 255, 255, 0.2) !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Controls -->
+    <header class="controls-header">
+        <div class="brand-title">
+            VOIDFARER <span>4x3 A4 MAP GENERATOR</span>
+        </div>
+        <div class="btn-group">
+            <button class="btn toggle-btn active" id="btn-toggle-sheet-lines" onclick="toggleSheetLines()">
+                📐 Page Boundaries
+            </button>
+            <button class="btn btn-primary" onclick="window.print()">
+                🖨️ Print / Save PDF (12 Pages)
+            </button>
+        </div>
+    </header>
+
+    <div class="app-view">
+        <!-- View Mode Tabs -->
+        <div class="tab-bar screen-only">
+            <button class="tab-btn active" onclick="switchTab('full')" id="tab-full">Full Board View (118.8 × 63
+                cm)</button>
+            <button class="tab-btn" onclick="switchTab('pages')" id="tab-pages">Print Pages View (12 A4 Sheets)</button>
+        </div>
+
+        <!-- Full Board Container -->
+        <div id="full-map-container">
+            <!-- Full SVG Map rendered dynamically -->
+        </div>
+
+        <!-- Printable Pages Container -->
+        <div id="print-pages-container" style="display: none;">
+            <!-- 12 Sliced A4 Pages rendered dynamically -->
+        </div>
+    </div>
+
+    <script>
+        // ── Map Geometry & Dimensions ──
+        const A4_WIDTH_MM = 297;
+        const A4_HEIGHT_MM = 210;
+        const COLS = 4;
+        const ROWS = 3;
+        const TOTAL_WIDTH_MM = A4_WIDTH_MM * COLS;  // 1188 mm
+        const TOTAL_HEIGHT_MM = A4_HEIGHT_MM * ROWS;  // 630 mm
+
+        // Hex geometry — pointy-top, 4 cm flat-to-flat
+        const HEX_W_MM = 40.0;                         // flat-to-flat width
+        const R_MM = HEX_W_MM / Math.sqrt(3);      // circumradius ~23.094 mm
+        const DX_MM = HEX_W_MM;                     // col step
+        const DY_MM = 1.5 * R_MM;                   // row step ~34.641 mm
+
+        // Grid area sits inside a thin border used by the credits track
+        const OFFSET_X = 30.0;
+        const OFFSET_Y = 14;                // push grid below track
+
+        const GRID_COLS = Math.floor((TOTAL_WIDTH_MM - OFFSET_X * 2) / DX_MM);
+        const GRID_ROWS = Math.floor((TOTAL_HEIGHT_MM - OFFSET_Y * 2) / DY_MM);
+
+        let showSheetLines = true;
+
+        // ── Hex helpers ──
+        function hexCenter(col, row) {
+            const x = OFFSET_X + col * DX_MM + (row % 2 === 1 ? DX_MM / 2 : 0);
+            const y = OFFSET_Y + row * DY_MM;
+            return { x, y };
+        }
+
+        function hexPoints(cx, cy, r) {
+            const pts = [];
+            for (let i = 0; i < 6; i++) {
+                const a = (Math.PI / 180) * (60 * i - 30);
+                pts.push(`${(cx + r * Math.cos(a)).toFixed(2)},${(cy + r * Math.sin(a)).toFixed(2)}`);
+            }
+            return pts.join(' ');
+        }
+
+        // ── Main SVG generator ──
+        function generateFullMapSVG() {
+            const W = TOTAL_WIDTH_MM;
+            const H = TOTAL_HEIGHT_MM;
+            let s = `<svg id="main-map-svg" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">`;
+
+            // ── Defs ──
+            s += `<defs>
+                <radialGradient id="bgGrad" cx="45%" cy="40%" r="75%">
+                    <stop offset="0%"   stop-color="#0d1829"/>
+                    <stop offset="60%"  stop-color="#060c18"/>
+                    <stop offset="100%" stop-color="#020509"/>
+                </radialGradient>
+
+                <!-- Nebula colour stops -->
+                <radialGradient id="neb1" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="rgba(80,30,140,0.28)"/>
+                    <stop offset="45%"  stop-color="rgba(40,10,80,0.14)"/>
+                    <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+                </radialGradient>
+                <radialGradient id="neb2" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="rgba(0,160,200,0.22)"/>
+                    <stop offset="50%"  stop-color="rgba(0,80,160,0.10)"/>
+                    <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+                </radialGradient>
+                <radialGradient id="neb3" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="rgba(220,60,80,0.18)"/>
+                    <stop offset="50%"  stop-color="rgba(120,20,60,0.09)"/>
+                    <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+                </radialGradient>
+                <radialGradient id="neb4" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="rgba(30,180,120,0.16)"/>
+                    <stop offset="55%"  stop-color="rgba(10,80,60,0.07)"/>
+                    <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+                </radialGradient>
+                <!-- Galaxy glow -->
+                <radialGradient id="gal1" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="rgba(255,240,200,0.32)"/>
+                    <stop offset="30%"  stop-color="rgba(220,180,120,0.14)"/>
+                    <stop offset="70%"  stop-color="rgba(160,120,80,0.06)"/>
+                    <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+                </radialGradient>
+                <radialGradient id="gal2" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="rgba(200,220,255,0.28)"/>
+                    <stop offset="35%"  stop-color="rgba(140,160,220,0.12)"/>
+                    <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+                </radialGradient>
+                <!-- Soft blur for nebulae -->
+                <filter id="blur8" x="-30%" y="-30%" width="160%" height="160%">
+                    <feGaussianBlur stdDeviation="8"/>
+                </filter>
+                <filter id="blur16" x="-40%" y="-40%" width="180%" height="180%">
+                    <feGaussianBlur stdDeviation="16"/>
+                </filter>
+                <filter id="blur5" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="5"/>
+                </filter>
+            </defs>`;
+
+            // ── Deep space background ──
+            s += `<rect width="${W}" height="${H}" fill="url(#bgGrad)"/>`;
+
+            // ── Galaxy cores (elliptical soft glows) ──
+            // Galaxy 1 — upper-left quadrant, warm gold core
+            s += `<ellipse cx="${W * 0.18}" cy="${H * 0.28}" rx="130" ry="80" fill="url(#gal1)" filter="url(#blur16)" opacity="0.9"/>`;
+            // Galaxy 2 — lower-right, cool blue-white
+            s += `<ellipse cx="${W * 0.78}" cy="${H * 0.72}" rx="110" ry="70" fill="url(#gal2)" filter="url(#blur16)" opacity="0.85"/>`;
+            // Galaxy 3 — mid-right, small warm core
+            s += `<ellipse cx="${W * 0.62}" cy="${H * 0.22}" rx="70"  ry="44" fill="url(#gal1)" filter="url(#blur8)"  opacity="0.6"/>`;
+
+            // Galaxy disc speckle (tiny dense star clusters inside galaxies)
+            const galCenters = [
+                { cx: W * 0.18, cy: H * 0.28, rx: 95, ry: 55 },
+                { cx: W * 0.78, cy: H * 0.72, rx: 80, ry: 48 },
+                { cx: W * 0.62, cy: H * 0.22, rx: 50, ry: 30 },
+            ];
+            s += `<g opacity="0.55">`;
+            for (let g = 0; g < galCenters.length; g++) {
+                const gc = galCenters[g];
+                for (let i = 0; i < 120; i++) {
+                    const seed1 = Math.sin(g * 137 + i * 41) * 0.5 + 0.5;
+                    const seed2 = Math.cos(g * 97 + i * 73) * 0.5 + 0.5;
+                    // Place within ellipse using rejection-free polar parametric
+                    const ang = seed1 * Math.PI * 2;
+                    const rad = Math.sqrt(seed2);
+                    const sx = gc.cx + rad * gc.rx * Math.cos(ang);
+                    const sy = gc.cy + rad * gc.ry * Math.sin(ang);
+                    const sr = (i % 7 === 0) ? 0.9 : 0.45;
+                    const op = 0.3 + seed1 * 0.6;
+                    const col = (i % 5 === 0) ? '#ffe8a0' : (i % 3 === 0 ? '#c8d8ff' : '#ffffff');
+                    s += `<circle cx="${sx.toFixed(1)}" cy="${sy.toFixed(1)}" r="${sr}" fill="${col}" opacity="${op.toFixed(2)}"/>`;
+                }
+            }
+            s += `</g>`;
+
+            // ── Nebula clouds (large, softly blurred ellipses) ──
+            // Nebula 1 — purple/violet, upper centre
+            s += `<ellipse cx="${W * 0.38}" cy="${H * 0.35}" rx="220" ry="130" fill="url(#neb1)" filter="url(#blur16)" opacity="1"/>`;
+            // Nebula 2 — cyan, mid-left
+            s += `<ellipse cx="${W * 0.12}" cy="${H * 0.58}" rx="170" ry="110" fill="url(#neb2)" filter="url(#blur16)" opacity="0.9"/>`;
+            // Nebula 3 — rose/red, lower-right
+            s += `<ellipse cx="${W * 0.85}" cy="${H * 0.65}" rx="190" ry="120" fill="url(#neb3)" filter="url(#blur16)" opacity="0.85"/>`;
+            // Nebula 4 — teal, centre-right faint
+            s += `<ellipse cx="${W * 0.58}" cy="${H * 0.55}" rx="145" ry="95"  fill="url(#neb4)" filter="url(#blur16)" opacity="0.8"/>`;
+            // Extra filament wisps
+            s += `<ellipse cx="${W * 0.28}" cy="${H * 0.70}" rx="100" ry="55"  fill="url(#neb2)" filter="url(#blur8)"  opacity="0.5"/>`;
+            s += `<ellipse cx="${W * 0.70}" cy="${H * 0.15}" rx="90"  ry="50"  fill="url(#neb3)" filter="url(#blur8)"  opacity="0.45"/>`;
+
+            // ── Starfield ──
+            s += `<g>`;
+            for (let i = 0; i < 420; i++) {
+                const sx = (Math.sin(i * 127.1) * 0.5 + 0.5) * W;
+                const sy = (Math.cos(i * 83.7) * 0.5 + 0.5) * H;
+                const sr = (i % 9 === 0) ? 1.3 : (i % 4 === 0 ? 0.8 : 0.45);
+                const op = (i % 5 === 0) ? 0.95 : (i % 2 === 0 ? 0.55 : 0.3);
+                const col = (i % 11 === 0) ? '#b8d4ff' : (i % 17 === 0 ? '#ffe8a0' : '#ffffff');
+                s += `<circle cx="${sx.toFixed(1)}" cy="${sy.toFixed(1)}" r="${sr}" fill="${col}" opacity="${op}"/>`;
+            }
+            s += `</g>`;
+
+            // ── Pure hex grid — no special tiles ──
+            s += `<g id="hex-grid-layer">`;
+            for (let r = 0; r < GRID_ROWS; r++) {
+                for (let c = 0; c < GRID_COLS; c++) {
+                    const { x, y } = hexCenter(c, r);
+                    const pts = hexPoints(x, y, R_MM - 0.35);
+                    s += `<polygon points="${pts}" fill="rgba(10,18,36,0.28)" stroke="rgba(120,180,255,0.25)" stroke-width="0.45"/>`;
+                }
+            }
+            s += `</g>`;
+
+            // ── Credits Track: 0 – 100 in steps of 5 (21 stops) ──
+            // Single track along the top border
+            const TRACK_H = 12.5;                         // track bar height mm
+            const STEPS = 21;                          // 0,5,10…100
+            const trackY = A4_HEIGHT_MM * 3 - 30;
+            const trackH2 = TRACK_H - 1.0;
+            const trackX1 = 8.0;
+            const trackCrX1 = 40.0;
+            const trackX2 = W - 8.0;
+            const trackW2 = trackX2 - trackCrX1;
+            const stepW = (trackX2 - trackCrX1 * 2) / (STEPS - 1);      // gap between stops
+
+            // Background bar
+            s += `<rect x="${trackX1}" y="${trackY}" width="${trackW2}" height="${trackH2}"
+                        fill="rgba(8,16,32,0.88)" stroke="rgba(80,160,255,0.35)" stroke-width="0.6" rx="3"/>`;
+
+            for (let i = 0; i < STEPS; i++) {
+                const val = i * 5;
+                const tx = trackCrX1 + i * stepW;
+                const isWin = (val === 100);
+                const isMajor = (val % 25 === 0);
+                const boxW = isMajor ? 10.5 : (val % 10 === 0 ? 9.0 : 7.5);
+                const boxH = trackH2 - 2.5;
+                const boxY = trackY + 1.25;
+                const fillCol = isWin ? 'rgba(244,63,94,0.4)'
+                    : isMajor ? 'rgba(251,191,36,0.25)'
+                        : 'rgba(30,50,80,0.6)';
+                const stkCol = isWin ? '#f43f5e'
+                    : isMajor ? '#fbbf24'
+                        : 'rgba(80,140,220,0.4)';
+                const txtCol = isWin ? '#f43f5e'
+                    : isMajor ? '#fbbf24'
+                        : '#7aabdd';
+                const fontSize = isMajor ? 4.0 : 3.2;
+                const fw = isMajor ? 'bold' : 'normal';
+
+                s += `<rect x="${(tx - boxW / 2).toFixed(2)}" y="${boxY.toFixed(2)}"
+                            width="${boxW}" height="${boxH}"
+                            fill="${fillCol}" stroke="${stkCol}" stroke-width="0.45" rx="1.5"/>`;
+                s += `<text x="${tx.toFixed(2)}" y="${(trackY + trackH2 - 2.2).toFixed(2)}"
+                            text-anchor="middle" fill="${txtCol}"
+                            font-family="'Orbitron',sans-serif" font-size="${fontSize}" font-weight="${fw}">${val}</text>`;
+            }
+
+            // Track label — subtle, at the far left
+            s += `<text x="${(trackX1 + 2).toFixed(2)}" y="${(trackY + trackH2 - 3.8).toFixed(2)}"
+                        fill="rgba(100,180,255,0.55)" font-family="'Orbitron',sans-serif"
+                        font-size="2.4" font-weight="600" letter-spacing="0.5">CREDITS</text>`;
+
+            // ── Sheet boundary guides (screen-only) ──
+            const sheetDisplay = showSheetLines ? 'block' : 'none';
+            s += `<g id="sheet-lines" style="display:${sheetDisplay};">`;
+            for (let c = 1; c < COLS; c++) {
+                const lx = c * A4_WIDTH_MM;
+                s += `<line x1="${lx}" y1="0" x2="${lx}" y2="${H}" stroke="rgba(244,63,94,0.5)" stroke-width="0.7" stroke-dasharray="5,3"/>`;
+            }
+            for (let r = 1; r < ROWS; r++) {
+                const ly = r * A4_HEIGHT_MM;
+                s += `<line x1="0" y1="${ly}" x2="${W}" y2="${ly}" stroke="rgba(244,63,94,0.5)" stroke-width="0.7" stroke-dasharray="5,3"/>`;
+            }
+            s += `</g>`;
+
+            s += `</svg>`;
+            return s;
+        }
+
+        // ── Generate self-contained SVG per A4 sheet ──
+        function generateSheetSVG(pageCol, pageRow) {
+            const minX = pageCol * A4_WIDTH_MM;
+            const minY = pageRow * A4_HEIGHT_MM;
+            const fullContent = generateFullMapSVG();
+            const innerMatch = fullContent.match(/<svg[^>]*>([\s\S]*)<\/svg>/i);
+            const inner = innerMatch ? innerMatch[1] : fullContent;
+            return `<svg viewBox="${minX} ${minY} ${A4_WIDTH_MM} ${A4_HEIGHT_MM}" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">${inner}</svg>`;
+        }
+
+        // ── Render 12 printable A4 pages (no text annotations on pages) ──
+        function renderPrintPages() {
+            const container = document.getElementById('print-pages-container');
+            container.innerHTML = '';
+            for (let r = 0; r < ROWS; r++) {
+                for (let c = 0; c < COLS; c++) {
+                    const div = document.createElement('div');
+                    div.className = 'page';
+                    div.id = `page-${r}-${c}`;
+                    const svg = generateSheetSVG(c, r);
+                    div.innerHTML = `
+                        <div class="page-svg-wrapper">${svg}</div>
+                    `;
+                    container.appendChild(div);
+                }
+            }
+        }
+
+        // ── UI ──
+        function initApp() {
+            document.getElementById('full-map-container').innerHTML = generateFullMapSVG();
+            renderPrintPages();
+        }
+
+        function toggleSheetLines() {
+            showSheetLines = !showSheetLines;
+            document.getElementById('btn-toggle-sheet-lines').classList.toggle('active', showSheetLines);
+            initApp();
+        }
+
+        function switchTab(tabName) {
+            document.getElementById('tab-full').classList.toggle('active', tabName === 'full');
+            document.getElementById('tab-pages').classList.toggle('active', tabName === 'pages');
+            document.getElementById('full-map-container').style.display = tabName === 'full' ? 'block' : 'none';
+            document.getElementById('print-pages-container').style.display = tabName === 'pages' ? 'flex' : 'none';
+        }
+
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+
+</html>

@@ -69,6 +69,9 @@ Distance cannot be higher than hull.
 
 Navigating the cold void requires precise distance calculations.
 
+In the preparation phase of the turn, the player can allocate points to Distance and Maneuver.
+Distance point are used to move the ship, no two points of distance can be used in the same tile, use manuever points for rotate more than once in the same tile.
+
 - 🚀 **Fixed movement:** Ships must move the exact Distance value currently set (no more, no less).
 - 🔄 **Mid-travel rotation:** At any point during movement, the player can spend Maneuver points allocated for the turn to rotate the ship in place, and then continue moving if movement points remain. Each point of Maneuver allow any number of rotations in a single hex.
 - ⚔️ **Attack interrupt:** Movement can be paused at any hex along the path to fire an attack (provided Attack points are allocated and a valid target is in arc). After resolving the attack, the ship continues moving with its remaining distance.
@@ -95,19 +98,31 @@ Once the ship shield is depleted, player receiving damage can direct the damage 
 
 ---
 
-## 🤝 Trading & Theft
+## 🤝 Trading, Agreements & Theft
 
 **Variables** Comms and Load.
 
 Accumulate wealth and transport commodities across space stations and planets.
 Trading and theft include both cargo and mission cards.
 
-### Trading
+### Trading & Agreements
 
-Trading between ships is possible when:
+Trading and agreements between ships are possible when:
 - Both ships land on the same **Planet**.
 - Both ships land in the same **Space Station**.
 - Both ships are within their active **Comms Range**.
+
+If a ship is not in comms range of the other ship, the only response it can give is "No response", else hull damage is taken for each exceeding hex.
+
+Any player can propse trading or an agreement with another player at any time.
+If accepted, both players can not attack or thieve each other until the agreement is broken.
+The agreement can be broken by any of the players.
+If credits are involved the amount must be in multiples of 5 or 10 and cannot exced 20 credits.
+For credits to be transfered, both ships must be on the same planet or space station.
+
+There can only be one active agreement per player at a time.
+
+If agreement is not fulfilled a bounty mission is immediately issued against the player who broke the agreement.
 
 ### Bribery
 
@@ -151,7 +166,7 @@ The sector is filled with hazardous anomalies that challenge even the most exper
 
 - **Navigation Hazard:** Moving through or ending a turn in an asteroid field is dangerous. For each hex of an asteroid field entered, the player must roll a **1d4**. On a roll of **1**, the ship takes **1 Hull damage**.
 - **Line of Sight Obstruction:** Asteroid fields block all weapon fire. Attacks cannot pass through asteroid hexes.
-- **Mining Opportunity:** Ships can attempt to mine asteroids, gaining **a  cargo of minerals** on a **1d4** roll of **4**.
+- **Mining Opportunity:** Ships can attempt to mine asteroids, gaining **up to 2 cargo of minerals** (player chooses how many) on a **1d4** roll of **4**.
 
 ### ⚡ Spatial Storm
 
@@ -168,29 +183,16 @@ Docking ends movement and attacking is no longer possible.
 
 #### Possible player actions ####
 
-| Action         | Planet    | Station     |
-| -------------- | --------- | ----------- |
-| Docking ships  | Unlimited | Max 2 ships |
-| Buy cargo      | Yes       | No          |
-| Sell cargo     | Yes       | No          |
-| Accepted cargo | Anything  | Only tech   |
-| Repair ship    | Yes       | Yes         |
-| Refit ship     | Yes       | No          |
-| Buy new ship   | Yes       | No          |
-| Mission board  | Yes       | Yes         |
-| Bounty office  | No        | Yes         |
-
-#### Costs of actions ####
-| Action                     | Planet | Station |
-| -------------------------- | ------ | ------- |
-| Docking                    | 0      | -5      |
-| Buy cargo                  | -5     | -       |
-| Sell cargo                 | 5      | 5       |
-| Sell highlited cargo       | 10     | 15      |
-| Repair two points of hull  | -5     | -5      |
-| Refit three points of ship | -5     | -5      |
-| Buy new ship               | 30     | -       |
-
+| Action        | Planet    | Station     |
+| ------------- | --------- | ----------- |
+| Docking ships | Unlimited | Max 2 ships |
+| Trade cargo   | Yes       | No          |
+| Special cargo | Anything  | Only tech   |
+| Repair ship   | No        | Yes         |
+| Refit ship    | Yes       | No          |
+| Buy new ship  | Yes       | No          |
+| Mission board | Yes       | Yes         |
+| Bounty office | No        | Yes         |
 
 If player cannot pay the passing fee, he must make a space movement turn.
 
@@ -253,38 +255,42 @@ He can abandon the mission without any penalty, exiting through any corner witho
 ### Cargo missions ###
 
 **Planets**
-* "Deliver 2 units of goods"
-* "Deliver 2 units of minerals"
-* "Deliver 1 units of good and 1 unit of mineral"
-* "Deliver 1 units of good and 1 unit of tech"
-* "Deliver 1 units of mineral and 1 unit of tech"
 
-* "Deliver 2 units of goods and 1 unit of mineral"
-* "Deliver 2 units of goods and 1 unit of tech"
-* "Deliver 2 units of minerals and 1 unit of good"
-* "Deliver 2 units of minerals and 1 unit of tech"
-* "Deliver 3 units of goods"
-* "Deliver 3 units of minerals"
-* "Deliver 3 units of any type"
+Plante names: Riter, Kaelis, Oilia
+Space Station names: Nexus, Apex
 
-One of each mission per planet
+* "Deliver 2 units of goods" = 2G => 2 units
+* "Deliver 2 units of minerals" = 2M => 2 units
+* "Deliver 2 units of tech" = 2T => 2 units
 
-***Reward*** 5 * (units + 1) credits.
-
-**Space Stations**
-* "Deliver 2 units of tech"
-* "Deliver 1 unit of tech and 1 unit of good"
-* "Deliver 1 units of tech and 1 unit of mineral"
-
-* "Deliver 2 units of tech and 1 unit of good"
-* "Deliver 2 units of tech and 1 unit of mineral"
-* "Deliver 1 unit of tech and 2 units of goods"
-* "Deliver 1 unit of tech and 2 units of minerals"
-* "Deliver 3 units of tech"
+* "Deliver 1 units of good and 1 unit of mineral" = 1G + 1M => 2 units
+* "Deliver 1 units of good and 1 unit of tech" = 1G + 1T => 2 units
+* "Deliver 1 units of mineral and 1 unit of tech" = 1M + 1T => 2 units
   
-One of each mission per space station
+* "Deliver 2 units of goods and 1 unit of mineral" = 2G + 1M => 3 units
+* "Deliver 2 units of goods and 1 unit of tech" = 2G + 1T => 3 units
+* "Deliver 2 units of minerals and 1 unit of good" = 2M + 1G => 3 units
+* "Deliver 2 units of minerals and 1 unit of tech" = 2M + 1T => 3 units
+* "Deliver 2 units of tech and 1 unit of good" = 2T + 1G => 3 units
+* "Deliver 2 units of tech and 1 unit of mineral" = 2T + 1M => 3 units
+* "Deliver 1 unit of tech and 1 unit of good and 1 unit of mineral" = 1T + 1G + 1M => 3 units
 
-***Reward*** 5 * (units + 2) credits.
+* "Deliver 3 units of goods" = 3G => 3 units
+* "Deliver 3 units of minerals" = 3M => 3 units
+* "Deliver 3 units of tech" = 3T => 3 units
+
+***Reward*** units * 10 credits.
+
+### Piracy missions ###
+
+* Destroy any one ship
+* Destroy any one ship with Tech cargo
+* Destroy any one ship with Good cargo
+* Destroy any one ship with mineral cargo
+* Capture any one ship and deliver to a space station
+* Capture any one ship with 2 or more cargo and deliver to a space station
+
+
 
 ### At any time ###
 

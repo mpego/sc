@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Game Mission Cards</title>
+    <style>
+        body {
+            background-color: #121212;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            padding: 40px;
+            color: #ffffff;
+        }
+
+        .row-title {
+            color: #8892b0;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: -10px;
+            width: 100%;
+            max-width: 1150px;
+            border-bottom: 1px solid #232d3f;
+            padding-bottom: 8px;
+        }
+
+        .card-row {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 1150px;
+        }
+
+        /* Strict Standard Magic: The Gathering Card Dimensions (2.5" x 3.5") */
+        .card {
+            width: 2.5in;
+            height: 3.5in;
+            min-width: 2.5in;
+            min-height: 3.5in;
+            max-width: 2.5in;
+            max-height: 3.5in;
+            background: #ffffff;
+            border: 4px solid #0a0a0a;
+            border-radius: 14px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            overflow: hidden;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        /* Top Header */
+        .header {
+            background: #0f172a;
+            color: #f8fafc;
+            text-align: center;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            padding: 10px 0;
+            text-transform: uppercase;
+            border-bottom: 2px solid #1e293b;
+        }
+
+        .station-header {
+            background: #1e1b4b;
+            border-bottom: 2px solid #312e81;
+        }
+
+        /* Middle Canvas Area */
+        .middle-canvas {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0b132b;
+            position: relative;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        /* Background local images */
+        .local-image-placeholder {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            opacity: 1.0S;
+            z-index: 1;
+        }
+
+        /* Overlay container for the 4 resource slots */
+        .resource-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 8px;
+            padding: 12px;
+            box-sizing: border-box;
+        }
+
+        /* Highly Translucent Grey Resource Box */
+        .resource-box {
+            background: rgba(40, 40, 40, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+            box-sizing: border-box;
+            backdrop-filter: blur(2px);
+        }
+
+        /* Resource Labels (G, M, T) */
+        .resource-label {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            text-shadow: 0 0 6px rgba(0, 242, 254, 0.6);
+            user-select: none;
+        }
+
+        .res-g {
+            color: #4ade80;
+            text-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+        }
+
+        .res-m {
+            color: #fc8484;
+            text-shadow: 0 0 8px rgba(192, 132, 252, 0.6);
+        }
+
+        .res-t {
+            color: hsl(65, 93%, 60%);
+            text-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+        }
+
+        /* Premium Sci-Fi Bottom Scoring Area */
+        .footer {
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, #0c1524 0%, #060b12 100%);
+            border-top: 2px solid #1a2942;
+            padding-bottom: 4px;
+            position: relative;
+        }
+
+        .footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 8px 8px;
+            pointer-events: none;
+        }
+
+        /* Filled Circle for Victory Points / Credits */
+        .points-circle {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #00f2fe;
+            border-radius: 50%;
+            background: #020617;
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.3), inset 0 2px 6px rgba(0, 0, 0, 0.8);
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00f2fe;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 5px rgba(0, 242, 254, 0.6);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="row-title">Planet Deck — Riter</div>
+    <div class="card-row">
+        <div class="card">
+            <div class="header">Riter</div>
+            <div class="middle-canvas">
+                <img src="riter.png" alt="Planet Image" class="local-image-placeholder">
+                <div class="resource-overlay">
+                    <div class="resource-box"><span class="resource-label res-g">G</span></div>
+                    <div class="resource-box"><span class="resource-label res-g">G</span></div>
+                    <div class="resource-box"></div>
+                    <div class="resource-box"></div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="points-circle">20</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="header">Riter</div>
+            <div class="middle-canvas">
+                <img src="riter.png" alt="Planet Image" class="local-image-placeholder">
+                <div class="resource-overlay">
+                    <div class="resource-box"><span class="resource-label res-g">G</span></div>
+                    <div class="resource-box"><span class="resource-label res-g">G</span></div>
+                    <div class="resource-box"><span class="resource-label res-m">M</span></div>
+                    <div class="resource-box"></div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="points-circle">30</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row-title">Space Station Deck — Nexus &amp; Apex</div>
+    <div class="card-row">
+        <div class="card">
+            <div class="header station-header">Nexus</div>
+            <div class="middle-canvas">
+                <img src="nexus_seven.png" alt="Station Image" class="local-image-placeholder">
+                <div class="resource-overlay">
+                    <div class="resource-box"><span class="resource-label res-t">T</span></div>
+                    <div class="resource-box"><span class="resource-label res-t">T</span></div>
+                    <div class="resource-box"></div>
+                    <div class="resource-box"></div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="points-circle">20</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="header station-header">Apex</div>
+            <div class="middle-canvas">
+                <img src="apex.png" alt="Station Image" class="local-image-placeholder">
+                <div class="resource-overlay">
+                    <div class="resource-box"><span class="resource-label res-t">T</span></div>
+                    <div class="resource-box"><span class="resource-label res-t">T</span></div>
+                    <div class="resource-box"><span class="resource-label res-g">G</span></div>
+                    <div class="resource-box"></div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="points-circle">30</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
