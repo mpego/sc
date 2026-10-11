@@ -1,0 +1,14 @@
+RULES.md
+  h_93a7d038c1b94f 15,35,50,169,173,177-180,186,189-192,261,268,272-273,276-278,287-288,340-342
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1c0afb49ed83c8c9cc5ddede229545dcd77166ee",
+  "prompts": {},
+  "humans": {
+    "h_93a7d038c1b94f": {
+      "author": "Mauricio Pego <mauricio.pego@pedidosya.com>"
+    }
+  }
+}
