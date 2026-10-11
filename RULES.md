@@ -12,7 +12,7 @@ Fear not exploring, players will always have the chance to get back in play even
 
 ## 💰 Game setup
 
-Each player gets a common ship with specs:
+Each player gets a ship with specs:
 
 **Hull** 5 
 **Shield** 5 
@@ -32,7 +32,7 @@ Planets and space statios have no resources to trade or other resources to offer
 
 ## 💰 Earning Credits
 
-To achieve victory in Voidfarer, ships must accumulate credits/points through various sector operations.
+To achieve victory in Voidfarer, player must accumulate credits/points through various sector operations.
 
 | Activity             | How To                                                                                                   |
 | -------------------- | -------------------------------------------------------------------------------------------------------- |
@@ -47,7 +47,7 @@ To achieve victory in Voidfarer, ships must accumulate credits/points through va
 
 ## 🚀 Ship Specifications
 
-When changing ships, players distribute exactly **30 units** among the following specs. Each spec defines the fundamental capabilities of your vessel.
+When buying new ships, players distribute exactly **30 units** among the following specs. Each spec defines the fundamental capabilities of your vessel.
 
 | Spec     | Range                       | Description                                                                             |
 | -------- | --------------------------- | --------------------------------------------------------------------------------------- |
@@ -166,26 +166,30 @@ The sector is filled with hazardous anomalies that challenge even the most exper
 Ships can land on planets or dock at a space station.
 Docking ends movement and attacking is no longer possible.
 
-#### Possible actions ####
+#### Possible player actions ####
 
 | Action         | Planet    | Station     |
 | -------------- | --------- | ----------- |
-| Docked ships   | Unlimited | Max 2 ships |
+| Docking ships  | Unlimited | Max 2 ships |
 | Buy cargo      | Yes       | No          |
 | Sell cargo     | Yes       | No          |
 | Accepted cargo | Anything  | Only tech   |
+| Repair ship    | Yes       | Yes         |
+| Refit ship     | Yes       | No          |
+| Buy new ship   | Yes       | No          |
+| Mission board  | Yes       | Yes         |
 | Bounty office  | No        | Yes         |
 
 #### Costs of actions ####
 | Action                     | Planet | Station |
 | -------------------------- | ------ | ------- |
-| Accept mission             | 0      | 0       |
-| Pass the turn              | 0      | -5      |
+| Docking                    | 0      | -5      |
 | Buy cargo                  | -5     | -       |
-| Repair two points of hull  | -5     | -10     |
-| Refit three points of ship | -5     | -10     |
 | Sell cargo                 | 5      | 5       |
-| Sell highlited cargo       | 10     | 10      |
+| Sell highlited cargo       | 10     | 15      |
+| Repair two points of hull  | -5     | -5      |
+| Refit three points of ship | -5     | -5      |
+| Buy new ship               | 30     | -       |
 
 
 If player cannot pay the passing fee, he must make a space movement turn.
@@ -254,17 +258,24 @@ He can abandon the mission without any penalty, exiting through any corner witho
 * "Deliver 1 units of good and 1 unit of mineral"
 * "Deliver 1 units of good and 1 unit of tech"
 * "Deliver 1 units of mineral and 1 unit of tech"
+
 * "Deliver 2 units of goods and 1 unit of mineral"
 * "Deliver 2 units of goods and 1 unit of tech"
 * "Deliver 2 units of minerals and 1 unit of good"
 * "Deliver 2 units of minerals and 1 unit of tech"
 * "Deliver 3 units of goods"
 * "Deliver 3 units of minerals"
+* "Deliver 3 units of any type"
 
 One of each mission per planet
 
+***Reward*** 5 * (units + 1) credits.
+
 **Space Stations**
 * "Deliver 2 units of tech"
+* "Deliver 1 unit of tech and 1 unit of good"
+* "Deliver 1 units of tech and 1 unit of mineral"
+
 * "Deliver 2 units of tech and 1 unit of good"
 * "Deliver 2 units of tech and 1 unit of mineral"
 * "Deliver 1 unit of tech and 2 units of goods"
@@ -272,6 +283,8 @@ One of each mission per planet
 * "Deliver 3 units of tech"
   
 One of each mission per space station
+
+***Reward*** 5 * (units + 2) credits.
 
 ### At any time ###
 
@@ -324,6 +337,9 @@ The accumulated valued must be completly used to increase or decrease ship varia
 | Maneuver | Allocate rotation points for the turn.                                                     |
 | Comms    | Set active communication range for the turn.                                               |
 
+Distance points are preserved from previous turn, all other turn variables points are cleared before assinging turn points. 
+
+
 > **Constraint:** None of these variables can surpass their maximum values defined by Ship Specs.
 > 
 
@@ -336,11 +352,8 @@ Player executes actions in any order in any combination.
 | 🚀 Move           | Fly the ship across the board using the distance set for this turn.      |
 | ⚔️ Attack         | Fire weapons at a valid target within arc and attack range.              |
 | 📡 Communications | Open a comms channel with another ship for trading, bribing or thievery. |
-| 🔧 Repair Shield  | Recover Shield points allocating engineering points.                     |
-
 
 The ship must move the exact value of distance points set. 
-Attack and comms variable point are fully consumed if used, all other are preserved for next turn.
 
 
 #### Docking into a space station
