@@ -151,14 +151,20 @@ Thivery is the only way to have more than one mission card at a time.
 
 Some dice combination on your **3d4** turn roll triggers special galaxy-wide anomalies or events.
 
-| Dice Combination | Event                                                                                                                                                 |
-| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ⚅⚅ Triple Fours  | The player can move the Space Station up to 4 hexes. Or choose to play as even doubles.                                                               |
-| ⚀⚀ Triple Ones   | One of the other players (the one who rolls the highest) can move the Space Station up to 3 hexes in any direction. Or choose to play as odd doubles. |
-| Even Doubles     | The player can change resources on any one planet.                                                                                                    |
-| Odd Doubles      | The player can move up to 6 units of asteroid fields or spatial storms in any combination.                                                            |
+| Dice Combination | Event                                                                            |
+| ---------------- | -------------------------------------------------------------------------------- |
+| Even Doubles     | The player can do, up to the value of the remaining die, any combination of:     |
+|                  | - change resources on any combination of planets                                 |
+|                  | - move any space station                                                         |
+| Odd Doubles      | Another player can do, up to the value of the remaining die, any combination of: |
+|                  | - move asteroid fields                                                           |
+|                  | - move spatial storms                                                            |
+|                  | - move any space station                                                         |
 
 ---
+
+If changing resources, new resources are reandomly picked from the resource pool.
+Planet can not sell resource of the same type of special buying.
 
 ## ☄️ Asteroids & Spatial Storms
 
